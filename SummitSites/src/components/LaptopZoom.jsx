@@ -1,13 +1,15 @@
 import { useRef } from 'react'
 import { useScroll, useTransform, motion } from 'framer-motion'
+import Homepage from './Homepage'
 
-// Screen bounds within good_laptop_ref.png (% of image)
-// Adjust these if the crop feels off
+// Pixel bounds of the laptop screen within good_laptop_ref_noText.png
+// expressed as inset percentages (top / right / bottom / left of the image).
+// Tweak these if the zoom origin feels off after seeing the actual image.
 const SCREEN = {
-  top: 5.5,    // % from top
-  right: 11.5, // % from right
-  bottom: 29,  // % from bottom
-  left: 11.5,  // % from left
+  top: 5.5,
+  right: 11.5,
+  bottom: 29,
+  left: 11.5,
 }
 
 export default function LaptopZoom() {
@@ -18,11 +20,11 @@ export default function LaptopZoom() {
     offset: ['start start', 'end end'],
   })
 
-  // Laptop zooms in — origin anchored to screen center
-  const laptopScale = useTransform(scrollYProgress, [0, 1], [1, 4])
-  const laptopOpacity = useTransform(scrollYProgress, [0.7, 1], [1, 0])
+  // Laptop zooms toward the viewer; origin locked to the screen center
+  const laptopScale   = useTransform(scrollYProgress, [0, 1],    [1, 4])
+  const laptopOpacity = useTransform(scrollYProgress, [0.65, 1], [1, 0])
 
-  // Homepage clip-path expands from screen bounds → full viewport
+  // Clip-path opens from the laptop screen area out to the full viewport
   const clipTop    = useTransform(scrollYProgress, [0, 1], [SCREEN.top,    0])
   const clipRight  = useTransform(scrollYProgress, [0, 1], [SCREEN.right,  0])
   const clipBottom = useTransform(scrollYProgress, [0, 1], [SCREEN.bottom, 0])
@@ -33,7 +35,8 @@ export default function LaptopZoom() {
     ([t, r, b, l]) => `inset(${t}% ${r}% ${b}% ${l}% round 4px)`
   )
 
-  const homepageOpacity = useTransform(scrollYProgress, [0.05, 0.3], [0, 1])
+  // Homepage fades in early so it's visible through the expanding screen window
+  const homepageOpacity = useTransform(scrollYProgress, [0.04, 0.25], [0, 1])
 
   return (
     <div ref={containerRef} style={{ height: '400vh', position: 'relative' }}>
@@ -43,15 +46,12 @@ export default function LaptopZoom() {
           top: 0,
           height: '100vh',
           overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#1a0a0a',
+          background: '#000',
         }}
       >
-        {/* Laptop layer */}
+        {/* Laptop image — zooms in toward the screen */}
         <motion.img
-          src="/good_laptop_ref.png"
+          src="/good_laptop_ref_noText.png"
           alt="laptop"
           style={{
             position: 'absolute',
@@ -65,7 +65,7 @@ export default function LaptopZoom() {
           }}
         />
 
-        {/* Homepage reveal layer */}
+        {/* Homepage revealed through the expanding screen window */}
         <motion.div
           style={{
             position: 'absolute',
@@ -74,16 +74,7 @@ export default function LaptopZoom() {
             opacity: homepageOpacity,
           }}
         >
-          <img
-            src="/mountian.jpeg"
-            alt="homepage"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center top',
-            }}
-          />
+          <Homepage />
         </motion.div>
       </div>
     </div>

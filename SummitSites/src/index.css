@@ -1,3 +1,56 @@
+@font-face {
+  font-family: 'MohoCondensed';
+  src: url('../fonts/moho-condensed-font-family/moho-std-condensed-light.otf') format('opentype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'MohoCondensed';
+  src: url('../fonts/moho-condensed-font-family/moho-std-condensed.otf') format('opentype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'MohoCondensed';
+  src: url('../fonts/moho-condensed-font-family/moho-std-condensed-medium.otf') format('opentype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'MohoCondensed';
+  src: url('../fonts/moho-condensed-font-family/moho-std-condensed-bold.otf') format('opentype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'MohoCondensed';
+  src: url('../fonts/moho-condensed-font-family/moho-std-condensed-black.otf') format('opentype');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Itoya';
+  src: url('../fonts/itoya-font-family/itoya-light.otf') format('opentype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Itoya';
+  src: url('../fonts/itoya-font-family/itoya-regular.otf') format('opentype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Itoya';
+  src: url('../fonts/itoya-font-family/itoya-medium.otf') format('opentype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Itoya';
+  src: url('../fonts/itoya-font-family/itoya-bold.otf') format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Avaleigh';
+  src: url('../fonts/avaleigh/Avaleigh Bold.otf') format('opentype');
+  font-weight: 700;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -12,4 +65,36 @@ html, body, #root {
 body {
   background: #000;
   overflow-x: hidden;
+}
+
+@keyframes chevronDrop {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(-10px) rotate(90deg); }
+  40%  { opacity: 1; transform: translateX(-50%) translateY(0px)   rotate(90deg); }
+  70%  { opacity: 1; transform: translateX(-50%) translateY(0px)   rotate(90deg); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(6px)   rotate(90deg); }
+}
+
+.explore-link:hover {
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .hero-bottom {
+    justify-content: flex-start !important;
+    padding-left: 20px !important;
+  }
+  .hero-inner {
+    width: 100%;
+  }
+  .hero-title {
+    font-size: clamp(90px, 26vw, 150px) !important;
+    letter-spacing: 0.07em !important;
+    word-break: break-word;
+  }
+  .mid-left {
+    bottom: 46% !important;
+  }
+  .mid-right {
+    bottom: 46% !important;
+  }
 }

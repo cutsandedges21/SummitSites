@@ -1,40 +1,46 @@
+import { Link } from 'react-router-dom'
+
 export default function Homepage() {
   return (
     <div style={styles.wrapper}>
       {/* Mountain background */}
-      <img src="/good_homepage.png" alt="" style={styles.bg} />
+      <video src="/wink_4k_homepageVid.mp4" style={styles.bg} autoPlay loop muted playsInline />
       <div style={styles.overlay} />
 
       {/* Announcement bar */}
       <div style={styles.announcement}>
-        Free Shipping On All Intl. Orders Over $100
+        Professional Websites for Serious Businesses
       </div>
 
       {/* Nav */}
       <nav style={styles.nav}>
-        <span style={styles.navItem}>Shop All</span>
-        <span style={styles.navItem}>Pendant</span>
-        <span style={styles.navItem}>Flame</span>
-        <span style={styles.navItem}>Table</span>
+        <Link to="/demos" style={styles.navLink}>Demos</Link>
+        <span style={styles.navItem}>Services</span>
+        <span style={styles.navItem}>Process</span>
+        <span style={styles.navItem}>Industries</span>
+        <span style={styles.navItem}>FAQ</span>
         <span style={styles.navItem}>Contact</span>
-        <span style={styles.navItem}>Cart</span>
       </nav>
 
       {/* Mid-left / mid-right labels */}
-      <div style={styles.midLeft}>
-        LIGHTING DESIGN<br />FOR A LASTING IMPRESSION
+      <div style={styles.midLeft} className="mid-left">
+        We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
       </div>
-      <div style={styles.midRight}>
-        EXPLORE NEW<br />COLLECTION
-      </div>
+      <Link to="/demos" style={styles.midRight} className="mid-right explore-link">
+        <span>see our<br />work</span>
+        <span style={styles.exploreArrow}>&gt;</span>
+      </Link>
 
       {/* Hero text */}
-      <div style={styles.heroBottom}>
-        <div style={styles.heroInner}>
-          <h1 style={styles.heroTitle}>SUMMIT SITES</h1>
-          <p style={styles.heroSub}>Illuminate Your Style.</p>
+      <div style={styles.heroBottom} className="hero-bottom">
+        <div style={styles.heroInner} className="hero-inner">
+          <h1 style={styles.heroTitle} className="hero-title">SUMMIT SITES</h1>
+          <p style={styles.heroSub}>Your Business, Elevated.</p>
         </div>
       </div>
+
+      {/* Scroll-down chevron */}
+      <div style={styles.scrollChevron} className="scroll-chevron">&#62;</div>
     </div>
   )
 }
@@ -45,7 +51,7 @@ const styles = {
     width: '100vw',
     height: '100vh',
     overflow: 'hidden',
-    fontFamily: "'Barlow', 'Helvetica Neue', Arial, sans-serif",
+    fontFamily: "'Itoya', 'Helvetica Neue', Arial, sans-serif",
     color: '#fff',
   },
   bg: {
@@ -65,7 +71,8 @@ const styles = {
     position: 'relative',
     zIndex: 10,
     textAlign: 'center',
-    fontSize: '11px',
+    fontSize: '15px',
+    fontWeight: 500,
     letterSpacing: '0.05em',
     padding: '8px 16px',
     borderBottom: '1px solid rgba(255,255,255,0.25)',
@@ -80,33 +87,51 @@ const styles = {
     padding: '14px 28px',
   },
   navItem: {
-    fontSize: '12px',
+    fontSize: '16px',
+    fontWeight: 500,
     letterSpacing: '0.04em',
     cursor: 'pointer',
-    opacity: 0.9,
+  },
+  navLink: {
+    fontSize: '16px',
+    fontWeight: 500,
+    letterSpacing: '0.04em',
+    cursor: 'pointer',
+    color: '#fff',
+    textDecoration: 'none',
   },
   midLeft: {
     position: 'absolute',
     zIndex: 10,
     left: '28px',
     bottom: '32%',
-    fontSize: '10px',
+    fontSize: '14px',
+    fontWeight: 500,
     letterSpacing: '0.08em',
     lineHeight: 1.6,
     textTransform: 'uppercase',
-    opacity: 0.85,
   },
   midRight: {
     position: 'absolute',
     zIndex: 10,
     right: '28px',
     bottom: '32%',
-    fontSize: '10px',
+    fontSize: '14px',
+    fontWeight: 500,
     letterSpacing: '0.08em',
     lineHeight: 1.6,
     textTransform: 'uppercase',
     textAlign: 'right',
-    opacity: 0.85,
+    color: '#fff',
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  exploreArrow: {
+    fontSize: '18px',
+    lineHeight: 1,
+    flexShrink: 0,
   },
   heroBottom: {
     position: 'absolute',
@@ -123,18 +148,31 @@ const styles = {
     alignItems: 'flex-start',
   },
   heroTitle: {
-    fontSize: 'clamp(64px, 13vw, 160px)',
+    fontSize: 'clamp(80px, 16vw, 200px)',
     fontWeight: 700,
-    letterSpacing: '0.05em',
+    letterSpacing: '0.1em',
     lineHeight: 1,
     margin: 0,
-    fontFamily: "'Barlow Semi Condensed', 'Barlow', 'Helvetica Neue', Arial, sans-serif",
+    fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif",
   },
   heroSub: {
-    fontSize: '14px',
-    letterSpacing: '0.04em',
-    marginTop: '8px',
-    opacity: 0.85,
+    fontSize: '18px',
+    fontWeight: 500,
+    letterSpacing: '0.06em',
+    marginTop: '10px',
     fontStyle: 'italic',
+  },
+  scrollChevron: {
+    position: 'absolute',
+    zIndex: 10,
+    bottom: '18px',
+    left: '50%',
+    transform: 'translateX(-50%) translateY(0px) rotate(90deg)',
+    fontSize: '22px',
+    fontWeight: 300,
+    color: 'rgba(255,255,255,0.75)',
+    animation: 'chevronDrop 2s ease-in-out infinite',
+    pointerEvents: 'none',
+    userSelect: 'none',
   },
 }
