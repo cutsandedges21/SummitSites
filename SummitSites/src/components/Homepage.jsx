@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
-export default function Homepage() {
+export default function Homepage({ revealed = true }) {
+  const fadeUp = {
+    initial:   { opacity: 0, y: -12 },
+    animate:   revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -12 },
+    transition: { duration: 0.6, ease: 'easeOut' },
+  }
+  const fadeSide = (x) => ({
+    initial:   { opacity: 0, x },
+    animate:   revealed ? { opacity: 1, x: 0 } : { opacity: 0, x },
+    transition: { duration: 0.6, ease: 'easeOut', delay: 0.15 },
+  })
+
   return (
     <div style={styles.wrapper}>
       {/* Mountain background */}
@@ -13,23 +25,25 @@ export default function Homepage() {
       </div>
 
       {/* Nav */}
-      <nav style={styles.nav}>
+      <motion.nav style={styles.nav} {...fadeUp}>
         <Link to="/demos" style={styles.navLink}>Demos</Link>
         <span style={styles.navItem}>Services</span>
         <span style={styles.navItem}>Process</span>
         <span style={styles.navItem}>Industries</span>
         <span style={styles.navItem}>FAQ</span>
         <span style={styles.navItem}>Contact</span>
-      </nav>
+      </motion.nav>
 
       {/* Mid-left / mid-right labels */}
-      <div style={styles.midLeft} className="mid-left">
+      <motion.div style={styles.midLeft} className="mid-left" {...fadeSide(-20)}>
         We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
-      </div>
-      <Link to="/demos" style={styles.midRight} className="mid-right explore-link">
-        <span>see our<br />work</span>
-        <span style={styles.exploreArrow}>&gt;</span>
-      </Link>
+      </motion.div>
+      <motion.div {...fadeSide(20)} style={{ position: 'absolute', zIndex: 10, right: '28px', bottom: '34%' }}>
+        <Link to="/demos" style={styles.midRight} className="mid-right explore-link">
+          <span>see our<br />work</span>
+          <span style={styles.exploreArrow}>&gt;</span>
+        </Link>
+      </motion.div>
 
       {/* Hero text */}
       <div style={styles.heroBottom} className="hero-bottom">
@@ -104,7 +118,7 @@ const styles = {
     position: 'absolute',
     zIndex: 10,
     left: '28px',
-    bottom: '32%',
+    bottom: '34%',
     fontSize: '14px',
     fontWeight: 500,
     letterSpacing: '0.08em',
@@ -112,10 +126,6 @@ const styles = {
     textTransform: 'uppercase',
   },
   midRight: {
-    position: 'absolute',
-    zIndex: 10,
-    right: '28px',
-    bottom: '32%',
     fontSize: '14px',
     fontWeight: 500,
     letterSpacing: '0.08em',
@@ -136,7 +146,7 @@ const styles = {
   heroBottom: {
     position: 'absolute',
     zIndex: 10,
-    bottom: '32px',
+    bottom: '30px',
     left: 0,
     right: 0,
     display: 'flex',
@@ -159,7 +169,7 @@ const styles = {
     fontSize: '18px',
     fontWeight: 500,
     letterSpacing: '0.06em',
-    marginTop: '10px',
+    marginTop: '0px',
     fontStyle: 'italic',
   },
   scrollChevron: {
