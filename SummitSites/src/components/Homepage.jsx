@@ -17,7 +17,7 @@ const ALL_NAV_LINKS = [
   { to: '/contact',    label: 'Contact'    },
 ]
 
-export default function Homepage({ revealed = true, isMobile = false, scrollY = 0 }) {
+export default function Homepage({ revealed = true, isMobile = false, scrollY = 0, progress = 0 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [showBrand, setShowBrand] = useState(false)
   const topBarRef  = useRef(null)
@@ -49,22 +49,24 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
 
   // ── Mobile: only bg + centered title + chevron until fullscreen ──────────
   if (isMobile && !revealed) {
+    const exitOpacity = progress < 0.6 ? 1 : Math.max(0, 1 - (progress - 0.6) / 0.4)
     return (
       <div style={styles.wrapper}>
         <video src="/wink_4k_homepageVid.mp4" style={styles.bg} autoPlay loop muted playsInline />
         <div style={styles.overlay} />
-        <div style={styles.centeredTitle}>
+        <div style={{ ...styles.centeredTitle, opacity: exitOpacity }}>
           <motion.h1
-            layoutId="summit-title"
             style={styles.heroTitle}
             className="hero-title"
-            transition={MORPH}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.4 }}
           >
             <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
             <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
           </motion.h1>
         </div>
-        <motion.div layoutId="scroll-chevron" style={styles.scrollChevron} className="scroll-chevron" transition={MORPH_SLOW}><ChevronIcon size={18} /></motion.div>
+        <div style={{ ...styles.scrollChevron, opacity: exitOpacity }} className="scroll-chevron"><ChevronIcon size={18} /></div>
       </div>
     )
   }
@@ -105,7 +107,7 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
         {/* Content layer — moves up on scroll */}
         <div style={{ position: 'absolute', inset: 0, transform: `translateY(${-scrollY}px)`, willChange: 'transform' }}>
           <motion.div style={styles.midLeft} className="mid-left" {...fadeSide(-20)}>
-            We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
+          WE DON’T BUILD WEBSITES <br />JUST TO “HAVE A WEBSITE” <br />WE BUILD DIGITAL EXPERIENCES THAT <br />POSITION YOUR COMPANY AS<br /> THE OBVIOUS CHOICE.
           </motion.div>
           <motion.div {...fadeSide(20)} className="mid-right-wrapper" style={{ position: 'absolute', zIndex: 10, right: 'clamp(16px, 2vw, 40px)', bottom: '34%' }}>
             <Link to="/demos" style={styles.midRight} className="mid-right explore-link">
@@ -115,8 +117,20 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
           </motion.div>
           <div style={styles.heroBottom} className="hero-bottom">
             <div style={styles.heroInner} className="hero-inner">
-              <FlipText style={styles.heroTitle} className="hero-title">SUMMIT SITES</FlipText>
-              <p ref={heroSubRef} style={styles.heroSub}>YOUR BUSINESS, ELEVATED.</p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: EASE, delay: 0.3 }}
+              >
+                <FlipText style={styles.heroTitle} className="hero-title">SUMMIT SITES</FlipText>
+              </motion.div>
+              <motion.p
+                ref={heroSubRef}
+                style={styles.heroSub}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: EASE, delay: 0.5 }}
+              >YOUR BUSINESS, ELEVATED.</motion.p>
             </div>
           </div>
           <div style={styles.scrollChevron} className="scroll-chevron"><ChevronIcon size={18} /></div>
@@ -174,6 +188,7 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
         transition={springTransition}
         style={{ position: 'absolute', inset: 0 }}
       >
+        {/* Top bar — stays fixed, not in scroll layer */}
         <motion.div style={styles.announcement} {...mAnn}>
           SUMMIT SITES
         </motion.div>
@@ -208,33 +223,39 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
           </div>
         </motion.nav>
 
-        <motion.div style={styles.midLeft} className="mid-left" {...mML}>
-          We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
-        </motion.div>
+        {/* Scroll content layer */}
+        <div style={{ position: 'absolute', inset: 0, transform: `translateY(${-scrollY}px)`, willChange: 'transform' }}>
+          <motion.div style={styles.midLeft} className="mid-left" {...mML}>
+          WE DON’T BUILD WEBSITES <br />JUST TO “HAVE A WEBSITE” <br />WE BUILD DIGITAL EXPERIENCES THAT <br />POSITION YOUR COMPANY AS<br /> THE OBVIOUS CHOICE.
+          </motion.div>
 
-        <div style={styles.heroBottom} className="hero-bottom">
-          <div style={styles.heroInner} className="hero-inner">
-            <motion.h1
-              layoutId="summit-title"
-              style={styles.heroTitle}
-              className="hero-title"
-              transition={MORPH}
-            >
-              <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
-              <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
-            </motion.h1>
-            <motion.p style={styles.heroSub} {...mSub}>
-              YOUR BUSINESS, ELEVATED.
-            </motion.p>
+          <div style={styles.heroBottom} className="hero-bottom">
+            <div style={styles.heroInner} className="hero-inner">
+              <motion.h1
+                style={styles.heroTitle}
+                className="hero-title"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: EASE, delay: 0.3 }}
+              >
+                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
+                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
+              </motion.h1>
+              <motion.p style={styles.heroSub} {...mSub}>
+                YOUR BUSINESS, ELEVATED.
+              </motion.p>
+            </div>
+          </div>
+
+          <div style={{ ...styles.scrollChevron, left: 'auto', right: 'clamp(16px, 4vw, 32px)', transform: 'rotate(90deg)' }} className="scroll-chevron">
+            <ChevronIcon size={18} />
+          </div>
+
+          {/* About section — mobile */}
+          <div style={{ position: 'absolute', top: '115vh', left: 0, width: '100vw' }}>
+            <About scrollY={scrollY} isMobile />
           </div>
         </div>
-
-        <motion.div
-          layoutId="scroll-chevron"
-          style={{ ...styles.scrollChevron, left: 'auto', right: 'clamp(16px, 4vw, 32px)', transform: 'rotate(90deg)' }}
-          className="scroll-chevron"
-          transition={MORPH_SLOW}
-        ><ChevronIcon size={18} /></motion.div>
       </motion.div>
 
     </div>

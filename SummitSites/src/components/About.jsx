@@ -78,7 +78,7 @@ function GlassLayers({ r, blur = '24px' }) {
   )
 }
 
-export default function About({ scrollY }) {
+export default function About({ scrollY, isMobile = false }) {
   const [revealed, setRevealed] = useState(false)
   const [viewportH, setViewportH] = useState(() => window.innerHeight)
 
@@ -95,22 +95,27 @@ export default function About({ scrollY }) {
   return (
     <div style={{
       width: '100vw',
-      height: '100vh',
+      minHeight: '100svh',
+      height: isMobile ? 'auto' : '100vh',
       background: 'transparent',
       display: 'flex',
       flexDirection: 'column',
-      padding: 'clamp(48px, 7vw, 100px) clamp(24px, 6vw, 80px) clamp(40px, 5vw, 80px)',
+      padding: isMobile
+        ? 'clamp(36px, 10vw, 60px) clamp(16px, 5vw, 28px) clamp(32px, 8vw, 48px)'
+        : 'clamp(48px, 7vw, 100px) clamp(24px, 6vw, 80px) clamp(40px, 5vw, 80px)',
       position: 'relative',
       overflow: 'hidden',
     }}>
 
-      {/* Background blur over the video */}
+      {/* Background blur over the video — fades in from top on desktop */}
       <div style={{
         position: 'absolute', inset: 0,
         backdropFilter: 'blur(18px)',
         WebkitBackdropFilter: 'blur(18px)',
         zIndex: 0,
         pointerEvents: 'none',
+        maskImage: 'linear-gradient(to bottom, transparent 0%, black 18%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 18%)',
       }} />
 
       {/* SVG distortion filter */}
@@ -162,7 +167,7 @@ export default function About({ scrollY }) {
           fontFamily: 'Georgia, "Times New Roman", serif',
           fontStyle: 'italic',
           fontWeight: 400,
-          fontSize: 'clamp(20px, 3vw, 48px)',
+          fontSize: isMobile ? 'clamp(18px, 6vw, 28px)' : 'clamp(20px, 3vw, 48px)',
           lineHeight: 1.25,
           color: 'rgba(255,255,255,0.88)',
           maxWidth: '900px',
@@ -190,9 +195,9 @@ export default function About({ scrollY }) {
       {/* Cards */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '20px',
-        flex: 1,
+        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+        gap: '16px',
+        flex: isMobile ? 'none' : 1,
       }}>
         {COLS.map((col, i) => (
           <motion.div
