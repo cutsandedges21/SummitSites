@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
@@ -16,8 +16,18 @@ const ALL_NAV_LINKS = [
   { to: '/contact',    label: 'Contact'    },
 ]
 
-export default function Homepage({ revealed = true, isMobile = false }) {
+export default function Homepage({ revealed = true, isMobile = false, scrollY = 0 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [showBrand, setShowBrand] = useState(false)
+  const topBarRef  = useRef(null)
+  const heroSubRef = useRef(null)
+
+  useEffect(() => {
+    if (!heroSubRef.current || !topBarRef.current) return
+    const subTop    = heroSubRef.current.getBoundingClientRect().top
+    const barBottom = topBarRef.current.getBoundingClientRect().bottom
+    setShowBrand(subTop <= barBottom)
+  }, [scrollY])
 
   // ── Desktop animations ───────────────────────────────────────────────────
   const dAnn = {
@@ -62,94 +72,56 @@ export default function Homepage({ revealed = true, isMobile = false }) {
   const mAnn  = { initial: { opacity: 0, y: -20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.55, ease: EASE, delay: 0.05 } }
   const mNav  = { initial: { opacity: 0, y: -28 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.6,  ease: EASE, delay: 0.12 } }
   const mML   = { initial: { opacity: 0, x: -28 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.6,  ease: EASE, delay: 0.22 } }
-  const mMR   = { initial: { opacity: 0, x:  28 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.6,  ease: EASE, delay: 0.22 } }
   const mSub  = { initial: { opacity: 0 },          animate: { opacity: 1 },       transition: { duration: 0.5,  ease: 'easeOut', delay: 0.45 } }
-
-  const annProps = isMobile ? mAnn : dAnn
-  const navProps = isMobile ? mNav : fadeUp
-  const mlProps  = isMobile ? mML  : fadeSide(-20)
-  const mrProps  = isMobile ? mMR  : fadeSide(20)
 
   const springTransition = { duration: 0.65, ease: EASE }
 
-  // ── Shared page content ──────────────────────────────────────────────────
-  const pageContent = (
-    <>
-      <video src="/wink_4k_homepageVid.mp4" style={styles.bg} autoPlay loop muted playsInline />
-      <div style={styles.overlay} />
+  // ── Desktop render ───────────────────────────────────────────────────────
+  if (!isMobile) {
+    return (
+      <div style={styles.wrapper}>
+        <video src="/wink_4k_homepageVid.mp4" style={styles.bg} autoPlay loop muted playsInline />
+        <div style={styles.overlay} />
 
-      <motion.div style={styles.announcement} {...annProps}>
-        Professional Websites for Serious Businesses
-      </motion.div>
-
-      <motion.nav style={isMobile ? styles.navMobile : styles.nav} {...navProps}>
-        {isMobile ? (
-          <>
-            <button
-              style={styles.hamburger}
-              onClick={() => setSidebarOpen(true)}
-              aria-label="Open menu"
-            >
-              <span style={styles.hamburgerBar} />
-              <span style={styles.hamburgerBar} />
-              <span style={styles.hamburgerBar} />
-            </button>
-            <div style={styles.mobileNavLinks}>
-              <Link to="/demos"     style={styles.navLink}>Demos</Link>
-              <Link to="/services"  style={styles.navLink}>Services</Link>
-              <Link to="/contact"   style={styles.navLink}>Contact</Link>
-            </div>
-          </>
-        ) : (
-          <>
+        {/* Top bar — stays fixed while content scrolls */}
+        <div ref={topBarRef} style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
+          <motion.div style={styles.announcement} {...dAnn}>
+            {showBrand
+              ? <motion.span key="brand" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} style={{ fontSize: 'clamp(12px, 1.0vw, 18px)', letterSpacing: '0.35em' }}>SUMMIT SITES</motion.span>
+              : <motion.span key="tagline" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} style={{ fontSize: 'clamp(12px, 1.0vw, 18px)', letterSpacing: '0.35em' }}>PROFESSIONAL WEBSITES FOR SERIOUS BUSINESSES</motion.span>
+            }
+          </motion.div>
+          <motion.nav style={styles.nav} {...fadeUp}>
             <Link to="/demos"      style={styles.navLink}>Demos</Link>
             <Link to="/services"   style={styles.navLink}>Services</Link>
             <Link to="/process"    style={styles.navLink}>Process</Link>
             <Link to="/industries" style={styles.navLink}>Industries</Link>
             <Link to="/faq"        style={styles.navLink}>FAQ</Link>
             <Link to="/contact"    style={styles.navLink}>Contact</Link>
-          </>
-        )}
-      </motion.nav>
+          </motion.nav>
+        </div>
 
-      <motion.div style={styles.midLeft} className="mid-left" {...mlProps}>
-        We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
-      </motion.div>
-      <motion.div {...mrProps} className="mid-right-wrapper" style={{ position: 'absolute', zIndex: 10, right: 'clamp(16px, 2vw, 40px)', bottom: '34%' }}>
-        <Link to="/demos" style={styles.midRight} className="mid-right explore-link">
-          <span>see our<br />work</span>
-          <ChevronIcon size={14} />
-        </Link>
-      </motion.div>
-
-      <div style={styles.heroBottom} className="hero-bottom">
-        <div style={styles.heroInner} className="hero-inner">
-          {isMobile ? (
-            <motion.h1
-              layoutId="summit-title"
-              style={styles.heroTitle}
-              className="hero-title"
-              transition={MORPH}
-            >
-              <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
-              <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
-            </motion.h1>
-          ) : (
-            <FlipText style={styles.heroTitle} className="hero-title">SUMMIT SITES</FlipText>
-          )}
-          <motion.p style={styles.heroSub} {...(isMobile ? mSub : {})}>
-            YOUR BUSINESS, ELEVATED.
-          </motion.p>
+        {/* Content layer — moves up on scroll */}
+        <div style={{ position: 'absolute', inset: 0, transform: `translateY(${-scrollY}px)`, willChange: 'transform' }}>
+          <motion.div style={styles.midLeft} className="mid-left" {...fadeSide(-20)}>
+            We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
+          </motion.div>
+          <motion.div {...fadeSide(20)} className="mid-right-wrapper" style={{ position: 'absolute', zIndex: 10, right: 'clamp(16px, 2vw, 40px)', bottom: '34%' }}>
+            <Link to="/demos" style={styles.midRight} className="mid-right explore-link">
+              <span>see our<br />work</span>
+              <ChevronIcon size={14} />
+            </Link>
+          </motion.div>
+          <div style={styles.heroBottom} className="hero-bottom">
+            <div style={styles.heroInner} className="hero-inner">
+              <FlipText style={styles.heroTitle} className="hero-title">SUMMIT SITES</FlipText>
+              <p ref={heroSubRef} style={styles.heroSub}>YOUR BUSINESS, ELEVATED.</p>
+            </div>
+          </div>
+          <div style={styles.scrollChevron} className="scroll-chevron"><ChevronIcon size={18} /></div>
         </div>
       </div>
-
-      <div style={styles.scrollChevron} className="scroll-chevron"><ChevronIcon size={18} /></div>
-    </>
-  )
-
-  // ── Desktop render ───────────────────────────────────────────────────────
-  if (!isMobile) {
-    return <div style={styles.wrapper}>{pageContent}</div>
+    )
   }
 
   // ── Mobile render with push sidebar ─────────────────────────────────────
@@ -197,7 +169,7 @@ export default function Homepage({ revealed = true, isMobile = false }) {
         style={{ position: 'absolute', inset: 0 }}
       >
         <motion.div style={styles.announcement} {...mAnn}>
-          Professional Websites for Serious Businesses
+          SUMMIT SITES
         </motion.div>
 
         <motion.nav style={styles.navMobile} {...mNav}>
@@ -230,33 +202,35 @@ export default function Homepage({ revealed = true, isMobile = false }) {
           </div>
         </motion.nav>
 
-        <motion.div style={styles.midLeft} className="mid-left" {...mML}>
-          We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
-        </motion.div>
+        <div style={{ transform: `translateY(${-scrollY}px)`, willChange: 'transform' }}>
+          <motion.div style={styles.midLeft} className="mid-left" {...mML}>
+            We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
+          </motion.div>
 
-        <div style={styles.heroBottom} className="hero-bottom">
-          <div style={styles.heroInner} className="hero-inner">
-            <motion.h1
-              layoutId="summit-title"
-              style={styles.heroTitle}
-              className="hero-title"
-              transition={MORPH}
-            >
-              <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
-              <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
-            </motion.h1>
-            <motion.p style={styles.heroSub} {...mSub}>
-              YOUR BUSINESS, ELEVATED.
-            </motion.p>
+          <div style={styles.heroBottom} className="hero-bottom">
+            <div style={styles.heroInner} className="hero-inner">
+              <motion.h1
+                layoutId="summit-title"
+                style={styles.heroTitle}
+                className="hero-title"
+                transition={MORPH}
+              >
+                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
+                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
+              </motion.h1>
+              <motion.p style={styles.heroSub} {...mSub}>
+                YOUR BUSINESS, ELEVATED.
+              </motion.p>
+            </div>
           </div>
-        </div>
 
-        <motion.div
-          layoutId="scroll-chevron"
-          style={{ ...styles.scrollChevron, left: 'auto', right: 'clamp(16px, 4vw, 32px)', transform: 'rotate(90deg)' }}
-          className="scroll-chevron"
-          transition={MORPH_SLOW}
-        ><ChevronIcon size={18} /></motion.div>
+          <motion.div
+            layoutId="scroll-chevron"
+            style={{ ...styles.scrollChevron, left: 'auto', right: 'clamp(16px, 4vw, 32px)', transform: 'rotate(90deg)' }}
+            className="scroll-chevron"
+            transition={MORPH_SLOW}
+          ><ChevronIcon size={18} /></motion.div>
+        </div>
       </motion.div>
 
     </div>

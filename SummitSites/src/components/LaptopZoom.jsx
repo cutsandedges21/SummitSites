@@ -49,8 +49,11 @@ export default function LaptopZoom() {
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
   const [viewport, setViewport] = useState(() => ({ w: window.innerWidth, h: window.innerHeight }))
 
-  const targetRef = useRef(0)
-  const rafRef    = useRef(null)
+  const targetRef       = useRef(0)
+  const rafRef          = useRef(null)
+  const [scrollY, setScrollY]   = useState(0)
+  const scrollTargetRef = useRef(0)
+  const scrollCurrRef   = useRef(0)
 
   useEffect(() => {
     const onResize = () => {
@@ -68,6 +71,10 @@ export default function LaptopZoom() {
       targetRef._curr = next
       setProgress(next)
       if (next >= 0.999 && !expanded) setExpanded(true)
+      const scurr = scrollCurrRef.current
+      const snext = scurr + (scrollTargetRef.current - scurr) * 0.07
+      scrollCurrRef.current = snext
+      setScrollY(snext)
       rafRef.current = requestAnimationFrame(tick)
     }
     rafRef.current = requestAnimationFrame(tick)
@@ -77,16 +84,23 @@ export default function LaptopZoom() {
   useEffect(() => {
     const clamp = v => Math.min(Math.max(v, 0), 1)
     const onWheel = (e) => {
-      if (expanded) return
       e.preventDefault()
-      targetRef.current = clamp(targetRef.current + e.deltaY * 0.0005)
+      if (expanded) {
+        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + e.deltaY * 0.8)
+      } else {
+        targetRef.current = clamp(targetRef.current + e.deltaY * 0.0005)
+      }
     }
     const onTouchStart = (e) => setTouchY(e.touches[0].clientY)
     const onTouchMove  = (e) => {
-      if (touchY === null || expanded) return
+      if (touchY === null) return
       e.preventDefault()
       const dy = touchY - e.touches[0].clientY
-      targetRef.current = clamp(targetRef.current + dy * (dy < 0 ? 0.006 : 0.004))
+      if (expanded) {
+        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + dy * 1.2)
+      } else {
+        targetRef.current = clamp(targetRef.current + dy * (dy < 0 ? 0.006 : 0.004))
+      }
       setTouchY(e.touches[0].clientY)
     }
     const onTouchEnd = () => setTouchY(null)
@@ -154,7 +168,7 @@ export default function LaptopZoom() {
             willChange:      'transform',
           }}
         >
-          <Homepage revealed={expanded} isMobile={isMobile} />
+          <Homepage revealed={expanded} isMobile={isMobile} scrollY={scrollY} />
         </div>
       </div>
 
