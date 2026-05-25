@@ -7,7 +7,7 @@ const IMG_H = 941
 
 // Screen area as % of SOURCE IMAGE edges (top/right/bottom/left inset from image borders).
 // These are resolution-independent — computed from viewport calibration at 1920×1080 (16:9).
-const DESKTOP_SCREEN = { top: 34.9, right: 31.13, bottom: 23.45, left: 31.15 }
+const DESKTOP_SCREEN = { top: 34.9, right: 31.16, bottom: 23.45, left: 31.16 }
 
 // Mobile: derived from iPhone 14 Pro (390×844) calibration.
 // The phone is landscape in the image, so horizontal insets are large (~44%).

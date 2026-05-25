@@ -63,11 +63,11 @@ export default function Homepage({ revealed = true, isMobile = false }) {
 
       <motion.nav style={styles.nav} {...navProps}>
         <Link to="/demos" style={styles.navLink}>Demos</Link>
-        <span style={styles.navItem}>Services</span>
-        <span style={styles.navItem}>Process</span>
-        <span style={styles.navItem}>Industries</span>
-        <span style={styles.navItem}>FAQ</span>
-        <span style={styles.navItem}>Contact</span>
+        <Link to="/services" style={styles.navLink}>Services</Link>
+        <Link to="/process" style={styles.navLink}>Process</Link>
+        <Link to="/industries" style={styles.navLink}>Industries</Link>
+        <Link to="/faq" style={styles.navLink}>FAQ</Link>
+        <Link to="/contact" style={styles.navLink}>Contact</Link>
       </motion.nav>
 
       <motion.div style={styles.midLeft} className="mid-left" {...mlProps}>
