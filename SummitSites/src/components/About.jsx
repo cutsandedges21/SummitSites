@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const EASE = [0.22, 1, 0.36, 1]
+const R_CARD = '20px'
+const R_CTA  = '6px'
+
+const SHADOW_MD = 'inset 3px 3px 3px 0 rgba(255,255,255,0.45), inset -3px -3px 3px 0 rgba(255,255,255,0.45)'
+const GLOW_SM   = '0 4px 4px rgba(0,0,0,0.15), 0 0 12px rgba(0,0,0,0.08), 0 0 24px rgba(255,255,255,0.1)'
 
 const QUOTE_WORDS = [
   { text: '"Every',       amber: false },
@@ -17,15 +22,15 @@ const QUOTE_WORDS = [
 const COLS = [
   {
     num: '01',
-    body: 'Summit Sites is a web design agency built specifically for local small businesses. We know you\'re busy — you don\'t have time for complicated tech, long timelines, or developers who disappear after launch.',
+    body: 'Summit Sites is a web design agency built for companies that take growth seriously. We create high-performing websites for businesses that want to generate more leads, build credibility, and turn their online presence into a revenue-driving asset.',
   },
   {
     num: '02',
-    body: 'So we handle everything. One setup fee, one monthly rate, one person to call. No jargon, no surprises, no long contracts.',
+    body: 'We keep the process simple. One setup fee, one monthly rate, and direct communication from start to finish. No confusing tech talk, no hidden costs, and no disappearing after launch.',
   },
   {
     num: '03',
-    body: 'Your website should be working for you around the clock — bringing in new clients even when you\'re not open. That\'s exactly what we build.',
+    body: "Your website should be working 24/7 — attracting customers, building trust, and driving sales even when you're off the clock. That's exactly what we build.",
   },
 ]
 
@@ -59,6 +64,20 @@ const ctaVariants = {
   },
 }
 
+function GlassLayers({ r, blur = '24px' }) {
+  return (
+    <>
+      <div style={{
+        position: 'absolute', inset: 0, borderRadius: r,
+        backdropFilter: `blur(${blur})`, WebkitBackdropFilter: `blur(${blur})`,
+        filter: 'url(#glass-blur)', zIndex: 0,
+      }} />
+      <div style={{ position: 'absolute', inset: 0, borderRadius: r, boxShadow: GLOW_SM, zIndex: 1 }} />
+      <div style={{ position: 'absolute', inset: 0, borderRadius: r, boxShadow: SHADOW_MD, zIndex: 2 }} />
+    </>
+  )
+}
+
 export default function About({ scrollY }) {
   const [revealed, setRevealed] = useState(false)
   const [viewportH, setViewportH] = useState(() => window.innerHeight)
@@ -84,6 +103,28 @@ export default function About({ scrollY }) {
       position: 'relative',
       overflow: 'hidden',
     }}>
+
+      {/* Background blur over the video */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        backdropFilter: 'blur(18px)',
+        WebkitBackdropFilter: 'blur(18px)',
+        zIndex: 0,
+        pointerEvents: 'none',
+      }} />
+
+      {/* SVG distortion filter */}
+      <svg style={{ display: 'none' }}>
+        <defs>
+          <filter id="glass-blur" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
+            <feTurbulence type="fractalNoise" baseFrequency="0.003 0.007" numOctaves="1" result="turbulence" />
+            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+      </svg>
+
+      {/* Content above blur */}
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', flex: 1 }}>
 
       {/* Top rule */}
       <div style={{
@@ -137,7 +178,7 @@ export default function About({ scrollY }) {
               style={{
                 display: 'inline-block',
                 marginRight: '0.28em',
-                color: w.amber ? '#c8a96e' : undefined,
+                color: w.amber ? '#D4623A' : undefined,
               }}
             >
               {w.text}
@@ -146,7 +187,7 @@ export default function About({ scrollY }) {
         </p>
       </div>
 
-      {/* Three liquid-glass cards */}
+      {/* Cards */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
@@ -156,42 +197,45 @@ export default function About({ scrollY }) {
         {COLS.map((col, i) => (
           <motion.div
             key={col.num}
-            className="liquid-glass"
             custom={i}
             variants={cardVariants}
             initial="hidden"
             animate={revealed ? 'visible' : 'hidden'}
-            style={{
-              borderRadius: '20px',
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.98 }}
+            style={{ position: 'relative', borderRadius: R_CARD }}
+          >
+            <GlassLayers r={R_CARD} blur="40px" />
+            <div style={{
+              position: 'relative', zIndex: 3,
               padding: 'clamp(20px, 2.5vw, 32px) clamp(16px, 2vw, 28px) clamp(24px, 3vw, 36px)',
               display: 'flex',
               flexDirection: 'column',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-            }}
-          >
-            <div style={{
-              fontSize: '10px',
-              letterSpacing: '0.18em',
-              color: 'rgba(255,255,255,0.2)',
-              marginBottom: '16px',
+              height: '100%',
             }}>
-              {col.num}
+              <div style={{
+                fontSize: '10px',
+                letterSpacing: '0.18em',
+                color: 'rgba(255,255,255,0.2)',
+                marginBottom: '16px',
+              }}>
+                {col.num}
+              </div>
+              <div style={{
+                width: '24px', height: '1px',
+                background: 'rgba(212,98,58,0.5)',
+                marginBottom: '20px',
+              }} />
+              <p style={{
+                fontSize: 'clamp(13px, 1.15vw, 17px)',
+                lineHeight: 1.8,
+                color: 'rgba(255,255,255,1)',
+                fontWeight: 300,
+                flex: 1,
+              }}>
+                {col.body}
+              </p>
             </div>
-            <div style={{
-              width: '24px', height: '1px',
-              background: 'rgba(200,169,110,0.5)',
-              marginBottom: '20px',
-            }} />
-            <p style={{
-              fontSize: 'clamp(13px, 1.15vw, 17px)',
-              lineHeight: 1.8,
-              color: 'rgba(255,255,255,0.6)',
-              fontWeight: 300,
-              flex: 1,
-            }}>
-              {col.body}
-            </p>
           </motion.div>
         ))}
       </div>
@@ -201,36 +245,42 @@ export default function About({ scrollY }) {
         variants={ctaVariants}
         initial="hidden"
         animate={revealed ? 'visible' : 'hidden'}
-        style={{ marginTop: 'clamp(28px, 4vw, 52px)' }}
+        style={{ marginTop: 'clamp(28px, 4vw, 52px)', display: 'inline-block' }}
       >
-        <a
+        <motion.a
           href="/contact"
-          className="liquid-glass-strong"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: '10px',
             padding: '14px 28px',
-            borderRadius: '6px',
+            borderRadius: R_CTA,
             fontSize: '11px',
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
             color: 'rgba(255,255,255,0.9)',
             textDecoration: 'none',
+            position: 'relative',
           }}
         >
-          Work with us
-          <svg
-            width="16" height="16" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor"
-            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          >
-            <line x1="7" y1="17" x2="17" y2="7" />
-            <polyline points="7 7 17 7 17 17" />
-          </svg>
-        </a>
+          <GlassLayers r={R_CTA} blur="70px" />
+          <span style={{ position: 'relative', zIndex: 3, display: 'flex', alignItems: 'center', gap: '10px' }}>
+            Work with us
+            <svg
+              width="16" height="16" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor"
+              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </span>
+        </motion.a>
       </motion.div>
 
+      </div>{/* end content above blur */}
     </div>
   )
 }

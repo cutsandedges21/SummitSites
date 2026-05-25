@@ -93,12 +93,12 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
             }
           </motion.div>
           <motion.nav style={styles.nav} {...fadeUp}>
-            <Link to="/demos"      style={styles.navLink}>Demos</Link>
-            <Link to="/services"   style={styles.navLink}>Services</Link>
-            <Link to="/process"    style={styles.navLink}>Process</Link>
-            <Link to="/industries" style={styles.navLink}>Industries</Link>
+            <Link to="/demos"      style={styles.navLink}>DEMOS</Link>
+            <Link to="/services"   style={styles.navLink}>SERVICES</Link>
+            <Link to="/process"    style={styles.navLink}>PROCESS</Link>
+            <Link to="/industries" style={styles.navLink}>INDUSTRIES</Link>
             <Link to="/faq"        style={styles.navLink}>FAQ</Link>
-            <Link to="/contact"    style={styles.navLink}>Contact</Link>
+            <Link to="/contact"    style={styles.navLink}>CONTACT</Link>
           </motion.nav>
         </div>
 
