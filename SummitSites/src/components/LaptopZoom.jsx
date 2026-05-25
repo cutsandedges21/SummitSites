@@ -105,13 +105,15 @@ export default function LaptopZoom() {
   const screen          = isMobile ? MOBILE_SCREEN : DESKTOP_SCREEN
   const s               = computeInsets(screen, viewport.w, viewport.h)
   const { scy, s0, dy } = derive(s)
+  const s0h             = (100 - s.left - s.right) / 100
+  const s0eff           = Math.max(s0, s0h)
   const p               = progress
 
   const bgSrc       = isMobile ? '/iphone_homepage.png' : '/good_laptop_ref_ratio.png'
   const bgScale     = 1 + p * (1 / s0 - 1)
   const bgOriginY   = isMobile ? scy : scy + 6.5
 
-  const homeScale   = s0 + (1 - s0) * p
+  const homeScale   = s0eff + (1 - s0eff) * p
   const homeTY      = dy * (1 - p)
 
   const ct = s.top    * (1 - p)

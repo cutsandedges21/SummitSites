@@ -74,8 +74,25 @@ body {
   100% { opacity: 0; transform: translateX(-50%) translateY(6px)   rotate(90deg); }
 }
 
-.explore-link:hover {
-  opacity: 0.75;
+.explore-link:hover,
+a:hover,
+.icon-btn:hover {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+@keyframes chevronSlideIn {
+  from { transform: translateX(-10px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+.explore-link:hover svg {
+  animation: chevronSlideIn 0.6s ease-in-out forwards;
+}
+
+a,
+.icon-btn {
+  transition: opacity 0.2s ease;
 }
 
 @media (max-width: 640px) {
@@ -96,7 +113,9 @@ body {
     font-size: clamp(9px, 2.8vw, 13px) !important;
   }
   .mid-right {
-    bottom: 46% !important;
     font-size: clamp(9px, 2.8vw, 13px) !important;
+  }
+  .mid-right-wrapper {
+    bottom: 89% !important;
   }
 }
