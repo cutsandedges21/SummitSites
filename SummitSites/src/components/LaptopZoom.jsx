@@ -1,29 +1,70 @@
 import { useState, useEffect, useRef } from 'react'
 import Homepage from './Homepage'
 
-// Screen bounds in % of viewport (image is 16:9, objectFit:cover maps 1:1)
-const S = { top: 32, right: 31.1, bottom: 18.4, left: 31.1 }
-// Screen center Y = top + (100 - top - bottom) / 2
-const SCY = S.top + (100 - S.top - S.bottom) / 2  // 58%
-// Homepage scale at p=0 that makes it fill the screen exactly (height-fit)
-const S0 = (100 - S.top - S.bottom) / 100          // 0.44
-// Y delta: screen center (58%) vs viewport center (50%)
-const DY  = SCY - 50                                 // 8
+// Source image natural dimensions (px) — both bg images are the same size
+const IMG_W = 1672
+const IMG_H = 941
+
+// Screen area as % of SOURCE IMAGE edges (top/right/bottom/left inset from image borders).
+// These are resolution-independent — computed from viewport calibration at 1920×1080 (16:9).
+const DESKTOP_SCREEN = { top: 34.9, right: 31.13, bottom: 23.45, left: 31.15 }
+
+// Mobile: derived from iPhone 14 Pro (390×844) calibration.
+// The phone is landscape in the image, so horizontal insets are large (~44%).
+const MOBILE_SCREEN = { top: 19.3, right: 42.5, bottom: 19.5, left: 42.56 }
+
+// Compute CSS inset% values accounting for how objectFit:cover crops the image
+// at the current viewport size.
+function computeInsets(screen, vw, vh) {
+  const scale = Math.max(vw / IMG_W, vh / IMG_H)
+  const rendW = IMG_W * scale
+  const rendH = IMG_H * scale
+  const ox    = (vw - rendW) / 2
+  const oy    = (vh - rendH) / 2
+
+  const vpLeft   = (screen.left   / 100) * rendW + ox
+  const vpTop    = (screen.top    / 100) * rendH + oy
+  const vpRight  = (1 - screen.right  / 100) * rendW + ox
+  const vpBottom = (1 - screen.bottom / 100) * rendH + oy
+
+  return {
+    top:    vpTop             / vh * 100,
+    right:  (vw - vpRight)   / vw * 100,
+    bottom: (vh - vpBottom)  / vh * 100,
+    left:   vpLeft            / vw * 100,
+  }
+}
+
+function derive(s) {
+  const scy = s.top + (100 - s.top - s.bottom) / 2
+  const s0  = (100 - s.top - s.bottom) / 100
+  const dy  = scy - 50
+  return { scy, s0, dy }
+}
 
 export default function LaptopZoom() {
   const [progress, setProgress] = useState(0)
   const [expanded, setExpanded] = useState(false)
   const [touchY,   setTouchY]   = useState(null)
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+  const [viewport, setViewport] = useState(() => ({ w: window.innerWidth, h: window.innerHeight }))
 
-  // Smooth lerp via RAF
   const targetRef = useRef(0)
   const rafRef    = useRef(null)
 
   useEffect(() => {
+    const onResize = () => {
+      setIsMobile(window.innerWidth < 768)
+      setViewport({ w: window.innerWidth, h: window.innerHeight })
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  useEffect(() => {
     const tick = () => {
-      const curr   = targetRef._curr ?? 0
-      const target = targetRef.current
-      const next   = curr + (target - curr) * 0.07
+      const curr = targetRef._curr ?? 0
+      const next = curr + (targetRef.current - curr) * 0.07
       targetRef._curr = next
       setProgress(next)
       if (next >= 0.999 && !expanded) setExpanded(true)
@@ -33,29 +74,22 @@ export default function LaptopZoom() {
     return () => cancelAnimationFrame(rafRef.current)
   }, [expanded])
 
-  // Intercept scroll while animating
   useEffect(() => {
     const clamp = v => Math.min(Math.max(v, 0), 1)
-
     const onWheel = (e) => {
       if (expanded) return
       e.preventDefault()
       targetRef.current = clamp(targetRef.current + e.deltaY * 0.0005)
     }
-
     const onTouchStart = (e) => setTouchY(e.touches[0].clientY)
-
-    const onTouchMove = (e) => {
+    const onTouchMove  = (e) => {
       if (touchY === null || expanded) return
       e.preventDefault()
-      const dy     = touchY - e.touches[0].clientY
-      const factor = dy < 0 ? 0.006 : 0.004
-      targetRef.current = clamp(targetRef.current + dy * factor)
+      const dy = touchY - e.touches[0].clientY
+      targetRef.current = clamp(targetRef.current + dy * (dy < 0 ? 0.006 : 0.004))
       setTouchY(e.touches[0].clientY)
     }
-
     const onTouchEnd = () => setTouchY(null)
-
     window.addEventListener('wheel',      onWheel,      { passive: false })
     window.addEventListener('touchstart', onTouchStart, { passive: true  })
     window.addEventListener('touchmove',  onTouchMove,  { passive: false })
@@ -68,32 +102,32 @@ export default function LaptopZoom() {
     }
   }, [expanded, touchY])
 
-  const p = progress
+  const screen          = isMobile ? MOBILE_SCREEN : DESKTOP_SCREEN
+  const s               = computeInsets(screen, viewport.w, viewport.h)
+  const { scy, s0, dy } = derive(s)
+  const p               = progress
 
-  // Laptop zooms at same rate as homepage expands — feels like one continuous push in
-  const laptopScale = 1 + p * (1 / S0 - 1)
+  const bgSrc       = isMobile ? '/iphone_homepage.png' : '/good_laptop_ref_ratio.png'
+  const bgScale     = 1 + p * (1 / s0 - 1)
+  const bgOriginY   = isMobile ? scy : scy + 6.5
 
-  // Homepage: scales from screen-fitted size → full, translated to screen center → viewport center
-  const homeScale = S0 + (1 - S0) * p
-  const homeTY    = DY * (1 - p)   // vh
+  const homeScale   = s0 + (1 - s0) * p
+  const homeTY      = dy * (1 - p)
 
-  // Clip opens from screen bounds → full viewport
-  const ct = S.top    * (1 - p)
-  const cr = S.right  * (1 - p)
-  const cb = S.bottom * (1 - p)
-  const cl = S.left   * (1 - p)
-  const radius = 16 * (1 - p)
+  const ct = s.top    * (1 - p)
+  const cr = s.right  * (1 - p)
+  const cb = s.bottom * (1 - p)
+  const cl = s.left   * (1 - p)
+  const radius  = 16 * (1 - p)
   const clipPath = `inset(${ct}% ${cr}% ${cb}% ${cl}% round ${radius}px)`
 
-  // Fade laptop out in the last quarter
-  const laptopOpacity = p < 0.75 ? 1 : 1 - (p - 0.75) / 0.25
+  const bgOpacity = p < 0.75 ? 1 : 1 - (p - 0.75) / 0.25
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: '#000' }}>
 
-      {/* Laptop image — tiny zoom toward screen center */}
       <img
-        src="/good_laptop_ref_ratio.png"
+        src={bgSrc}
         alt=""
         style={{
           position:        'absolute',
@@ -101,22 +135,14 @@ export default function LaptopZoom() {
           height:          '100%',
           objectFit:       'cover',
           objectPosition:  'center',
-          transform:       `scale(${laptopScale})`,
-          transformOrigin: `50% ${SCY + 6.5}%`,
-          opacity:         laptopOpacity,
+          transform:       `scale(${bgScale})`,
+          transformOrigin: `50% ${bgOriginY}%`,
+          opacity:         bgOpacity,
           willChange:      'transform, opacity',
         }}
       />
 
-      {/* Homepage scales up from screen position */}
-      <div
-        style={{
-          position:        'absolute',
-          inset:           0,
-          clipPath,
-          willChange:      'clip-path',
-        }}
-      >
+      <div style={{ position: 'absolute', inset: 0, clipPath, willChange: 'clip-path' }}>
         <div
           style={{
             width:           '100vw',
@@ -126,7 +152,7 @@ export default function LaptopZoom() {
             willChange:      'transform',
           }}
         >
-          <Homepage revealed={expanded} />
+          <Homepage revealed={expanded} isMobile={isMobile} />
         </div>
       </div>
 

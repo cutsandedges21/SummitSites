@@ -81,20 +81,22 @@ body {
 @media (max-width: 640px) {
   .hero-bottom {
     justify-content: flex-start !important;
-    padding-left: 20px !important;
+    padding-left: clamp(14px, 4vw, 24px) !important;
   }
   .hero-inner {
     width: 100%;
   }
   .hero-title {
-    font-size: clamp(90px, 26vw, 150px) !important;
+    font-size: clamp(72px, 22vw, 140px) !important;
     letter-spacing: 0.07em !important;
     word-break: break-word;
   }
   .mid-left {
     bottom: 46% !important;
+    font-size: clamp(9px, 2.8vw, 13px) !important;
   }
   .mid-right {
     bottom: 46% !important;
+    font-size: clamp(9px, 2.8vw, 13px) !important;
   }
 }
