@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import About from './About'
 
 const EASE = [0.22, 1, 0.36, 1]
 const MORPH = { type: 'spring', stiffness: 45, damping: 18 }
@@ -119,6 +120,11 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
             </div>
           </div>
           <div style={styles.scrollChevron} className="scroll-chevron"><ChevronIcon size={18} /></div>
+
+          {/* About section — sits at 100vh, scrolls up with the content layer */}
+          <div style={{ position: 'absolute', top: '115vh', left: 0, width: '100vw', height: '100vh' }}>
+            <About scrollY={scrollY} />
+          </div>
         </div>
       </div>
     )

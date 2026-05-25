@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Section Mockup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #050508;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── Liquid Glass ── */
+  .liquid-glass {
+    background: rgba(255,255,255,0.01);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .liquid-glass::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.45) 0%,
+      rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0) 40%,
+      rgba(255,255,255,0) 60%,
+      rgba(255,255,255,0.15) 80%,
+      rgba(255,255,255,0.45) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .liquid-glass-strong {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255,255,255,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .liquid-glass-strong::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.5) 0%,
+      rgba(255,255,255,0.2) 20%,
+      rgba(255,255,255,0) 40%,
+      rgba(255,255,255,0) 60%,
+      rgba(255,255,255,0.2) 80%,
+      rgba(255,255,255,0.5) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* ── BlurText animation (CSS stand-in — in React this is Framer Motion) ── */
+  @keyframes blurIn {
+    0%   { filter: blur(10px); opacity: 0; transform: translateY(50px); }
+    50%  { filter: blur(5px);  opacity: 0.5; transform: translateY(-5px); }
+    100% { filter: blur(0px);  opacity: 1; transform: translateY(0); }
+  }
+
+  .blur-word {
+    display: inline-block;
+    margin-right: 0.28em;
+    animation: blurIn 0.7s ease-out both;
+  }
+  .blur-word:nth-child(1)  { animation-delay: 0.00s; }
+  .blur-word:nth-child(2)  { animation-delay: 0.10s; }
+  .blur-word:nth-child(3)  { animation-delay: 0.20s; }
+  .blur-word:nth-child(4)  { animation-delay: 0.30s; }
+  .blur-word:nth-child(5)  { animation-delay: 0.40s; }
+  .blur-word:nth-child(6)  { animation-delay: 0.50s; }
+  .blur-word:nth-child(7)  { animation-delay: 0.60s; }
+  .blur-word:nth-child(8)  { animation-delay: 0.70s; }
+  .blur-word:nth-child(9)  { animation-delay: 0.80s; }
+  .blur-word:nth-child(10) { animation-delay: 0.90s; }
+
+  /* ── Section ── */
+  .about-section {
+    min-height: 100vh;
+    padding: 100px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* top divider line */
+  .section-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+    margin-bottom: 64px;
+  }
+
+  /* eyebrow */
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 28px;
+  }
+
+  /* quote block */
+  .quote-block {
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 56px;
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 52px);
+    line-height: 1.25;
+    color: rgba(255,255,255,0.88);
+    max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 0.1em;
+  }
+
+  .amber { color: #c8a96e; font-style: italic; }
+
+  /* three-column body */
+  .three-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    flex: 1;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .col-num {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.2);
+    margin-bottom: 20px;
+  }
+
+  .col-rule {
+    width: 24px;
+    height: 1px;
+    background: rgba(200,169,110,0.4);
+    margin-bottom: 20px;
+  }
+
+  .col-text {
+    font-size: 13px;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+    flex: 1;
+  }
+
+  /* CTA */
+  .cta-row {
+    margin-top: 64px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .cta-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .cta-btn:hover .cta-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  /* ambient glow behind section */
+  .glow {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(200,169,110,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* annotation badge */
+  .annotation {
+    position: fixed;
+    top: 16px; right: 16px;
+    background: rgba(200,169,110,0.15);
+    border: 1px solid rgba(200,169,110,0.3);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #c8a96e;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+<div class="annotation">Mockup — Layout C</div>
+
+<section class="about-section">
+
+  <div class="section-rule"></div>
+
+  <div class="eyebrow">About Summit Sites</div>
+
+  <!-- Quote with BlurText animation -->
+  <div class="quote-block">
+    <p class="quote-text">
+      <span class="blur-word">"Every</span>
+      <span class="blur-word">local</span>
+      <span class="blur-word">business</span>
+      <span class="blur-word">deserves</span>
+      <span class="blur-word">a</span>
+      <span class="blur-word amber">professional</span>
+      <span class="blur-word amber">presence</span>
+      <span class="blur-word">"</span>
+    </p>
+  </div>
+
+  <!-- Three columns -->
+  <div class="three-cols">
+    <div class="col">
+      <div class="col-num">01</div>
+      <div class="col-rule"></div>
+      <p class="col-text">
+        Summit Sites is a web design agency built specifically for local small businesses.
+        We know you're busy — you don't have time for complicated tech, long timelines,
+        or developers who disappear after launch.
+      </p>
+    </div>
+    <div class="col">
+      <div class="col-num">02</div>
+      <div class="col-rule"></div>
+      <p class="col-text">
+        So we handle everything. One setup fee, one monthly rate, one person to call.
+        No jargon, no surprises, no long contracts.
+      </p>
+    </div>
+    <div class="col">
+      <div class="col-num">03</div>
+      <div class="col-rule"></div>
+      <p class="col-text">
+        Your website should be working for you around the clock — bringing in new clients
+        even when you're not open. That's exactly what we build.
+      </p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-row">
+    <a class="cta-btn liquid-glass-strong" style="border-radius:4px;" href="#">
+      Work with us
+      <span class="cta-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"/>
+          <polyline points="7 7 17 7 17 17"/>
+        </svg>
+      </span>
+    </a>
+  </div>
+
+</section>
+
+</body>
+</html>

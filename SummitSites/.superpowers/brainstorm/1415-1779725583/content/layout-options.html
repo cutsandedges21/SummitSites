@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll Section Layout Options</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; color: #fff; font-family: sans-serif; padding: 40px 24px; }
+
+  h1 { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 8px; letter-spacing: 0.02em; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 40px; }
+
+  /* Option cards */
+  .options { display: flex; flex-direction: column; gap: 48px; }
+  .option-wrap { cursor: pointer; border: 1.5px solid #222; border-radius: 12px; overflow: hidden; transition: border-color 0.2s; }
+  .option-wrap:hover { border-color: #444; }
+  .option-wrap.selected { border-color: #c8a96e; }
+
+  .option-label {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 20px;
+    background: #111;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #888;
+  }
+  .option-label .letter {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #1e1e1e; border: 1px solid #333;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: #aaa;
+  }
+  .option-wrap.selected .option-label { color: #c8a96e; }
+  .option-wrap.selected .letter { background: #c8a96e22; border-color: #c8a96e; color: #c8a96e; }
+
+  .preview { background: #080810; }
+
+  /* ─── OPTION A: Centered Editorial ─── */
+  .a-section {
+    min-height: 480px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 64px 48px; text-align: center;
+    position: relative;
+  }
+  .a-eyebrow {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #555; margin-bottom: 32px;
+  }
+  .a-quote {
+    font-family: Georgia, serif;
+    font-size: 28px; font-style: italic; font-weight: 400;
+    line-height: 1.4; color: #ccc; max-width: 640px;
+    margin-bottom: 40px;
+  }
+  .a-quote em { color: #c8a96e; font-style: italic; }
+  .a-divider { width: 40px; height: 1px; background: #333; margin: 0 auto 40px; }
+  .a-body { font-size: 13px; line-height: 1.8; color: #888; max-width: 560px; }
+  .a-body p { margin-bottom: 16px; }
+  .a-cta {
+    margin-top: 40px;
+    display: inline-block; padding: 12px 32px;
+    border: 1px solid #c8a96e; color: #c8a96e;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    border-radius: 2px;
+  }
+
+  /* ─── OPTION B: Left Column + Right Body ─── */
+  .b-section {
+    min-height: 480px;
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    padding: 64px 48px; gap: 64px;
+    align-items: center;
+  }
+  .b-left {}
+  .b-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #555; margin-bottom: 20px; }
+  .b-quote {
+    font-family: Georgia, serif;
+    font-size: 26px; font-style: italic; color: #ccc; line-height: 1.45;
+  }
+  .b-quote em { color: #c8a96e; }
+  .b-accent-line { width: 32px; height: 2px; background: #c8a96e; margin-top: 28px; }
+  .b-right {}
+  .b-body { font-size: 13px; line-height: 1.85; color: #888; }
+  .b-body p { margin-bottom: 18px; }
+  .b-cta {
+    margin-top: 32px; display: inline-block;
+    padding: 12px 32px; border: 1px solid #c8a96e;
+    color: #c8a96e; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px;
+  }
+
+  /* ─── OPTION C: Large Quote Hero + Body Below ─── */
+  .c-section {
+    min-height: 480px;
+    padding: 72px 48px 64px;
+    position: relative;
+  }
+  .c-top {
+    border-bottom: 1px solid #1c1c1c;
+    padding-bottom: 40px; margin-bottom: 40px;
+  }
+  .c-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #555; margin-bottom: 20px; }
+  .c-quote {
+    font-family: Georgia, serif;
+    font-size: 36px; font-style: italic; font-weight: 400;
+    color: #ddd; line-height: 1.3; max-width: 800px;
+  }
+  .c-quote em { color: #c8a96e; }
+  .c-bottom {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  }
+  .c-col { }
+  .c-col-num { font-size: 10px; letter-spacing: 0.15em; color: #444; margin-bottom: 12px; }
+  .c-col-text { font-size: 12px; line-height: 1.75; color: #777; }
+  .c-cta-row { margin-top: 40px; }
+  .c-cta {
+    display: inline-block; padding: 12px 32px;
+    border: 1px solid #c8a96e; color: #c8a96e;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 2px;
+  }
+</style>
+<script>
+  function select(el) {
+    document.querySelectorAll('.option-wrap').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    // fire event for state tracking
+    if (window.__brainstormHelper) window.__brainstormHelper.select(el.dataset.choice, el.querySelector('.option-label span').textContent.trim());
+    else { try { const e = new CustomEvent('brainstorm-select', {detail:{choice:el.dataset.choice}}); document.dispatchEvent(e); } catch(e){} }
+  }
+</script>
+</head>
+<body>
+<h1>Scroll Section — Layout Direction</h1>
+<p class="subtitle">Same copy, three different spatial treatments. Click to select.</p>
+
+<div class="options">
+
+  <!-- OPTION A -->
+  <div class="option-wrap" data-choice="a" onclick="select(this)">
+    <div class="option-label">
+      <div class="letter">A</div>
+      <span>Centered Editorial — everything centered, stacked, breathable</span>
+    </div>
+    <div class="preview">
+      <div class="a-section">
+        <div class="a-eyebrow">About Summit Sites</div>
+        <div class="a-quote">"Every local business deserves a <em>professional presence</em> online."</div>
+        <div class="a-divider"></div>
+        <div class="a-body">
+          <p>Summit Sites is a web design agency built specifically for local small businesses. We know you're busy — you don't have time for complicated tech, long timelines, or developers who disappear after launch.</p>
+          <p>So we handle everything. One setup fee, one monthly rate, one person to call. No jargon, no surprises, no long contracts.</p>
+          <p>Your website should be working for you around the clock — bringing in new clients even when you're not open. That's exactly what we build.</p>
+        </div>
+        <div class="a-cta">Work with us</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION B -->
+  <div class="option-wrap" data-choice="b" onclick="select(this)">
+    <div class="option-label">
+      <div class="letter">B</div>
+      <span>Split Layout — quote anchored left, body text flows right</span>
+    </div>
+    <div class="preview">
+      <div class="b-section">
+        <div class="b-left">
+          <div class="b-eyebrow">About Summit Sites</div>
+          <div class="b-quote">"Every local business deserves a <em>professional presence</em> online."</div>
+          <div class="b-accent-line"></div>
+        </div>
+        <div class="b-right">
+          <div class="b-body">
+            <p>Summit Sites is a web design agency built specifically for local small businesses. We know you're busy — you don't have time for complicated tech, long timelines, or developers who disappear after launch.</p>
+            <p>So we handle everything. One setup fee, one monthly rate, one person to call. No jargon, no surprises, no long contracts.</p>
+            <p>Your website should be working for you around the clock — bringing in new clients even when you're not open. That's exactly what we build.</p>
+          </div>
+          <div class="b-cta">Work with us</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION C -->
+  <div class="option-wrap" data-choice="c" onclick="select(this)">
+    <div class="option-label">
+      <div class="letter">C</div>
+      <span>Quote Hero + Three Columns — large quote on top, body split into 3 columns below</span>
+    </div>
+    <div class="preview">
+      <div class="c-section">
+        <div class="c-top">
+          <div class="c-eyebrow">About Summit Sites</div>
+          <div class="c-quote">"Every local business deserves a <em>professional presence</em> online."</div>
+        </div>
+        <div class="c-bottom">
+          <div class="c-col">
+            <div class="c-col-num">01</div>
+            <div class="c-col-text">Summit Sites is a web design agency built specifically for local small businesses. We know you're busy — no time for complicated tech or long timelines.</div>
+          </div>
+          <div class="c-col">
+            <div class="c-col-num">02</div>
+            <div class="c-col-text">So we handle everything. One setup fee, one monthly rate, one person to call. No jargon, no surprises, no long contracts.</div>
+          </div>
+          <div class="c-col">
+            <div class="c-col-num">03</div>
+            <div class="c-col-text">Your website should be working for you around the clock — bringing in new clients even when you're not open. That's exactly what we build.</div>
+          </div>
+        </div>
+        <div class="c-cta-row"><div class="c-cta">Work with us</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -89,7 +89,7 @@ export default function LaptopZoom() {
     const onWheel = (e) => {
       e.preventDefault()
       if (expanded && !isMobileRef.current) {
-        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + e.deltaY * 0.8)
+        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + e.deltaY * 0.4)
       } else if (!expanded) {
         targetRef.current = clamp(targetRef.current + e.deltaY * 0.0005)
       }
@@ -100,7 +100,7 @@ export default function LaptopZoom() {
       e.preventDefault()
       const dy = touchY - e.touches[0].clientY
       if (expanded && !isMobileRef.current) {
-        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + dy * 1.2)
+        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + dy * 0.6)
       } else if (!expanded) {
         targetRef.current = clamp(targetRef.current + dy * (dy < 0 ? 0.006 : 0.004))
       }
