@@ -54,6 +54,9 @@ export default function LaptopZoom() {
   const [scrollY, setScrollY]   = useState(0)
   const scrollTargetRef = useRef(0)
   const scrollCurrRef   = useRef(0)
+  const isMobileRef     = useRef(isMobile)
+
+  useEffect(() => { isMobileRef.current = isMobile }, [isMobile])
 
   useEffect(() => {
     const onResize = () => {
@@ -85,9 +88,9 @@ export default function LaptopZoom() {
     const clamp = v => Math.min(Math.max(v, 0), 1)
     const onWheel = (e) => {
       e.preventDefault()
-      if (expanded) {
+      if (expanded && !isMobileRef.current) {
         scrollTargetRef.current = Math.max(0, scrollTargetRef.current + e.deltaY * 0.8)
-      } else {
+      } else if (!expanded) {
         targetRef.current = clamp(targetRef.current + e.deltaY * 0.0005)
       }
     }
@@ -96,9 +99,9 @@ export default function LaptopZoom() {
       if (touchY === null) return
       e.preventDefault()
       const dy = touchY - e.touches[0].clientY
-      if (expanded) {
+      if (expanded && !isMobileRef.current) {
         scrollTargetRef.current = Math.max(0, scrollTargetRef.current + dy * 1.2)
-      } else {
+      } else if (!expanded) {
         targetRef.current = clamp(targetRef.current + dy * (dy < 0 ? 0.006 : 0.004))
       }
       setTouchY(e.touches[0].clientY)

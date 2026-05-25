@@ -202,35 +202,33 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
           </div>
         </motion.nav>
 
-        <div style={{ transform: `translateY(${-scrollY}px)`, willChange: 'transform' }}>
-          <motion.div style={styles.midLeft} className="mid-left" {...mML}>
-            We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
-          </motion.div>
+        <motion.div style={styles.midLeft} className="mid-left" {...mML}>
+          We build fast,<br />professional websites<br />for local businesses,<br />starting at one flat fee.
+        </motion.div>
 
-          <div style={styles.heroBottom} className="hero-bottom">
-            <div style={styles.heroInner} className="hero-inner">
-              <motion.h1
-                layoutId="summit-title"
-                style={styles.heroTitle}
-                className="hero-title"
-                transition={MORPH}
-              >
-                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
-                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
-              </motion.h1>
-              <motion.p style={styles.heroSub} {...mSub}>
-                YOUR BUSINESS, ELEVATED.
-              </motion.p>
-            </div>
+        <div style={styles.heroBottom} className="hero-bottom">
+          <div style={styles.heroInner} className="hero-inner">
+            <motion.h1
+              layoutId="summit-title"
+              style={styles.heroTitle}
+              className="hero-title"
+              transition={MORPH}
+            >
+              <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
+              <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
+            </motion.h1>
+            <motion.p style={styles.heroSub} {...mSub}>
+              YOUR BUSINESS, ELEVATED.
+            </motion.p>
           </div>
-
-          <motion.div
-            layoutId="scroll-chevron"
-            style={{ ...styles.scrollChevron, left: 'auto', right: 'clamp(16px, 4vw, 32px)', transform: 'rotate(90deg)' }}
-            className="scroll-chevron"
-            transition={MORPH_SLOW}
-          ><ChevronIcon size={18} /></motion.div>
         </div>
+
+        <motion.div
+          layoutId="scroll-chevron"
+          style={{ ...styles.scrollChevron, left: 'auto', right: 'clamp(16px, 4vw, 32px)', transform: 'rotate(90deg)' }}
+          className="scroll-chevron"
+          transition={MORPH_SLOW}
+        ><ChevronIcon size={18} /></motion.div>
       </motion.div>
 
     </div>
