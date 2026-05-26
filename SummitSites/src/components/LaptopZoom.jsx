@@ -100,7 +100,7 @@ export default function LaptopZoom() {
       e.preventDefault()
       const dy = touchY - e.touches[0].clientY
       if (expanded) {
-        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + dy * 0.6)
+        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + dy)
       } else if (!expanded) {
         targetRef.current = clamp(targetRef.current + dy * (dy < 0 ? 0.006 : 0.004))
       }
@@ -165,7 +165,7 @@ export default function LaptopZoom() {
         <div
           style={{
             width:           '100vw',
-            height:          '100vh',
+            height:          '100svh',
             transform:       `translateY(${homeTY}vh) scale(${homeScale})`,
             transformOrigin: 'center center',
             willChange:      'transform',
