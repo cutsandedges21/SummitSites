@@ -75,7 +75,7 @@ export default function LaptopZoom() {
       setProgress(next)
       if (next >= 0.999 && !expanded) setExpanded(true)
       const scurr = scrollCurrRef.current
-      const snext = scurr + (scrollTargetRef.current - scurr) * 0.07
+      const snext = scurr + (scrollTargetRef.current - scurr) * (isMobileRef.current ? 1 : 0.07)
       scrollCurrRef.current = snext
       setScrollY(snext)
       rafRef.current = requestAnimationFrame(tick)
@@ -164,8 +164,8 @@ export default function LaptopZoom() {
       <div style={{ position: 'absolute', inset: 0, clipPath, willChange: 'clip-path' }}>
         <div
           style={{
-            width:           '100vw',
-            height:          '100svh',
+            width:           '100%',
+            height:          '100%',
             transform:       `translateY(${homeTY}vh) scale(${homeScale})`,
             transformOrigin: 'center center',
             willChange:      'transform',

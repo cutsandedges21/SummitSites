@@ -106,10 +106,10 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
 
         {/* Content layer — moves up on scroll */}
         <div style={{ position: 'absolute', inset: 0, transform: `translateY(${-scrollY}px)`, willChange: 'transform' }}>
-          <motion.div style={styles.midLeft} className="mid-left" {...fadeSide(-20)}>
+          <motion.div style={{ ...styles.midLeft, bottom: `calc(34% + ${5 * progress}vw)` }} className="mid-left" {...fadeSide(-20)}>
           WE DON’T BUILD WEBSITES <br />JUST TO “HAVE A WEBSITE” <br />WE BUILD DIGITAL EXPERIENCES THAT <br />POSITION YOUR COMPANY AS<br /> THE OBVIOUS CHOICE.
           </motion.div>
-          <motion.div {...fadeSide(20)} className="mid-right-wrapper" style={{ position: 'absolute', zIndex: 10, right: 'clamp(16px, 2vw, 40px)', bottom: '34%' }}>
+          <motion.div {...fadeSide(20)} className="mid-right-wrapper" style={{ position: 'absolute', zIndex: 10, right: 'clamp(16px, 2vw, 40px)', bottom: `calc(34% + ${5 * progress}vw)` }}>
             <Link to="/demos" style={styles.midRight} className="mid-right explore-link">
               <span>see our<br />work</span>
               <ChevronIcon size={14} />
@@ -122,7 +122,7 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: EASE, delay: 0.3 }}
               >
-                <FlipText style={styles.heroTitle} className="hero-title">SUMMIT SITES</FlipText>
+                <FlipText style={{ ...styles.heroTitle, fontSize: `max(60px, ${12 + 5 * progress}vw)` }} className="hero-title">SUMMIT SITES</FlipText>
               </motion.div>
               <motion.p
                 ref={heroSubRef}
@@ -323,8 +323,8 @@ function FlipText({ children, style, className }) {
 const styles = {
   wrapper: {
     position: 'relative',
-    width: '100vw',
-    height: '100svh',
+    width: '100%',
+    height: '100%',
     overflow: 'hidden',
     fontFamily: "'Itoya', 'Helvetica Neue', Arial, sans-serif",
     color: '#fff',
@@ -512,7 +512,7 @@ const styles = {
     alignItems: 'flex-start',
   },
   heroTitle: {
-    fontSize: 'clamp(60px, 12vw, 200px)',
+    fontSize: 'clamp(60px, 17vw, 280px)',
     fontWeight: 700,
     letterSpacing: '0.1em',
     lineHeight: 1,
