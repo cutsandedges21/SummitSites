@@ -1,3 +1,91 @@
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
+const SERVICES = [
+  {
+    icon: '✦',
+    title: 'DESIGN',
+    blurb: 'Custom visuals built around your brand — no templates, no shortcuts.',
+    includes: ['Brand identity integration', 'Mobile-first layouts', 'Custom animations', 'UI/UX wireframing'],
+  },
+  {
+    icon: '⬡',
+    title: 'DEVELOPMENT',
+    blurb: 'Fast, modern sites engineered for performance and long-term reliability.',
+    includes: ['React / Next.js build', 'CMS integration', 'Speed optimization', 'Cross-browser QA'],
+  },
+  {
+    icon: '◎',
+    title: 'SEO',
+    blurb: 'Built to rank from day one — technical SEO baked into every page.',
+    includes: ['On-page optimization', 'Schema markup', 'Core Web Vitals', 'Google Business setup'],
+  },
+  {
+    icon: '△',
+    title: 'MAINTENANCE',
+    blurb: 'We keep your site fast, secure, and up to date — hands off for you.',
+    includes: ['Monthly updates', 'Uptime monitoring', 'Security patches', 'Content edits included'],
+  },
+]
+
 export default function Services() {
-  return <div />
+  return (
+    <div style={{ minHeight: '100vh', padding: 'clamp(40px,6vw,80px) clamp(16px,4vw,60px)', fontFamily: "'Itoya','Helvetica Neue',Arial,sans-serif" }}>
+      <motion.h1
+        initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, ease: 'easeOut' }}
+        style={{ fontSize: 'clamp(28px,4vw,52px)', fontWeight: 700, letterSpacing: '0.06em', color: '#fff', margin: '0 0 8px' }}
+      >
+        SERVICES
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+        transition={{ delay: 0.15, duration: 0.5 }}
+        style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, letterSpacing: '0.06em', marginBottom: 52 }}
+      >
+        EVERYTHING YOUR SITE NEEDS. NOTHING IT DOESN'T.
+      </motion.p>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))', gap: 24, marginBottom: 60 }}>
+        {SERVICES.map((svc, i) => (
+          <motion.div
+            key={svc.title}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.08, duration: 0.5 }}
+            style={{
+              border: '1px solid rgba(255,255,255,0.12)',
+              borderRadius: 4, padding: '32px 28px',
+              background: 'rgba(255,255,255,0.03)',
+            }}
+          >
+            <div style={{ fontSize: 24, marginBottom: 16, color: 'rgba(255,255,255,0.6)' }}>{svc.icon}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.12em', color: '#fff', marginBottom: 10 }}>{svc.title}</div>
+            <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, marginBottom: 22 }}>{svc.blurb}</div>
+            <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+              {svc.includes.map(item => (
+                <li key={item} style={{ fontSize: 12, color: 'rgba(255,255,255,0.38)', letterSpacing: '0.04em', padding: '5px 0', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                  — {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+        style={{ textAlign: 'center' }}
+      >
+        <Link to="/contact" style={{
+          display: 'inline-block', padding: '14px 36px',
+          border: '1px solid rgba(255,255,255,0.35)', borderRadius: 2,
+          color: '#fff', textDecoration: 'none', fontSize: 12,
+          letterSpacing: '0.14em', textTransform: 'uppercase',
+        }}>
+          GET STARTED →
+        </Link>
+      </motion.div>
+    </div>
+  )
 }
