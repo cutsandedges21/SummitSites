@@ -15,20 +15,29 @@ const INDUSTRIES = [
 export default function Industries() {
   return (
     <div style={{ minHeight: '100vh', padding: 'clamp(40px,6vw,80px) clamp(16px,4vw,60px)', fontFamily: "'Itoya','Helvetica Neue',Arial,sans-serif" }}>
-      <motion.h1
-        initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, ease: 'easeOut' }}
-        style={{ fontSize: 'clamp(28px,4vw,52px)', fontWeight: 700, letterSpacing: '0.06em', color: '#fff', margin: '0 0 8px' }}
-      >
-        INDUSTRIES
-      </motion.h1>
-      <motion.p
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        transition={{ delay: 0.15, duration: 0.5 }}
-        style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, letterSpacing: '0.06em', marginBottom: 52 }}
-      >
-        WE KNOW YOUR INDUSTRY. WE KNOW WHAT WORKS.
-      </motion.p>
+      <div style={{ marginBottom: 72 }}>
+        <motion.p
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+          style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', margin: 0, marginBottom: 18 }}
+        >
+          Who we serve
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          style={{ fontSize: 'clamp(44px,5.5vw,88px)', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.08, fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif", margin: 0, marginBottom: 20 }}
+        >
+          We know your<br />industry.
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          style={{ fontSize: 'clamp(13px,1.05vw,18px)', color: 'rgba(255,255,255,0.45)', fontWeight: 400, letterSpacing: '0.04em', margin: 0 }}
+        >
+          We've built across every major local business category. Your sector isn't new to us.
+        </motion.p>
+      </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: 20 }}>
         {INDUSTRIES.map((ind, i) => (

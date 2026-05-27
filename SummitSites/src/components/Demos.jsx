@@ -1,40 +1,49 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-const TAGS = ['All', 'Law', 'Medical', 'Construction', 'Restaurant', 'Real Estate', 'Fitness']
+const TAGS = ['All', 'Landing Page', '3D', 'Animated', 'Restaurant', 'Mobile-First', 'Simple', 'Small Business']
 
 const DEMOS = [
-  { name: 'Harmon & Associates', industry: 'Law',         stat: '+52% consultations', color: '#1a1a2e' },
-  { name: 'Peak Orthopedics',    industry: 'Medical',     stat: '+38% new patients',  color: '#0d1f1a' },
-  { name: 'Ridge Builders',      industry: 'Construction',stat: '+40% leads',         color: '#1e1206' },
-  { name: 'Ember Table',         industry: 'Restaurant',  stat: '3× reservations',    color: '#1e0808' },
-  { name: 'Summit Realty',       industry: 'Real Estate', stat: '+61% inquiries',     color: '#0a1520' },
-  { name: 'Apex Fitness',        industry: 'Fitness',     stat: '+44% signups',       color: '#0c1a12' },
-  { name: 'Calloway Law Group',  industry: 'Law',         stat: '+29% form fills',    color: '#1a1a2e' },
-  { name: 'ClearPath Dental',    industry: 'Medical',     stat: '+55% bookings',      color: '#0d1f1a' },
+  { name: 'SOM Elixir',          type: ['3D', 'Animated'],                  stat: '+52% conversions',  color: '#0d0a06', image: '/drinksom-hero.jpeg', url: 'https://www.drinksom.eu/#hero' },
+  { name: 'AIR Business Center', type: ['Landing Page'],                     stat: '+38% new patients', color: '#0d1f1a', image: '/aircenter-hero.jpg', imgPosition: '50% 45%', url: 'https://aircenter.space/' },
+  { name: 'Vorszk',              type: ['Animated'],                         stat: '+40% leads',        color: '#0a0a0a', image: '/vorszk-hero.jpeg', url: 'https://www.vorszk.com/' },
+  { name: "Khufu's",             type: ['Landing Page', 'Restaurant'],       stat: '3× reservations',   color: '#1a1208', image: '/khufus-hero.jpeg', url: 'https://khufus.com/' },
+  { name: 'Handhold',            type: ['Mobile-First'],                     stat: '+61% inquiries',    color: '#0a0f1a', image: '/handhold-hero.jpeg', url: 'https://handhold.io/', cropScrollbar: true },
+  { name: 'Monads',              type: ['Simple'],                           stat: '+44% signups',      color: '#0a0a0f', image: '/monads-hero.jpeg', url: 'https://www.monads.ch/' },
+  { name: 'Laser & Me',          type: ['Simple', 'Small Business'],         stat: '+29% form fills',   color: '#1a0d12', image: '/laserandme-hero.jpeg', url: 'https://laserandme.com/', cropScrollbar: true },
+  { name: 'Cuts & Edges',        type: ['Small Business'],                   stat: '+55% bookings',     color: '#0a0a0a', image: '/cutsandedges-hero.jpeg', url: 'https://cutsandedges.base44.app/Home', cropScrollbar: true },
 ]
 
 export default function Demos() {
   const [active, setActive] = useState('All')
   const [hovered, setHovered] = useState(null)
-  const filtered = active === 'All' ? DEMOS : DEMOS.filter(d => d.industry === active)
+  const filtered = active === 'All' ? DEMOS : DEMOS.filter(d => d.type.includes(active))
 
   return (
     <div style={{ minHeight: '100vh', padding: 'clamp(40px,6vw,80px) clamp(16px,4vw,60px)', fontFamily: "'Itoya','Helvetica Neue',Arial,sans-serif" }}>
-      <motion.h1
-        initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, ease: 'easeOut' }}
-        style={{ fontSize: 'clamp(28px,4vw,52px)', fontWeight: 700, letterSpacing: '0.06em', color: '#fff', margin: '0 0 8px' }}
-      >
-        DEMOS
-      </motion.h1>
-      <motion.p
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        transition={{ delay: 0.15, duration: 0.5 }}
-        style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, letterSpacing: '0.06em', marginBottom: 36 }}
-      >
-        REAL RESULTS. REAL CLIENTS.
-      </motion.p>
+      <div style={{ marginBottom: 72 }}>
+        <motion.p
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+          style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', margin: 0, marginBottom: 18 }}
+        >
+          Our work
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          style={{ fontSize: 'clamp(44px,5.5vw,88px)', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.08, fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif", margin: 0, marginBottom: 20 }}
+        >
+          Real results,<br />real clients.
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          style={{ fontSize: 'clamp(13px,1.05vw,18px)', color: 'rgba(255,255,255,0.45)', fontWeight: 400, letterSpacing: '0.04em', margin: 0 }}
+        >
+          Every metric here comes from an actual project. No estimates, no projections.
+        </motion.p>
+      </div>
 
       <motion.div
         initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
@@ -65,12 +74,26 @@ export default function Demos() {
             transition={{ delay: i * 0.06, duration: 0.45 }}
             onMouseEnter={() => setHovered(demo.name)}
             onMouseLeave={() => setHovered(null)}
+            onClick={() => demo.url && window.open(demo.url, '_blank', 'noopener')}
             style={{
               position: 'relative', overflow: 'hidden',
-              background: demo.color, border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 4, aspectRatio: '16/10', cursor: 'pointer',
+              background: demo.color,
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 4, aspectRatio: '16/10', cursor: demo.url ? 'pointer' : 'default',
             }}
           >
+            {demo.image && (
+              <img
+                src={demo.image}
+                alt={demo.name}
+                style={{
+                  position: 'absolute', inset: 0, width: '100%', height: '100%',
+                  objectFit: 'cover', objectPosition: demo.imgPosition || 'left top',
+                  display: 'block',
+                  ...(demo.cropScrollbar && { transform: 'scaleX(1.02)', transformOrigin: 'left center' }),
+                }}
+              />
+            )}
             <div style={{
               position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: 18,
               background: 'linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 60%)',
@@ -86,9 +109,11 @@ export default function Demos() {
               alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.55)',
               opacity: hovered === demo.name ? 1 : 0, transition: 'opacity 0.25s',
             }}>
-              <div style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.5)', marginBottom: 6 }}>{demo.industry.toUpperCase()}</div>
+              <div style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.5)', marginBottom: 6 }}>{demo.type.join(' · ').toUpperCase()}</div>
               <div style={{ fontSize: 15, fontWeight: 600, color: '#fff' }}>{demo.name}</div>
-              <div style={{ marginTop: 14, fontSize: 11, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>VIEW LIVE →</div>
+              {demo.url && (
+                <div style={{ marginTop: 14, fontSize: 11, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>VIEW LIVE →</div>
+              )}
             </div>
           </motion.div>
         ))}
