@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Homepage from './Homepage'
 
 // Source image natural dimensions (px) — both bg images are the same size
@@ -55,8 +55,14 @@ export default function LaptopZoom() {
   const scrollCurrRef   = useRef(0)
   const isMobileRef     = useRef(isMobile)
   const touchYRef       = useRef(null)
+  const maxScrollRef    = useRef(Infinity)
 
   useEffect(() => { isMobileRef.current = isMobile }, [isMobile])
+
+  const handleMaxScroll = useCallback((max) => {
+    maxScrollRef.current = max
+    scrollTargetRef.current = Math.min(scrollTargetRef.current, max)
+  }, [])
 
   useEffect(() => {
     const onResize = () => {
@@ -116,15 +122,16 @@ export default function LaptopZoom() {
   // Scroll phase — passive:true lets the browser compositor run without waiting for JS
   useEffect(() => {
     if (!expanded) return
+    const clampScroll = v => Math.min(maxScrollRef.current, Math.max(0, v))
     const onWheel = (e) => {
       e.preventDefault()
-      scrollTargetRef.current = Math.max(0, scrollTargetRef.current + e.deltaY * 0.4)
+      scrollTargetRef.current = clampScroll(scrollTargetRef.current + e.deltaY * 0.4)
     }
     const onTouchStart = (e) => { touchYRef.current = e.touches[0].clientY }
     const onTouchMove  = (e) => {
       if (touchYRef.current === null) return
       const dy = touchYRef.current - e.touches[0].clientY
-      scrollTargetRef.current = Math.max(0, scrollTargetRef.current + dy)
+      scrollTargetRef.current = clampScroll(scrollTargetRef.current + dy)
       touchYRef.current = e.touches[0].clientY
     }
     const onTouchEnd = () => { touchYRef.current = null }
@@ -192,7 +199,7 @@ export default function LaptopZoom() {
             willChange:      'transform',
           }}
         >
-          <Homepage revealed={expanded} isMobile={isMobile} scrollY={scrollY} progress={p} />
+          <Homepage revealed={expanded} isMobile={isMobile} scrollY={scrollY} progress={p} onMaxScroll={handleMaxScroll} />
         </div>
       </div>
 

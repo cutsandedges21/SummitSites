@@ -96,7 +96,7 @@ export default function About({ scrollY, isMobile = false }) {
     <div style={{
       width: '100vw',
       minHeight: '100svh',
-      height: isMobile ? 'auto' : '100vh',
+      height: 'auto',
       background: 'transparent',
       display: 'flex',
       flexDirection: 'column',
@@ -104,19 +104,7 @@ export default function About({ scrollY, isMobile = false }) {
         ? 'clamp(36px, 10vw, 60px) clamp(16px, 5vw, 28px) clamp(32px, 8vw, 48px)'
         : 'clamp(48px, 7vw, 100px) clamp(24px, 6vw, 80px) clamp(40px, 5vw, 80px)',
       position: 'relative',
-      overflow: 'hidden',
     }}>
-
-      {/* Background blur over the video — fades in from top on desktop */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        backdropFilter: 'blur(18px)',
-        WebkitBackdropFilter: 'blur(18px)',
-        zIndex: 0,
-        pointerEvents: 'none',
-        maskImage: 'linear-gradient(to bottom, transparent 0%, black 18%)',
-        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 18%)',
-      }} />
 
       {/* SVG distortion filter */}
       <svg style={{ display: 'none' }}>

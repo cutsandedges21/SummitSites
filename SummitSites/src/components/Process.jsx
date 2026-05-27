@@ -43,7 +43,7 @@ const CARD_CSS = `
     transform-style: preserve-3d;
     transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
   }
-  .pc-wrap:hover .pc-inner {
+  .pc-wrap:not(.pc-flat):hover .pc-inner {
     box-shadow: rgba(0,0,0,0.3) 30px 50px 25px -40px, rgba(0,0,0,0.1) 0px 25px 30px 0px, inset 3px 3px 3px 0 rgba(255,255,255,0.45), inset -3px -3px 3px 0 rgba(255,255,255,0.45);
     transform: rotate3d(1,1,0,20deg);
   }
@@ -51,15 +51,16 @@ const CARD_CSS = `
     transform: translate3d(0,0,100px);
     transition: transform 0.5s ease-in-out 0.2s;
   }
-  .pc-wrap:hover .pc-badge { transform: translate3d(0,0,120px); }
+  .pc-wrap:not(.pc-flat):hover .pc-badge { transform: translate3d(0,0,120px); }
+  .pc-flat .pc-badge { transform: none; }
 `
 
-function ProcessCard({ step, index }) {
+function ProcessCard({ step, index, flat = false }) {
   return (
     <>
       {index === 0 && <style>{CARD_CSS}</style>}
       <motion.div
-        className="pc-wrap"
+        className={flat ? 'pc-wrap pc-flat' : 'pc-wrap'}
         initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
         animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
         transition={{ duration: 0.7, delay: 0.35 + index * 0.15, ease: EASE }}
@@ -75,7 +76,7 @@ function ProcessCard({ step, index }) {
 
           {/* Decorative circles + badge */}
           <div style={{ position: 'absolute', top: 0, right: 0, transformStyle: 'preserve-3d' }}>
-            {CIRCLES.map((c, i) => (
+            {!flat && CIRCLES.map((c, i) => (
               <div key={i} style={{
                 position: 'absolute',
                 width: c.size,
@@ -85,7 +86,7 @@ function ProcessCard({ step, index }) {
                 boxShadow: 'rgba(100,100,111,0.2) -10px 10px 20px 0px',
                 top: c.pos,
                 right: c.pos,
-                transform: `translate3d(0,0,${c.z}px)`,
+                transform: flat ? 'none' : `translate3d(0,0,${c.z}px)`,
                 transition: `transform 0.5s ease-in-out ${c.delay}`,
               }} />
             ))}
@@ -118,7 +119,7 @@ function ProcessCard({ step, index }) {
           <div style={{
             position: 'absolute',
             inset: 0,
-            transform: 'translate3d(0,0,26px)',
+            transform: flat ? 'none' : 'translate3d(0,0,26px)',
             padding: '140px 22px 20px',
             overflow: 'hidden',
           }}>
@@ -151,7 +152,13 @@ function ProcessCard({ step, index }) {
   )
 }
 
-export default function Process() {
+export default function Process({
+  flat = false,
+  eyebrow = 'How it works',
+  heading = <>Up and running<br />in four steps.</>,
+  sub = 'We keep it simple. No jargon, no long timelines, no surprises.',
+  steps = STEPS,
+}) {
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
 
   useEffect(() => {
@@ -186,7 +193,7 @@ export default function Process() {
             marginBottom: 18,
           }}
         >
-          How it works
+          {eyebrow}
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
@@ -202,7 +209,7 @@ export default function Process() {
             marginBottom: 20,
           }}
         >
-          Up and running<br />in four steps.
+          {heading}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -216,14 +223,14 @@ export default function Process() {
             margin: 0,
           }}
         >
-          We keep it simple. No jargon, no long timelines, no surprises.
+          {sub}
         </motion.p>
       </div>
 
       {/* Cards */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'stretch' }}>
-        {STEPS.map((step, i) => (
-          <ProcessCard key={step.num} step={step} index={i} />
+        {steps.map((step, i) => (
+          <ProcessCard key={step.num} step={step} index={i} flat={flat} />
         ))}
       </div>
 

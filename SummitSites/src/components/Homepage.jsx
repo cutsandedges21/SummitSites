@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import About from './About'
+import HomeSections from './HomeExtras'
+import Footer from './Footer'
 
 const EASE = [0.22, 1, 0.36, 1]
 const MORPH = { type: 'spring', stiffness: 45, damping: 18 }
@@ -17,11 +19,29 @@ const ALL_NAV_LINKS = [
   { to: '/contact',    label: 'Contact'    },
 ]
 
-export default function Homepage({ revealed = true, isMobile = false, scrollY = 0, progress = 0 }) {
+const TAIL_TOP_VH = 1.15 // About + footer block starts at 115vh
+
+export default function Homepage({ revealed = true, isMobile = false, scrollY = 0, progress = 0, onMaxScroll }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [showBrand, setShowBrand] = useState(false)
   const topBarRef  = useRef(null)
   const heroSubRef = useRef(null)
+  const tailRef    = useRef(null)
+
+  // Measure the About+footer block so the scroll can be clamped at its bottom
+  useEffect(() => {
+    const el = tailRef.current
+    if (!el || !onMaxScroll) return
+    const measure = () => {
+      const vh = window.innerHeight
+      onMaxScroll(Math.max(0, TAIL_TOP_VH * vh + el.offsetHeight - vh))
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    window.addEventListener('resize', measure)
+    return () => { ro.disconnect(); window.removeEventListener('resize', measure) }
+  }, [onMaxScroll, revealed, isMobile])
 
   useEffect(() => {
     if (!heroSubRef.current || !topBarRef.current) return
@@ -135,9 +155,14 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
           </div>
           <div style={styles.scrollChevron} className="scroll-chevron"><ChevronIcon size={18} /></div>
 
-          {/* About section — sits at 100vh, scrolls up with the content layer */}
-          <div style={{ position: 'absolute', top: '115vh', left: 0, width: '100vw', height: '100vh' }}>
-            <About scrollY={scrollY} />
+          {/* About + footer — sits at 115vh, scrolls up with the content layer */}
+          <div ref={tailRef} style={{ position: 'absolute', top: '115vh', left: 0, width: '100vw' }}>
+            <TailBlur />
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <About scrollY={scrollY} />
+              <HomeSections />
+              <Footer />
+            </div>
           </div>
         </div>
       </div>
@@ -251,14 +276,34 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
             <ChevronIcon size={18} />
           </div>
 
-          {/* About section — mobile */}
-          <div style={{ position: 'absolute', top: '115vh', left: 0, width: '100vw' }}>
-            <About scrollY={scrollY} isMobile />
+          {/* About + footer — mobile */}
+          <div ref={tailRef} style={{ position: 'absolute', top: '115vh', left: 0, width: '100vw' }}>
+            <TailBlur />
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <About scrollY={scrollY} isMobile />
+              <HomeSections />
+              <Footer />
+            </div>
           </div>
         </div>
       </motion.div>
 
     </div>
+  )
+}
+
+// Single continuous glass layer behind the whole tail (About → footer).
+// Fades in over the top ~18vh so it blends out of the clear hero video,
+// then holds a consistent blur + tint through every section and the footer.
+function TailBlur() {
+  return (
+    <div style={{
+      position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+      backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)',
+      background: 'linear-gradient(to bottom, rgba(10,20,40,0.45) 0%, rgba(10,20,40,0.62) 100%)',
+      maskImage: 'linear-gradient(to bottom, transparent 0, black 18vh)',
+      WebkitMaskImage: 'linear-gradient(to bottom, transparent 0, black 18vh)',
+    }} />
   )
 }
 
