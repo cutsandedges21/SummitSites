@@ -194,6 +194,7 @@ export default function About({ scrollY, isMobile = false }) {
             variants={cardVariants}
             initial="hidden"
             animate={revealed ? 'visible' : 'hidden'}
+            whileHover={{ scale: 1.03, transition: { duration: 0.25, ease: EASE } }}
             style={{ position: 'relative', borderRadius: R_CARD }}
           >
             <GlassLayers r={R_CARD} blur="40px" />

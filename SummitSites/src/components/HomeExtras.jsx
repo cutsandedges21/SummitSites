@@ -65,6 +65,7 @@ function WorkPreview() {
             key={demo.name}
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VIEWPORT}
             transition={{ delay: i * 0.08, duration: 0.5, ease: EASE }}
+            whileHover={{ scale: 1.03, transition: { duration: 0.25, ease: EASE } }}
             onMouseEnter={() => setHovered(demo.name)}
             onMouseLeave={() => setHovered(null)}
             onClick={() => demo.url && window.open(demo.url, '_blank', 'noopener')}
@@ -126,6 +127,20 @@ function WorkPreview() {
   )
 }
 
+function Divider() {
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 18,
+      width: '100%', maxWidth: 1100, margin: '0 auto',
+      padding: '0 clamp(16px,4vw,60px)',
+    }}>
+      <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.18))' }} />
+      <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, lineHeight: 1 }}>✦</span>
+      <div style={{ flex: 1, height: 1, background: 'linear-gradient(to left, transparent, rgba(255,255,255,0.18))' }} />
+    </div>
+  )
+}
+
 function CtaBand() {
   return (
     <section style={{
@@ -175,14 +190,18 @@ function CtaBand() {
 export default function HomeSections() {
   return (
     <>
+      <Divider />
       <Process
         flat
+        inView
         eyebrow="The process"
         heading={<>Simple from<br />day one.</>}
         sub="Four steps from first hello to a website that quietly works for you around the clock."
         steps={HOME_STEPS}
       />
+      <Divider />
       <WorkPreview />
+      <Divider />
       <CtaBand />
     </>
   )

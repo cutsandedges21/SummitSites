@@ -55,15 +55,20 @@ const CARD_CSS = `
   .pc-flat .pc-badge { transform: none; }
 `
 
-function ProcessCard({ step, index, flat = false }) {
+function ProcessCard({ step, index, flat = false, inView = false }) {
+  const shown = { opacity: 1, y: 0, filter: 'blur(0px)' }
+  const reveal = inView
+    ? { whileInView: shown, viewport: { once: true, amount: 0.3 } }
+    : { animate: shown }
   return (
     <>
       {index === 0 && <style>{CARD_CSS}</style>}
       <motion.div
         className={flat ? 'pc-wrap pc-flat' : 'pc-wrap'}
         initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-        transition={{ duration: 0.7, delay: 0.35 + index * 0.15, ease: EASE }}
+        {...reveal}
+        whileHover={flat ? { scale: 1.03 } : undefined}
+        transition={{ duration: 0.7, delay: 0.35 + index * 0.15, ease: EASE, scale: { duration: 0.25, ease: EASE } }}
       >
         <div className="pc-inner">
 
@@ -154,6 +159,7 @@ function ProcessCard({ step, index, flat = false }) {
 
 export default function Process({
   flat = false,
+  inView = false,
   eyebrow = 'How it works',
   heading = <>Up and running<br />in four steps.</>,
   sub = 'We keep it simple. No jargon, no long timelines, no surprises.',
@@ -166,6 +172,10 @@ export default function Process({
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
+
+  const reveal = (to) => inView
+    ? { whileInView: to, viewport: { once: true, amount: 0.3 } }
+    : { animate: to }
 
   return (
     <div style={{
@@ -182,7 +192,7 @@ export default function Process({
       <div style={{ marginBottom: isMobile ? 48 : 72 }}>
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          {...reveal({ opacity: 1 })}
           transition={{ duration: 0.5, delay: 0.05, ease: EASE }}
           style={{
             fontSize: 10,
@@ -197,7 +207,7 @@ export default function Process({
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...reveal({ opacity: 1, y: 0 })}
           transition={{ duration: 0.65, ease: EASE, delay: 0.1 }}
           style={{
             fontSize: isMobile ? 'clamp(34px, 11vw, 56px)' : 'clamp(44px, 5.5vw, 88px)',
@@ -213,7 +223,7 @@ export default function Process({
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...reveal({ opacity: 1, y: 0 })}
           transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
           style={{
             fontSize: isMobile ? 'clamp(13px, 3.5vw, 16px)' : 'clamp(13px, 1.05vw, 18px)',
@@ -230,7 +240,7 @@ export default function Process({
       {/* Cards */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'stretch' }}>
         {steps.map((step, i) => (
-          <ProcessCard key={step.num} step={step} index={i} flat={flat} />
+          <ProcessCard key={step.num} step={step} index={i} flat={flat} inView={inView} />
         ))}
       </div>
 
