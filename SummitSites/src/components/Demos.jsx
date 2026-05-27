@@ -4,14 +4,14 @@ import { motion } from 'framer-motion'
 const TAGS = ['All', 'Landing Page', '3D', 'Animated', 'Restaurant', 'Mobile-First', 'Simple', 'Small Business']
 
 const DEMOS = [
-  { name: 'SOM Elixir',          type: ['3D', 'Animated'],                  stat: '+52% conversions',  color: '#0d0a06', image: '/drinksom-hero.jpeg', url: 'https://www.drinksom.eu/#hero' },
-  { name: 'AIR Business Center', type: ['Landing Page'],                     stat: '+38% new patients', color: '#0d1f1a', image: '/aircenter-hero.jpg', imgPosition: '50% 45%', url: 'https://aircenter.space/' },
-  { name: 'Vorszk',              type: ['Animated'],                         stat: '+40% leads',        color: '#0a0a0a', image: '/vorszk-hero.jpeg', url: 'https://www.vorszk.com/' },
+  { name: 'SOM Elixir',          type: ['3D', 'Animated', 'Landing Page'],                  stat: '+52% conversions',  color: '#0d0a06', image: '/drinksom-hero.jpeg', url: 'https://www.drinksom.eu/#hero' },
+  { name: 'AIR Business Center', type: ['Landing Page', 'Animated'],                     stat: '+38% new patients', color: '#0d1f1a', image: '/aircenter-hero.jpg', imgPosition: '50% 45%', url: 'https://aircenter.space/' },
+  { name: 'Vorszk',              type: ['Animated', 'Landing Page'],                         stat: '+40% leads',        color: '#0a0a0a', image: '/vorszk-hero.jpeg', url: 'https://www.vorszk.com/' },
   { name: "Khufu's",             type: ['Landing Page', 'Restaurant'],       stat: '3× reservations',   color: '#1a1208', image: '/khufus-hero.jpeg', url: 'https://khufus.com/' },
-  { name: 'Handhold',            type: ['Mobile-First'],                     stat: '+61% inquiries',    color: '#0a0f1a', image: '/handhold-hero.jpeg', url: 'https://handhold.io/', cropScrollbar: true },
+  { name: 'Handhold',            type: ['Mobile-First', 'Landing Page', 'Simple'],                     stat: '+61% inquiries',    color: '#0a0f1a', image: '/handhold-hero.jpeg', url: 'https://handhold.io/', cropScrollbar: true },
   { name: 'Monads',              type: ['Simple'],                           stat: '+44% signups',      color: '#0a0a0f', image: '/monads-hero.jpeg', url: 'https://www.monads.ch/' },
   { name: 'Laser & Me',          type: ['Simple', 'Small Business'],         stat: '+29% form fills',   color: '#1a0d12', image: '/laserandme-hero.jpeg', url: 'https://laserandme.com/', cropScrollbar: true },
-  { name: 'Cuts & Edges',        type: ['Small Business'],                   stat: '+55% bookings',     color: '#0a0a0a', image: '/cutsandedges-hero.jpeg', url: 'https://cutsandedges.base44.app/Home', cropScrollbar: true },
+  { name: 'Cuts & Edges',        type: ['Small Business', 'Simple'],                   stat: '+55% bookings',     color: '#0a0a0a', image: '/cutsandedges-hero.jpeg', url: 'https://cutsandedges.base44.app/Home', cropScrollbar: true },
 ]
 
 export default function Demos() {
@@ -27,21 +27,21 @@ export default function Demos() {
           transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
           style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', margin: 0, marginBottom: 18 }}
         >
-          Our work
+          Our benchmark
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           style={{ fontSize: 'clamp(44px,5.5vw,88px)', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.08, fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif", margin: 0, marginBottom: 20 }}
         >
-          Real results,<br />real clients.
+          The bar<br />we're building to.
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           style={{ fontSize: 'clamp(13px,1.05vw,18px)', color: 'rgba(255,255,255,0.45)', fontWeight: 400, letterSpacing: '0.04em', margin: 0 }}
         >
-          Every metric here comes from an actual project. No estimates, no projections.
+          We didn't build these. They're the benchmark — the quality level we're committed to matching and beating for every client.
         </motion.p>
       </div>
 
