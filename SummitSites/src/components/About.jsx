@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 const EASE = [0.22, 1, 0.36, 1]
@@ -78,9 +78,10 @@ function GlassLayers({ r, blur = '24px' }) {
   )
 }
 
-export default function About({ scrollY, isMobile = false }) {
+export default function About({ scrollY, isMobile = false, native = false }) {
   const [revealed, setRevealed] = useState(false)
   const [viewportH, setViewportH] = useState(() => window.innerHeight)
+  const rootRef = useRef(null)
 
   useEffect(() => {
     const onResize = () => setViewportH(window.innerHeight)
@@ -88,12 +89,27 @@ export default function About({ scrollY, isMobile = false }) {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
+  // Native mobile scrolls the real document, so the transform-driven scrollY is
+  // always 0 — trigger the reveal off an IntersectionObserver instead.
   useEffect(() => {
+    if (!native || revealed) return
+    const el = rootRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setRevealed(true); io.disconnect() } },
+      { threshold: 0.18 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [native, revealed])
+
+  useEffect(() => {
+    if (native) return
     if (!revealed && scrollY > viewportH * 0.15) setRevealed(true)
-  }, [scrollY, viewportH, revealed])
+  }, [native, scrollY, viewportH, revealed])
 
   return (
-    <div style={{
+    <div ref={rootRef} style={{
       width: '100vw',
       minHeight: '100svh',
       height: 'auto',
@@ -101,7 +117,7 @@ export default function About({ scrollY, isMobile = false }) {
       display: 'flex',
       flexDirection: 'column',
       padding: isMobile
-        ? 'clamp(36px, 10vw, 60px) clamp(16px, 5vw, 28px) clamp(32px, 8vw, 48px)'
+        ? `${native ? 'clamp(104px, 26vw, 132px)' : 'clamp(36px, 10vw, 60px)'} clamp(16px, 5vw, 28px) clamp(32px, 8vw, 48px)`
         : 'clamp(48px, 7vw, 100px) clamp(24px, 6vw, 80px) clamp(40px, 5vw, 80px)',
       position: 'relative',
     }}>

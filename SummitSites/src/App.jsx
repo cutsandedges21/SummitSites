@@ -4,7 +4,6 @@ import LaptopZoom from './components/LaptopZoom'
 import Demos from './components/Demos'
 import Services from './components/Services'
 import Process from './components/Process'
-import Industries from './components/Industries'
 import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import PrivacyPolicy from './components/PrivacyPolicy'
@@ -22,7 +21,6 @@ export default function App() {
         <Route path="/demos"      element={<WithLayout><Demos /></WithLayout>} />
         <Route path="/services"   element={<WithLayout><Services /></WithLayout>} />
         <Route path="/process"    element={<WithLayout><Process /></WithLayout>} />
-        <Route path="/industries" element={<WithLayout><Industries /></WithLayout>} />
         <Route path="/faq"        element={<WithLayout><FAQ /></WithLayout>} />
         <Route path="/contact"         element={<WithLayout><Contact /></WithLayout>} />
         <Route path="/privacy-policy"  element={<WithLayout><PrivacyPolicy /></WithLayout>} />

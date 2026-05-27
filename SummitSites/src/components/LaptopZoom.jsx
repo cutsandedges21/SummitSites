@@ -74,6 +74,9 @@ export default function LaptopZoom() {
   }, [])
 
   useEffect(() => {
+    // On mobile, once the zoom completes we hand off to native scrolling —
+    // no rAF loop is needed (and running one would re-render the tree at 60fps).
+    if (expanded && isMobileRef.current) return
     const tick = () => {
       const curr = targetRef._curr ?? 0
       const next = curr + (targetRef.current - curr) * 0.07
@@ -119,9 +122,10 @@ export default function LaptopZoom() {
     }
   }, [expanded])
 
-  // Scroll phase — passive:true lets the browser compositor run without waiting for JS
+  // Scroll phase — passive:true lets the browser compositor run without waiting for JS.
+  // Desktop only: mobile uses native document scrolling after the zoom completes.
   useEffect(() => {
-    if (!expanded) return
+    if (!expanded || isMobile) return
     const clampScroll = v => Math.min(maxScrollRef.current, Math.max(0, v))
     const onWheel = (e) => {
       e.preventDefault()
@@ -145,7 +149,17 @@ export default function LaptopZoom() {
       window.removeEventListener('touchmove',  onTouchMove)
       window.removeEventListener('touchend',   onTouchEnd)
     }
-  }, [expanded])
+  }, [expanded, isMobile])
+
+  // Mobile, post-zoom: drop the fixed/clipped zoom stage entirely and render the
+  // homepage in normal document flow so the browser handles scrolling natively.
+  if (expanded && isMobile) {
+    return (
+      <div style={{ background: '#000' }}>
+        <Homepage revealed isMobile native />
+      </div>
+    )
+  }
 
   const screen          = isMobile ? MOBILE_SCREEN : DESKTOP_SCREEN
   const s               = computeInsets(screen, viewport.w, viewport.h)

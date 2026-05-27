@@ -14,19 +14,20 @@ const ALL_NAV_LINKS = [
   { to: '/demos',      label: 'Demos'      },
   { to: '/services',   label: 'Services'   },
   { to: '/process',    label: 'Process'    },
-  { to: '/industries', label: 'Industries' },
   { to: '/faq',        label: 'FAQ'        },
   { to: '/contact',    label: 'Contact'    },
 ]
 
 const TAIL_TOP_VH = 1.15 // About + footer block starts at 115vh
 
-export default function Homepage({ revealed = true, isMobile = false, scrollY = 0, progress = 0, onMaxScroll }) {
+export default function Homepage({ revealed = true, isMobile = false, native = false, scrollY = 0, progress = 0, onMaxScroll }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [showBrand, setShowBrand] = useState(false)
   const topBarRef  = useRef(null)
   const heroSubRef = useRef(null)
   const tailRef    = useRef(null)
+  const mHeaderRef = useRef(null)
+  const mTailRef   = useRef(null)
 
   // Measure the About+footer block so the scroll can be clamped at its bottom
   useEffect(() => {
@@ -49,6 +50,21 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
     const barBottom = topBarRef.current.getBoundingClientRect().bottom
     setShowBrand(subTop <= barBottom)
   }, [scrollY])
+
+  // Mobile native: swap the header tagline for the brand once the tail (About)
+  // scrolls up to meet the navbar.
+  useEffect(() => {
+    if (!native) return
+    const onScroll = () => {
+      const tail = mTailRef.current
+      const header = mHeaderRef.current
+      if (!tail || !header) return
+      setShowBrand(tail.getBoundingClientRect().top <= header.getBoundingClientRect().bottom)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [native])
 
   // ── Desktop animations ───────────────────────────────────────────────────
   const dAnn = {
@@ -91,11 +107,9 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
     )
   }
 
-  // ── Mobile fullscreen entrance animations ────────────────────────────────
-  const mAnn  = { initial: { opacity: 0, y: -20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.55, ease: EASE, delay: 0.05 } }
-  const mNav  = { initial: { opacity: 0, y: -28 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.6,  ease: EASE, delay: 0.12 } }
-  const mML   = { initial: { opacity: 0, x: -28 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.6,  ease: EASE, delay: 0.22 } }
-  const mSub  = { initial: { opacity: 0 },          animate: { opacity: 1 },       transition: { duration: 0.5,  ease: 'easeOut', delay: 0.45 } }
+  // ── Mobile entrance animations ───────────────────────────────────────────
+  const mML   = { initial: { opacity: 0, x: -28 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.6, ease: EASE, delay: 0.22 } }
+  const mSub  = { initial: { opacity: 0 },          animate: { opacity: 1 },       transition: { duration: 0.5, ease: 'easeOut', delay: 0.45 } }
 
   const springTransition = { duration: 0.65, ease: EASE }
 
@@ -118,7 +132,6 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
             <Link to="/demos"      style={styles.navLink}>DEMOS</Link>
             <Link to="/services"   style={styles.navLink}>SERVICES</Link>
             <Link to="/process"    style={styles.navLink}>PROCESS</Link>
-            <Link to="/industries" style={styles.navLink}>INDUSTRIES</Link>
             <Link to="/faq"        style={styles.navLink}>FAQ</Link>
             <Link to="/contact"    style={styles.navLink}>CONTACT</Link>
           </motion.nav>
@@ -169,20 +182,47 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
     )
   }
 
-  // ── Mobile render with push sidebar ─────────────────────────────────────
+  // ── Mobile native render — normal document flow, native scrolling ────────
   return (
-    <div style={styles.wrapper}>
+    <div style={styles.mWrapper}>
 
-      {/* Static background — never pushed */}
-      <video src="/wink_4k_homepageVid.mp4" style={styles.bg} autoPlay loop muted playsInline />
-      <div style={styles.overlay} />
+      {/* Video background — fixed behind the whole page */}
+      <video src="/wink_4k_homepageVid.mp4" style={styles.bgFixed} autoPlay loop muted playsInline />
+      <div style={styles.overlayFixed} />
 
-      {/* Sidebar panel — slides in from left */}
+      {/* Fixed header — mirrors the top bar used on every other page */}
+      <header ref={mHeaderRef} style={styles.mHeader}>
+        <div style={styles.mHeaderTagline}>
+          <motion.span
+            key={showBrand ? 'brand' : 'tag'}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            style={{ display: 'inline-block' }}
+          >
+            {showBrand ? 'SUMMIT SITES' : 'PROFESSIONAL WEBSITES FOR SERIOUS BUSINESSES'}
+          </motion.span>
+        </div>
+        <div style={styles.mHeaderRow}>
+          <button
+            className="icon-btn"
+            style={styles.hamburger}
+            onClick={() => setSidebarOpen(v => !v)}
+            aria-label={sidebarOpen ? 'Close menu' : 'Open menu'}
+          >
+            <motion.span style={styles.hamburgerBar} animate={sidebarOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }} transition={{ duration: 0.5, ease: EASE }} />
+            <motion.span style={styles.hamburgerBar} animate={sidebarOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }} transition={{ duration: 0.3, ease: 'easeOut' }} />
+            <motion.span style={styles.hamburgerBar} animate={sidebarOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }} transition={{ duration: 0.5, ease: EASE }} />
+          </button>
+        </div>
+      </header>
+
+      {/* Drawer — fixed overlay, slides in from the left */}
       <motion.div
         initial={false}
         animate={{ x: sidebarOpen ? 0 : -SIDEBAR_W }}
         transition={springTransition}
-        style={styles.sidebar}
+        style={styles.mSidebar}
       >
         <div style={styles.sidebarBrand}>SUMMIT<br />SITES</div>
         <nav style={styles.sidebarNav}>
@@ -201,92 +241,42 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
         </nav>
       </motion.div>
 
-      {/* Backdrop — tap to close */}
-      {sidebarOpen && (
-        <div style={styles.backdrop} onClick={() => setSidebarOpen(false)} />
-      )}
+      {sidebarOpen && <div style={styles.mBackdrop} onClick={() => setSidebarOpen(false)} />}
 
-      {/* Text layer — only this gets pushed right */}
-      <motion.div
-        initial={false}
-        animate={{ x: sidebarOpen ? SIDEBAR_W : 0 }}
-        transition={springTransition}
-        style={{ position: 'absolute', inset: 0 }}
-      >
-        {/* Top bar — stays fixed, not in scroll layer */}
-        <motion.div style={styles.announcement} {...mAnn}>
-          SUMMIT SITES
+      {/* Hero — one full viewport */}
+      <section style={styles.mHero}>
+        <motion.div style={styles.midLeftNative} {...mML}>
+        WE DON’T BUILD WEBSITES <br />JUST TO “HAVE A WEBSITE” <br />WE BUILD DIGITAL EXPERIENCES THAT <br />POSITION YOUR COMPANY AS<br /> THE OBVIOUS CHOICE.
         </motion.div>
 
-        <motion.nav style={styles.navMobile} {...mNav}>
-          <button
-            className="icon-btn"
-            style={{ ...styles.hamburger, position: 'relative', zIndex: 28 }}
-            onClick={() => setSidebarOpen(v => !v)}
-            aria-label={sidebarOpen ? 'Close menu' : 'Open menu'}
+        <div style={styles.mHeroBottom}>
+          <motion.h1
+            style={styles.heroTitle}
+            className="hero-title"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: EASE, delay: 0.3 }}
           >
-            <motion.span
-              style={styles.hamburgerBar}
-              animate={sidebarOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.65, ease: EASE }}
-            />
-            <motion.span
-              style={styles.hamburgerBar}
-              animate={sidebarOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-            />
-            <motion.span
-              style={styles.hamburgerBar}
-              animate={sidebarOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.65, ease: EASE }}
-            />
-          </button>
-          <div style={styles.mobileNavLinks}>
-            <Link to="/demos"     style={styles.navLink}>Demos</Link>
-            <Link to="/services"  style={styles.navLink}>Services</Link>
-            <Link to="/contact"   style={styles.navLink}>Contact</Link>
-          </div>
-        </motion.nav>
-
-        {/* Scroll content layer */}
-        <div style={{ position: 'absolute', inset: 0, transform: `translateY(${-scrollY}px)`, willChange: 'transform' }}>
-          <motion.div style={styles.midLeft} className="mid-left" {...mML}>
-          WE DON’T BUILD WEBSITES <br />JUST TO “HAVE A WEBSITE” <br />WE BUILD DIGITAL EXPERIENCES THAT <br />POSITION YOUR COMPANY AS<br /> THE OBVIOUS CHOICE.
-          </motion.div>
-
-          <div style={styles.heroBottom} className="hero-bottom">
-            <div style={styles.heroInner} className="hero-inner">
-              <motion.h1
-                style={styles.heroTitle}
-                className="hero-title"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, ease: EASE, delay: 0.3 }}
-              >
-                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
-                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
-              </motion.h1>
-              <motion.p style={styles.heroSub} {...mSub}>
-                YOUR BUSINESS, ELEVATED.
-              </motion.p>
-            </div>
-          </div>
-
-          <div style={{ ...styles.scrollChevron, left: 'auto', right: 'clamp(16px, 4vw, 32px)', transform: 'rotate(90deg)' }} className="scroll-chevron">
-            <ChevronIcon size={18} />
-          </div>
-
-          {/* About + footer — mobile */}
-          <div ref={tailRef} style={{ position: 'absolute', top: '115vh', left: 0, width: '100vw' }}>
-            <TailBlur />
-            <div style={{ position: 'relative', zIndex: 1 }}>
-              <About scrollY={scrollY} isMobile />
-              <HomeSections />
-              <Footer />
-            </div>
-          </div>
+            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
+            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
+          </motion.h1>
+          <motion.p style={styles.heroSub} {...mSub}>
+            YOUR BUSINESS, ELEVATED.
+          </motion.p>
         </div>
-      </motion.div>
+
+        <div style={styles.scrollChevron} className="scroll-chevron"><ChevronIcon size={18} /></div>
+      </section>
+
+      {/* Tail — About → process → work → CTA → footer, over one continuous blur */}
+      <div ref={mTailRef} style={{ position: 'relative' }}>
+        <TailBlur />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <About isMobile native />
+          <HomeSections isMobile />
+          <Footer />
+        </div>
+      </div>
 
     </div>
   )
@@ -387,6 +377,102 @@ const styles = {
     inset: 0,
     background: 'linear-gradient(to bottom, rgba(10,20,40,0.45) 0%, rgba(10,20,40,0.15) 40%, rgba(10,20,40,0.6) 100%)',
   },
+
+  // ── Mobile native layout ──
+  mWrapper: {
+    position: 'relative',
+    zIndex: 0, // own stacking context so the fixed video bg layers correctly
+    width: '100%',
+    overflowX: 'clip',
+    fontFamily: "'Itoya', 'Helvetica Neue', Arial, sans-serif",
+    color: '#fff',
+  },
+  bgFixed: {
+    position: 'fixed',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center 30%',
+    zIndex: 0,
+  },
+  overlayFixed: {
+    position: 'fixed',
+    inset: 0,
+    zIndex: 0,
+    pointerEvents: 'none',
+    background: 'linear-gradient(to bottom, rgba(10,20,40,0.45) 0%, rgba(10,20,40,0.15) 40%, rgba(10,20,40,0.6) 100%)',
+  },
+  mHeader: {
+    position: 'fixed',
+    top: 0, left: 0, right: 0,
+    zIndex: 20,
+    paddingTop: 'env(safe-area-inset-top, 0px)',
+    background: 'transparent',
+    backdropFilter: 'blur(7px)',
+    WebkitBackdropFilter: 'blur(7px)',
+  },
+  mHeaderTagline: {
+    textAlign: 'center',
+    fontSize: 'clamp(11px, 0.85vw, 15px)',
+    fontWeight: 500,
+    letterSpacing: '0.05em',
+    padding: 'clamp(8px, 0.9vh, 12px) 16px',
+    borderBottom: '2px solid rgba(255,255,255,0.2)',
+    margin: '0 clamp(16px, 2vw, 40px)',
+  },
+  mHeaderRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: 'clamp(10px, 1.4vh, 16px) clamp(16px, 4vw, 24px)',
+  },
+  mSidebar: {
+    position: 'fixed',
+    left: 0, top: 0, bottom: 0,
+    width: SIDEBAR_W,
+    zIndex: 40,
+    background: 'transparent',
+    backdropFilter: 'blur(9px)',
+    WebkitBackdropFilter: 'blur(9px)',
+    borderRight: '1px solid rgba(255,255,255,0.15)',
+    display: 'flex',
+    flexDirection: 'column',
+    paddingTop: 'calc(env(safe-area-inset-top, 0px) + 12px)',
+    paddingBottom: '40px',
+  },
+  mBackdrop: {
+    position: 'fixed',
+    inset: 0,
+    zIndex: 30,
+    background: 'rgba(0,0,0,0.45)',
+  },
+  mHero: {
+    position: 'relative',
+    height: '100svh',
+    width: '100%',
+  },
+  midLeftNative: {
+    position: 'absolute',
+    zIndex: 2,
+    left: 'clamp(16px, 4vw, 24px)',
+    bottom: '49%',
+    fontSize: 'clamp(9px, 2.8vw, 13px)',
+    fontWeight: 500,
+    letterSpacing: '0.08em',
+    lineHeight: 1.6,
+    textTransform: 'uppercase',
+  },
+  mHeroBottom: {
+    position: 'absolute',
+    zIndex: 2,
+    bottom: 'clamp(40px, 9vh, 90px)',
+    left: 'clamp(14px, 4vw, 24px)',
+    right: 'clamp(14px, 4vw, 24px)',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
   centeredTitle: {
     position: 'absolute',
     zIndex: 10,
@@ -414,14 +500,6 @@ const styles = {
     alignItems: 'center',
     padding: 'clamp(10px, 1.4vh, 18px) clamp(16px, 2vw, 40px)',
   },
-  navMobile: {
-    position: 'relative',
-    zIndex: 10,
-    display: 'grid',
-    gridTemplateColumns: '44px 1fr',
-    alignItems: 'center',
-    padding: 'clamp(10px, 1.4vh, 18px) clamp(16px, 4vw, 24px)',
-  },
   hamburger: {
     display: 'flex',
     flexDirection: 'column',
@@ -440,38 +518,6 @@ const styles = {
     height: '1.5px',
     background: '#fff',
     borderRadius: '1px',
-  },
-  mobileNavLinks: {
-    display: 'flex',
-    gap: '35px',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  sidebar: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    width: SIDEBAR_W,
-    zIndex: 30,
-    background: 'transparent',
-    borderRight: '1px solid rgba(255,255,255,0.15)',
-    display: 'flex',
-    flexDirection: 'column',
-    paddingTop: '20px',
-    paddingBottom: '40px',
-  },
-  sidebarClose: {
-    alignSelf: 'flex-end',
-    marginRight: '18px',
-    background: 'none',
-    border: 'none',
-    color: 'rgba(0,0,0,0.45)',
-    fontSize: '28px',
-    lineHeight: 1,
-    cursor: 'pointer',
-    padding: '4px 8px',
-    fontWeight: 300,
   },
   sidebarBrand: {
     fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif",
@@ -498,12 +544,6 @@ const styles = {
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
     padding: '14px 28px',
-  },
-  backdrop: {
-    position: 'absolute',
-    inset: 0,
-    zIndex: 25,
-    background: 'rgba(0,0,0,0.35)',
   },
   navLink: {
     fontSize: 'clamp(12px, 0.9vw, 17px)',

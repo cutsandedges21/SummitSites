@@ -70,12 +70,18 @@ html, body, #root {
 
 body {
   background: #000;
-  overflow-x: hidden;
-  scrollbar-width: none;
+  overflow-x: hidden;           /* clip horizontal only — keep window vertical scroll on <html> */
 }
 
+/* Hide the scrollbar without changing overflow (which would trap window scroll) */
+html, body {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* old Edge/IE */
+}
+
+html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  display: none;
+  display: none;                /* Chrome / Safari */
 }
 
 @keyframes chevronDrop {

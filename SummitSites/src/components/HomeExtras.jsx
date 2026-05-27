@@ -47,7 +47,7 @@ function SectionHead({ eyebrow, title, sub }) {
   )
 }
 
-function WorkPreview() {
+function WorkPreview({ isMobile = false }) {
   const [hovered, setHovered] = useState(null)
   const featured = DEMOS.slice(0, 3)
 
@@ -85,27 +85,59 @@ function WorkPreview() {
                 }}
               />
             )}
-            <div style={{
-              position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: 18,
-              background: 'linear-gradient(to top,rgba(0,0,0,0.72) 0%,transparent 60%)',
-              opacity: hovered === demo.name ? 0 : 1, transition: 'opacity 0.25s',
-            }}>
-              <div>
-                <div style={{ fontSize: 15, fontWeight: 600, color: '#fff', letterSpacing: '0.03em' }}>{demo.name}</div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.08em', marginTop: 3 }}>{demo.stat}</div>
-              </div>
-            </div>
-            <div style={{
-              position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.55)',
-              opacity: hovered === demo.name ? 1 : 0, transition: 'opacity 0.25s',
-            }}>
-              <div style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.5)', marginBottom: 6 }}>{demo.type.join(' · ').toUpperCase()}</div>
-              <div style={{ fontSize: 15, fontWeight: 600, color: '#fff' }}>{demo.name}</div>
-              {demo.url && (
-                <div style={{ marginTop: 14, fontSize: 11, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>VIEW LIVE →</div>
-              )}
-            </div>
+            {isMobile ? (
+              <>
+                {/* Left half — default label over the image (touch has no hover) */}
+                <div style={{
+                  position: 'absolute', top: 0, bottom: 0, left: 0, width: '50%',
+                  display: 'flex', alignItems: 'flex-end', padding: 16,
+                  background: 'linear-gradient(to top,rgba(0,0,0,0.72) 0%,transparent 60%)',
+                }}>
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 600, color: '#fff', letterSpacing: '0.03em' }}>{demo.name}</div>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.08em', marginTop: 3 }}>{demo.stat}</div>
+                  </div>
+                </div>
+                {/* Right half — permanently dimmed "hover" state */}
+                <div style={{
+                  position: 'absolute', top: 0, bottom: 0, left: '50%', right: 0,
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                  textAlign: 'center', padding: 12,
+                  background: 'rgba(0,0,0,0.55)',
+                  borderLeft: '1px solid rgba(255,255,255,0.12)',
+                }}>
+                  <div style={{ fontSize: 10, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.5)', marginBottom: 6 }}>{demo.type.join(' · ').toUpperCase()}</div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>{demo.name}</div>
+                  {demo.url && (
+                    <div style={{ marginTop: 12, fontSize: 10, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>VIEW LIVE →</div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={{
+                  position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: 18,
+                  background: 'linear-gradient(to top,rgba(0,0,0,0.72) 0%,transparent 60%)',
+                  opacity: hovered === demo.name ? 0 : 1, transition: 'opacity 0.25s',
+                }}>
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 600, color: '#fff', letterSpacing: '0.03em' }}>{demo.name}</div>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.08em', marginTop: 3 }}>{demo.stat}</div>
+                  </div>
+                </div>
+                <div style={{
+                  position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
+                  alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.55)',
+                  opacity: hovered === demo.name ? 1 : 0, transition: 'opacity 0.25s',
+                }}>
+                  <div style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.5)', marginBottom: 6 }}>{demo.type.join(' · ').toUpperCase()}</div>
+                  <div style={{ fontSize: 15, fontWeight: 600, color: '#fff' }}>{demo.name}</div>
+                  {demo.url && (
+                    <div style={{ marginTop: 14, fontSize: 11, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>VIEW LIVE →</div>
+                  )}
+                </div>
+              </>
+            )}
           </motion.div>
         ))}
       </div>
@@ -144,7 +176,7 @@ function Divider() {
 function CtaBand() {
   return (
     <section style={{
-      padding: 'clamp(72px,10vw,140px) clamp(16px,4vw,60px)',
+      padding: 'clamp(40px,10vw,140px) clamp(16px,4vw,60px)',
       textAlign: 'center',
       display: 'flex', flexDirection: 'column', alignItems: 'center',
     }}>
@@ -187,7 +219,7 @@ function CtaBand() {
   )
 }
 
-export default function HomeSections() {
+export default function HomeSections({ isMobile = false }) {
   return (
     <>
       <Divider />
@@ -200,7 +232,7 @@ export default function HomeSections() {
         steps={HOME_STEPS}
       />
       <Divider />
-      <WorkPreview />
+      <WorkPreview isMobile={isMobile} />
       <Divider />
       <CtaBand />
     </>

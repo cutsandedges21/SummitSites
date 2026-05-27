@@ -26,13 +26,6 @@ const STEPS = [
   },
 ]
 
-const CIRCLES = [
-  { size: 170, pos: 8,  z: 20,  delay: '0s'   },
-  { size: 140, pos: 10, z: 40,  delay: '0.4s' },
-  { size: 110, pos: 17, z: 60,  delay: '0.8s' },
-  { size: 80,  pos: 23, z: 80,  delay: '1.2s' },
-]
-
 const CARD_CSS = `
   .pc-wrap { flex: 1 1 220px; min-width: 220px; height: 300px; perspective: 1000px; }
   .pc-inner {
@@ -79,22 +72,8 @@ function ProcessCard({ step, index, flat = false, inView = false }) {
             zIndex: 0,
           }} />
 
-          {/* Decorative circles + badge */}
+          {/* Number badge */}
           <div style={{ position: 'absolute', top: 0, right: 0, transformStyle: 'preserve-3d' }}>
-            {!flat && CIRCLES.map((c, i) => (
-              <div key={i} style={{
-                position: 'absolute',
-                width: c.size,
-                height: c.size,
-                borderRadius: '50%',
-                background: 'rgba(255,255,255,0.07)',
-                boxShadow: 'rgba(100,100,111,0.2) -10px 10px 20px 0px',
-                top: c.pos,
-                right: c.pos,
-                transform: flat ? 'none' : `translate3d(0,0,${c.z}px)`,
-                transition: `transform 0.5s ease-in-out ${c.delay}`,
-              }} />
-            ))}
             <div className="pc-badge" style={{
               position: 'absolute',
               width: 50,

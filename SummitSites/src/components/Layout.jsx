@@ -7,7 +7,6 @@ const NAV_LINKS = [
   { to: '/demos',      label: 'DEMOS'      },
   { to: '/services',   label: 'SERVICES'   },
   { to: '/process',    label: 'PROCESS'    },
-  { to: '/industries', label: 'INDUSTRIES' },
   { to: '/faq',        label: 'FAQ'        },
   { to: '/contact',    label: 'CONTACT'    },
 ]
