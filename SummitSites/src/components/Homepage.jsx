@@ -193,17 +193,16 @@ export default function Homepage({ revealed = true, isMobile = false, native = f
       {/* Fixed header — mirrors the top bar used on every other page */}
       <header ref={mHeaderRef} style={styles.mHeader}>
         <div style={styles.mHeaderTagline}>
-          <motion.span
-            key={showBrand ? 'brand' : 'tag'}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            style={{ display: 'inline-block' }}
-          >
-            {showBrand ? 'SUMMIT SITES' : 'PROFESSIONAL WEBSITES FOR SERIOUS BUSINESSES'}
-          </motion.span>
+          PROFESSIONAL WEBSITES FOR SERIOUS BUSINESSES
         </div>
         <div style={styles.mHeaderRow}>
+          <motion.div
+            initial={false}
+            animate={{ opacity: showBrand ? 1 : 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          >
+            <Link to="/" style={styles.mHeaderBrand}>SUMMIT SITES</Link>
+          </motion.div>
           <button
             className="icon-btn"
             style={styles.hamburger}
@@ -424,8 +423,16 @@ const styles = {
   mHeaderRow: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     padding: 'clamp(10px, 1.4vh, 16px) clamp(16px, 4vw, 24px)',
+  },
+  mHeaderBrand: {
+    fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif",
+    fontSize: 20,
+    fontWeight: 700,
+    letterSpacing: '0.1em',
+    color: '#fff',
+    textDecoration: 'none',
   },
   mSidebar: {
     position: 'fixed',
