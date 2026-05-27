@@ -1,5 +1,0 @@
-{
-  "buildCommand": "cd SummitSites && npm install && npm run build",
-  "outputDirectory": "SummitSites/dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-}
