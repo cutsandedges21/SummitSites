@@ -1,0 +1,287 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e8]:
+      - generic [ref=e11]: Power
+      - paragraph [ref=e13]:
+        - text: SŌM fuel for focus
+        - text: "& performance"
+    - generic [ref=e14]:
+      - paragraph [ref=e17]: SŌM®
+      - paragraph [ref=e18]:
+        - text: Modern elixir from
+        - text: ancient wisdom
+    - paragraph [ref=e20]: Your daily potions crafted from natural origins and powerful ingredients designed to enhance both body and mind.
+    - generic:
+      - generic:
+        - generic:
+          - generic: "0"
+          - generic: "1"
+          - generic: "2"
+          - generic: "3"
+          - generic: "4"
+          - generic: "5"
+          - generic: "6"
+          - generic: "7"
+          - generic: "8"
+          - generic: "9"
+      - generic:
+        - generic:
+          - generic: "0"
+          - generic: "1"
+          - generic: "2"
+          - generic: "3"
+          - generic: "4"
+          - generic: "5"
+          - generic: "6"
+          - generic: "7"
+          - generic: "8"
+          - generic: "9"
+    - paragraph [ref=e22]: LOADING SŌM EXPERIENCE
+  - banner:
+    - generic:
+      - link "TikTok" [ref=e23] [cursor=pointer]:
+        - /url: https://tiktok.com/@drink.som
+        - text: TikTok
+      - link "SŌM®" [ref=e24] [cursor=pointer]:
+        - /url: /#hero
+        - paragraph [ref=e27]: SŌM®
+      - link "Instagram" [ref=e28] [cursor=pointer]:
+        - /url: https://instagram.com/drink.som
+        - text: Instagram
+    - button "JOIN WAITLIST JOIN WAITLIST" [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]: JOIN WAITLIST
+        - generic [ref=e33]: JOIN WAITLIST
+      - generic [ref=e34]: →
+  - main [ref=e35]:
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - generic [ref=e41]:
+          - paragraph [ref=e42]:
+            - generic [ref=e43]: FUNCTIONAL DAILY ELIXIR
+            - generic [ref=e44]: FOR PEAK MENTAL FOCUS AND
+            - generic [ref=e45]: PHYSICAL STAMINA
+          - paragraph [ref=e46]:
+            - generic [ref=e47]: DAILY RITUAL TO
+            - generic [ref=e48]: UNLOCK VITALITY AND
+            - generic [ref=e49]: YOUR INNER DRIVE
+          - paragraph [ref=e51]: CRAFTED FROM NATURAL ORIGINS TO DELIVER HIGH-LEVEL COGNITIVE PERFORMANCE
+        - generic [ref=e52]:
+          - img [ref=e54]
+          - paragraph [ref=e55]:
+            - generic [ref=e57]: Reclaiming the sacred elixir. Ancient SOMA,
+            - generic [ref=e59]: recoded for human performance.
+      - generic [ref=e63]:
+        - generic:
+          - img
+        - generic [ref=e67]:
+          - button "MENTAL FOCUS" [ref=e68] [cursor=pointer]
+          - button "STAMINA STRENGTH" [ref=e69] [cursor=pointer]
+          - button "INNER BALANCE" [ref=e70] [cursor=pointer]
+          - button "IMMUNE BOOST" [ref=e71] [cursor=pointer]
+        - generic [ref=e73]:
+          - paragraph [ref=e74]: 01/04
+          - paragraph [ref=e75]:
+            - generic [ref=e77]: A
+            - generic [ref=e79]: vial
+            - generic [ref=e81]: of
+            - generic [ref=e83]: clarity.
+            - generic [ref=e85]: Designed
+            - generic [ref=e87]: to
+            - generic [ref=e89]: help
+            - generic [ref=e91]: you
+            - generic [ref=e93]: be
+            - generic [ref=e95]: sharper
+            - generic [ref=e97]: and
+            - generic [ref=e99]: stay
+            - generic [ref=e101]: present
+            - generic [ref=e103]: in
+            - generic [ref=e105]: a
+            - generic [ref=e107]: world
+            - generic [ref=e109]: that
+            - generic [ref=e111]: constantly
+            - generic [ref=e113]: asks
+            - generic [ref=e115]: for
+            - generic [ref=e117]: more.
+        - paragraph [ref=e120]:
+          - generic [ref=e122]: PROVIDES MENTAL FOCUS,
+          - generic [ref=e124]: CLARITY, AND SHARPNESS FOR THE MODERN HUMAN
+    - generic [ref=e127]:
+      - generic:
+        - generic:
+          - paragraph:
+            - generic:
+              - generic: Performance
+            - generic:
+              - generic: is
+            - generic:
+              - generic: Culture
+        - generic:
+          - generic:
+            - generic:
+              - generic: ANCIENT
+              - generic: WISDOM
+            - paragraph:
+              - generic:
+                - generic: SŌM
+              - generic:
+                - generic: is
+              - generic:
+                - generic: inspired
+              - generic:
+                - generic: by
+              - generic:
+                - generic: the
+              - generic:
+                - generic: ancient
+              - generic:
+                - generic: SOMA
+              - generic:
+                - generic: —
+              - generic:
+                - generic: a
+              - generic:
+                - generic: sacred
+              - generic:
+                - generic: elixir
+              - generic:
+                - generic: known
+              - generic:
+                - generic: to
+              - generic:
+                - generic: bring
+              - generic:
+                - generic: vitality
+              - generic:
+                - generic: and
+              - generic:
+                - generic: a
+              - generic:
+                - generic: higher
+              - generic:
+                - generic: State
+              - generic:
+                - generic: of
+              - generic:
+                - generic: Mind.
+              - generic:
+                - generic: We've
+              - generic:
+                - generic: traveled
+              - generic:
+                - generic: from
+              - generic:
+                - generic: the
+              - generic:
+                - generic: heart
+              - generic:
+                - generic: of
+              - generic:
+                - generic: the
+              - generic:
+                - generic: Amazon
+              - generic:
+                - generic: to
+              - generic:
+                - generic: modern
+              - generic:
+                - generic: labs
+              - generic:
+                - generic: to
+              - generic:
+                - generic: bottle
+              - generic:
+                - generic: this
+              - generic:
+                - generic: essence
+              - generic:
+                - generic: for
+              - generic:
+                - generic: the
+              - generic:
+                - generic: modern
+              - generic:
+                - generic: human.
+    - generic [ref=e145]:
+      - generic [ref=e146]:
+        - generic [ref=e148]:
+          - paragraph [ref=e149]: BECOME
+          - generic [ref=e150]:
+            - generic [ref=e151]: SOM
+            - generic [ref=e152]: EONE
+          - paragraph [ref=e153]: POWERFUL
+        - paragraph [ref=e154]:
+          - generic [ref=e155]: DON'T JUST WATCH. COMMAND THE DROP.
+          - generic [ref=e156]: JOIN THE WAITLIST FOR PRIORITY ACCESS
+          - generic [ref=e157]: TO THE FIRST RITUAL.
+        - generic [ref=e158]:
+          - generic [ref=e159]:
+            - generic [ref=e160]:
+              - textbox "Email address" [ref=e161]:
+                - /placeholder: " "
+              - generic: EMAIL ADDRESS
+            - generic [ref=e162]:
+              - generic [ref=e163]:
+                - checkbox "I accept the Privacy Policy and want to receive SŌM news." [ref=e164] [cursor=pointer]
+                - img
+              - generic [ref=e165] [cursor=pointer]:
+                - text: I accept the
+                - link "Privacy Policy" [ref=e166]:
+                  - /url: /tos#privacy
+                - text: and want to receive SŌM news.
+          - button "JOIN WAITLIST JOIN WAITLIST" [ref=e167]:
+            - generic [ref=e168]:
+              - generic [ref=e169]: JOIN WAITLIST
+              - generic [ref=e170]: JOIN WAITLIST
+            - generic [ref=e171]: →
+      - generic [ref=e173]:
+        - generic [ref=e174]:
+          - paragraph [ref=e175]: GET SŌM(E)
+          - paragraph [ref=e176]: POWER
+        - generic [ref=e177]:
+          - paragraph [ref=e178]: COMING SOON
+          - paragraph [ref=e179]: "2026"
+    - contentinfo [ref=e181]:
+      - generic [ref=e182]:
+        - generic:
+          - img
+        - generic [ref=e184]:
+          - generic [ref=e185]:
+            - button "CONTACTS" [ref=e186] [cursor=pointer]
+            - generic:
+              - generic:
+                - generic: For all inquiries
+                - link "hello@drinksom.eu":
+                  - /url: mailto:hello@drinksom.eu
+              - generic:
+                - generic: TIKTOK
+                - link "@drink.som":
+                  - /url: https://tiktok.com/@drink.som
+              - generic:
+                - generic: INSTAGRAM
+                - link "@drink.som":
+                  - /url: https://instagram.com/drink.som
+          - navigation "Footer navigation" [ref=e187]:
+            - link "PRIVACY POLICY" [ref=e188] [cursor=pointer]:
+              - /url: /tos#privacy
+            - link "REFUND POLICY" [ref=e189] [cursor=pointer]:
+              - /url: /tos#refund
+            - link "SHIPPING POLICY" [ref=e190] [cursor=pointer]:
+              - /url: /tos#shipping
+            - link "TERMS OF SERVICE" [ref=e191] [cursor=pointer]:
+              - /url: /tos#terms
+          - link "WEBSITE BY .RAW" [ref=e192] [cursor=pointer]:
+            - /url: https://www.rawlab.co/
+        - generic [ref=e195]:
+          - paragraph [ref=e196]: Consistency is the ritual.
+          - paragraph [ref=e197]: Ritual is SŌM.
+    - generic [ref=e203]:
+      - paragraph [ref=e204]:
+        - generic [ref=e205]: FUNCTIONAL DAILY ELIXIR
+        - generic [ref=e206]: FOR PEAK MENTAL FOCUS AND
+        - generic [ref=e207]: PHYSICAL STAMINA
+      - paragraph [ref=e208]:
+        - generic [ref=e209]: DAILY RITUAL TO
+        - generic [ref=e210]: UNLOCK VITALITY AND
+        - generic [ref=e211]: YOUR INNER DRIVE
+      - paragraph [ref=e213]: CRAFTED FROM NATURAL ORIGINS TO DELIVER HIGH-LEVEL COGNITIVE PERFORMANCE

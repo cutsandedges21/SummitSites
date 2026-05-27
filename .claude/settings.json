@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude --bare -p \"/graphify\"",
+            "shell": "powershell",
+            "async": true,
+            "statusMessage": "Updating graphify..."
+          }
+        ]
+      }
+    ]
+  }
+}

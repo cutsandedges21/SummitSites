@@ -1,0 +1,602 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "App.jsx",
+      "file_type": "code",
+      "source_file": "App.jsx",
+      "source_location": "L1",
+      "id": "app_jsx",
+      "community": 2,
+      "norm_label": "app.jsx"
+    },
+    {
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "App.jsx",
+      "source_location": "L10",
+      "id": "src_app_app",
+      "community": 2,
+      "norm_label": "app()"
+    },
+    {
+      "label": "main.jsx",
+      "file_type": "code",
+      "source_file": "main.jsx",
+      "source_location": "L1",
+      "id": "main_jsx",
+      "community": 2,
+      "norm_label": "main.jsx"
+    },
+    {
+      "label": "Contact.jsx",
+      "file_type": "code",
+      "source_file": "components/Contact.jsx",
+      "source_location": "L1",
+      "id": "components_contact_jsx",
+      "community": 7,
+      "norm_label": "contact.jsx"
+    },
+    {
+      "label": "Contact()",
+      "file_type": "code",
+      "source_file": "components/Contact.jsx",
+      "source_location": "L1",
+      "id": "components_contact_contact",
+      "community": 7,
+      "norm_label": "contact()"
+    },
+    {
+      "label": "Demos.jsx",
+      "file_type": "code",
+      "source_file": "components/Demos.jsx",
+      "source_location": "L1",
+      "id": "components_demos_jsx",
+      "community": 3,
+      "norm_label": "demos.jsx"
+    },
+    {
+      "label": "Demos()",
+      "file_type": "code",
+      "source_file": "components/Demos.jsx",
+      "source_location": "L1",
+      "id": "components_demos_demos",
+      "community": 3,
+      "norm_label": "demos()"
+    },
+    {
+      "label": "FAQ.jsx",
+      "file_type": "code",
+      "source_file": "components/FAQ.jsx",
+      "source_location": "L1",
+      "id": "components_faq_jsx",
+      "community": 8,
+      "norm_label": "faq.jsx"
+    },
+    {
+      "label": "FAQ()",
+      "file_type": "code",
+      "source_file": "components/FAQ.jsx",
+      "source_location": "L1",
+      "id": "components_faq_faq",
+      "community": 8,
+      "norm_label": "faq()"
+    },
+    {
+      "label": "Homepage.jsx",
+      "file_type": "code",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L1",
+      "id": "components_homepage_jsx",
+      "community": 0,
+      "norm_label": "homepage.jsx"
+    },
+    {
+      "label": "EASE",
+      "file_type": "code",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L5",
+      "id": "components_homepage_ease",
+      "community": 0,
+      "norm_label": "ease"
+    },
+    {
+      "label": "MORPH",
+      "file_type": "code",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L6",
+      "id": "components_homepage_morph",
+      "community": 0,
+      "norm_label": "morph"
+    },
+    {
+      "label": "MORPH_SLOW",
+      "file_type": "code",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L7",
+      "id": "components_homepage_morph_slow",
+      "community": 0,
+      "norm_label": "morph_slow"
+    },
+    {
+      "label": "ALL_NAV_LINKS",
+      "file_type": "code",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L10",
+      "id": "components_homepage_all_nav_links",
+      "community": 0,
+      "norm_label": "all_nav_links"
+    },
+    {
+      "label": "Homepage()",
+      "file_type": "code",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L19",
+      "id": "components_homepage_homepage",
+      "community": 0,
+      "norm_label": "homepage()"
+    },
+    {
+      "label": "ChevronIcon()",
+      "file_type": "code",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L266",
+      "id": "components_homepage_chevronicon",
+      "community": 0,
+      "norm_label": "chevronicon()"
+    },
+    {
+      "label": "FlipText()",
+      "file_type": "code",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L284",
+      "id": "components_homepage_fliptext",
+      "community": 0,
+      "norm_label": "fliptext()"
+    },
+    {
+      "label": "styles",
+      "file_type": "code",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L324",
+      "id": "components_homepage_styles",
+      "community": 0,
+      "norm_label": "styles"
+    },
+    {
+      "label": "Industries.jsx",
+      "file_type": "code",
+      "source_file": "components/Industries.jsx",
+      "source_location": "L1",
+      "id": "components_industries_jsx",
+      "community": 4,
+      "norm_label": "industries.jsx"
+    },
+    {
+      "label": "Industries()",
+      "file_type": "code",
+      "source_file": "components/Industries.jsx",
+      "source_location": "L1",
+      "id": "components_industries_industries",
+      "community": 4,
+      "norm_label": "industries()"
+    },
+    {
+      "label": "LaptopZoom.jsx",
+      "file_type": "code",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L1",
+      "id": "components_laptopzoom_jsx",
+      "community": 1,
+      "norm_label": "laptopzoom.jsx"
+    },
+    {
+      "label": "DESKTOP_SCREEN",
+      "file_type": "code",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L10",
+      "id": "components_laptopzoom_desktop_screen",
+      "community": 1,
+      "norm_label": "desktop_screen"
+    },
+    {
+      "label": "MOBILE_SCREEN",
+      "file_type": "code",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L14",
+      "id": "components_laptopzoom_mobile_screen",
+      "community": 1,
+      "norm_label": "mobile_screen"
+    },
+    {
+      "label": "computeInsets()",
+      "file_type": "code",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L18",
+      "id": "components_laptopzoom_computeinsets",
+      "community": 1,
+      "norm_label": "computeinsets()"
+    },
+    {
+      "label": "derive()",
+      "file_type": "code",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L38",
+      "id": "components_laptopzoom_derive",
+      "community": 1,
+      "norm_label": "derive()"
+    },
+    {
+      "label": "LaptopZoom()",
+      "file_type": "code",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L45",
+      "id": "components_laptopzoom_laptopzoom",
+      "community": 1,
+      "norm_label": "laptopzoom()"
+    },
+    {
+      "label": "Process.jsx",
+      "file_type": "code",
+      "source_file": "components/Process.jsx",
+      "source_location": "L1",
+      "id": "components_process_jsx",
+      "community": 5,
+      "norm_label": "process.jsx"
+    },
+    {
+      "label": "Process()",
+      "file_type": "code",
+      "source_file": "components/Process.jsx",
+      "source_location": "L1",
+      "id": "components_process_process",
+      "community": 5,
+      "norm_label": "process()"
+    },
+    {
+      "label": "Services.jsx",
+      "file_type": "code",
+      "source_file": "components/Services.jsx",
+      "source_location": "L1",
+      "id": "components_services_jsx",
+      "community": 6,
+      "norm_label": "services.jsx"
+    },
+    {
+      "label": "Services()",
+      "file_type": "code",
+      "source_file": "components/Services.jsx",
+      "source_location": "L1",
+      "id": "components_services_services",
+      "community": 6,
+      "norm_label": "services()"
+    }
+  ],
+  "links": [
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "App.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "app_jsx",
+      "target": "components_laptopzoom_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "App.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "app_jsx",
+      "target": "components_demos_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "App.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "app_jsx",
+      "target": "components_services_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "App.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "app_jsx",
+      "target": "components_process_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "App.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "app_jsx",
+      "target": "components_industries_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "App.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "app_jsx",
+      "target": "components_faq_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "App.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "app_jsx",
+      "target": "components_contact_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "app_jsx",
+      "target": "src_app_app",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "main.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "main_jsx",
+      "target": "app_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Contact.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "components_contact_jsx",
+      "target": "components_contact_contact",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Demos.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "components_demos_jsx",
+      "target": "components_demos_demos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/FAQ.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "components_faq_jsx",
+      "target": "components_faq_faq",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_homepage_jsx",
+      "target": "components_homepage_ease",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "components_homepage_jsx",
+      "target": "components_homepage_morph",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "components_homepage_jsx",
+      "target": "components_homepage_morph_slow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "components_homepage_jsx",
+      "target": "components_homepage_all_nav_links",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "components_homepage_jsx",
+      "target": "components_homepage_homepage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L266",
+      "weight": 1.0,
+      "source": "components_homepage_jsx",
+      "target": "components_homepage_chevronicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L284",
+      "weight": 1.0,
+      "source": "components_homepage_jsx",
+      "target": "components_homepage_fliptext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Homepage.jsx",
+      "source_location": "L324",
+      "weight": 1.0,
+      "source": "components_homepage_jsx",
+      "target": "components_homepage_styles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "components_laptopzoom_jsx",
+      "target": "components_homepage_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Industries.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "components_industries_jsx",
+      "target": "components_industries_industries",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "components_laptopzoom_jsx",
+      "target": "components_laptopzoom_desktop_screen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "components_laptopzoom_jsx",
+      "target": "components_laptopzoom_mobile_screen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "components_laptopzoom_jsx",
+      "target": "components_laptopzoom_computeinsets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "components_laptopzoom_jsx",
+      "target": "components_laptopzoom_derive",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "components_laptopzoom_jsx",
+      "target": "components_laptopzoom_laptopzoom",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "components_laptopzoom_laptopzoom",
+      "target": "components_laptopzoom_computeinsets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "components/LaptopZoom.jsx",
+      "source_location": "L107",
+      "weight": 1.0,
+      "source": "components_laptopzoom_laptopzoom",
+      "target": "components_laptopzoom_derive",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Process.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "components_process_jsx",
+      "target": "components_process_process",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Services.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "components_services_jsx",
+      "target": "components_services_services",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "57ff7f823cae877a888b19814aef2b947dabb549"
+}

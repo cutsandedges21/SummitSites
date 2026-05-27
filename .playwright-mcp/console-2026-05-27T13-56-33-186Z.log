@@ -1,0 +1,12 @@
+[    1295ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://khufus.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[    1664ms] [ERROR] Access to font at 'https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2' from origin 'https://khufus.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://khufus.com/:0
+[    1664ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2:0
+[   20977ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://khufus.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[   21239ms] [ERROR] Access to font at 'https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2' from origin 'https://khufus.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://khufus.com/:0
+[   21239ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2:0
+[   25486ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://khufus.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[   25643ms] [ERROR] Access to font at 'https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2' from origin 'https://khufus.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://khufus.com/:0
+[   25644ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2:0
+[   27840ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://khufus.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[   28025ms] [ERROR] Access to font at 'https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2' from origin 'https://khufus.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://khufus.com/:0
+[   28026ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2:0

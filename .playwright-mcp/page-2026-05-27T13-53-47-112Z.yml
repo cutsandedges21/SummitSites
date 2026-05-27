@@ -1,0 +1,238 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#content"
+  - generic [ref=e3]:
+    - banner:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - heading "RESERVATIONS" [level=2] [ref=e7]:
+            - link "RESERVATIONS" [ref=e8] [cursor=pointer]:
+              - /url: /reservations
+          - heading "BISTRO" [level=2] [ref=e10]:
+            - link "BISTRO" [ref=e11] [cursor=pointer]:
+              - /url: https://khufusbistro.com/
+        - link [ref=e14] [cursor=pointer]:
+          - /url: /
+        - img [ref=e322] [cursor=pointer]
+    - main [ref=e20]:
+      - article [ref=e21]:
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - heading "Where the setting becomes part of the table" [level=1] [ref=e29]:
+              - generic [ref=e30]:
+                - generic [ref=e32]: WHERE THE SETTING
+                - generic [ref=e34]:
+                  - text: BECOMES PART OF THE
+                  - emphasis [ref=e35]: TABLE
+            - button "Reserve Your Table" [ref=e38] [cursor=pointer]
+          - generic [ref=e39]:
+            - generic [ref=e40]:
+              - heading "Dining at the Edge of History" [level=2] [ref=e42]:
+                - generic [ref=e43]: Dining
+                - text: at the Edge of History
+              - paragraph [ref=e45]: Set beneath an ancient skyline, interpreted through a modern lens. A New Standard in Elevated Egyptian Dining
+            - generic [ref=e49]:
+              - article [ref=e50]:
+                - img [ref=e51]
+                - generic [ref=e53]:
+                  - heading "Setting Where Place Defines Presence" [level=3] [ref=e56] [cursor=pointer]:
+                    - text: Setting
+                    - generic [ref=e57]: Where Place Defines Presence
+                  - generic:
+                    - paragraph [ref=e58]: Its legacy is felt less as history retold and more as presence carried forward. Place, memory, and cultural gravity give the restaurant a sense of continuity that feels quietly enduring.
+                    - link "Discover More" [ref=e59] [cursor=pointer]:
+                      - /url: /legacy
+              - article [ref=e60]:
+                - img [ref=e61]
+                - generic [ref=e63]:
+                  - heading "Composition Every Detail Holds Intention" [level=3] [ref=e66] [cursor=pointer]:
+                    - text: Composition
+                    - generic [ref=e67]: Every Detail Holds Intention
+                  - generic:
+                    - paragraph [ref=e68]: Behind the restaurant is a point of view shaped with restraint. Intention, authorship, and perspective come together in a language that reveals how Khufu's came to feel singular from the start.
+                    - link "Explore The Craft" [ref=e69] [cursor=pointer]:
+                      - /url: /about
+              - article [ref=e70]:
+                - img [ref=e71]
+                - generic [ref=e73]:
+                  - heading "Atmosphere A Rhythm That Settles In" [level=3] [ref=e76] [cursor=pointer]:
+                    - text: Atmosphere
+                    - generic [ref=e77]: A Rhythm That Settles In
+                  - generic:
+                    - paragraph [ref=e78]: The experience unfolds in measured layers rather than all at once. Atmosphere, detail, and emotion arrive gradually, creating a rhythm that lingers beyond the moment itself, shaped through elevated Egyptian dining.
+                    - link "Feel The Experience" [ref=e79] [cursor=pointer]:
+                      - /url: /experience
+          - generic [ref=e80]:
+            - generic [ref=e83]:
+              - generic [ref=e84]:
+                - generic: "03"
+                - generic [ref=e85]: GLOBAL RECOGNITION
+                - heading "A PLACE THE WORLD TOOK NOTE OF Recognition With Substance" [level=2] [ref=e86]:
+                  - text: A PLACE THE WORLD
+                  - text: TOOK NOTE OF
+                  - generic [ref=e87]: Recognition With Substance
+                - paragraph [ref=e88]: In a setting shaped by millennia, permanence remains the clearest measure. Khufu’s has earned recognition among the region’s leading restaurants, not as a passing headline, but as a reflection of narrative, precision, and a dining experience rooted in place.
+                - link "Reserve Your Table" [ref=e89] [cursor=pointer]:
+                  - /url: /reservations
+              - paragraph [ref=e92]: From Cairo to global stages, the table has entered a wider conversation while remaining grounded in its own identity.
+            - generic [ref=e95]:
+              - generic "Experience images" [ref=e96]:
+                - figure [ref=e97]
+                - figure [ref=e98]
+                - figure [ref=e99]
+              - generic [ref=e100]:
+                - generic [ref=e101]:
+                  - heading "MENA’S 50 BEST, NO. 1" [level=3] [ref=e330]
+                  - paragraph [ref=e331]: Best Restaurant in Egypt for three consecutive years, rising in MENA’s 50 Best from No. 5 in 2024 to No. 4 in 2025 and No. 1 in 2026.
+                - button "Next slide (1/4)" [ref=e332] [cursor=pointer]:
+                  - generic [ref=e103]: 1/4
+          - generic [ref=e105]:
+            - generic [ref=e106]:
+              - heading "THE KHUFU'S EXPERIENCE" [level=2] [ref=e108]:
+                - text: THE
+                - generic [ref=e109]: KHUFU'S
+                - text: EXPERIENCE
+              - paragraph [ref=e111]: Set within the Giza Plateau, with the Great Pyramid standing in quiet authority, Khufu’s offers more than a view, it offers alignment. Architecture, light, and landscape converge into a dining experience shaped by precision and restraint. The cuisine draws from heritage without excess, refined and contemporary in its expression. Service moves with calm confidence, allowing the setting to breathe. At Khufu’s, the table does not compete with its surroundings, it belongs to them.
+            - generic [ref=e334] [cursor=pointer]:
+              - link "Open gallery" [ref=e335]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e336]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e337]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e338]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e339]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e340]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e341]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e342]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e343]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e344]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e345]:
+                - /url: /gallery
+              - link "Open gallery" [ref=e346]:
+                - /url: /gallery
+          - generic [ref=e121]:
+            - generic [ref=e128]: Chef Mostafa Seif
+            - generic [ref=e347]:
+              - generic [ref=e349]:
+                - generic: "05"
+                - generic [ref=e350]: Meet The Chef
+                - heading "Meet Chef Mostafa Seif Innovation Meets Tradition" [level=2] [ref=e351]:
+                  - text: Meet Chef
+                  - text: Mostafa Seif
+                  - generic [ref=e352]: Innovation Meets Tradition
+                - paragraph [ref=e353]: Winner of Top Chef Middle East 2018 and recipient of Two Knives at The Best Chef Awards 2025, Chef Mostafa Seif is one of the leading voices in new Egyptian cuisine, blending traditional flavours with contemporary flair.
+                - generic "Previous and next slide controls" [ref=e355]:
+                  - button "Previous slide" [ref=e356] [cursor=pointer]:
+                    - img [ref=e357]
+                  - button "Next slide" [ref=e359] [cursor=pointer]:
+                    - img [ref=e360]
+              - paragraph [ref=e364]: Together, Giovanni Bolandrini and Chef Mostafa Seif have shaped a menu driven by passion, creativity, and a deep love for gastronomy.
+            - generic "Slide navigation" [ref=e135]:
+              - button "01" [ref=e136] [cursor=pointer]
+              - button "02" [ref=e137] [cursor=pointer]
+              - button "03" [ref=e138] [cursor=pointer]
+          - generic [ref=e143]:
+            - generic [ref=e144]:
+              - generic [ref=e146]:
+                - generic: "08"
+                - generic [ref=e147]: Experience It By Evening
+                - heading "The Experience Evolves With The Light a softer, deeper atmosphere" [level=2] [ref=e148]:
+                  - text: The Experience
+                  - text: Evolves With
+                  - text: The Light
+                  - generic [ref=e149]: a softer, deeper atmosphere
+                - paragraph [ref=e150]: As daylight begins to fade, the setting shifts into a more intimate expression. Light softens, the pace changes, and the atmosphere becomes more immersive and composed.
+                - link "Continue To Khufu’s Bistro" [ref=e151] [cursor=pointer]:
+                  - /url: https://bistro.khufus.com
+              - paragraph [ref=e154]: The experience continues into Khufu’s Bistro, an evening expression of elevated Egyptian dining.
+            - generic [ref=e164]:
+              - generic [ref=e165]: Evening Atmosphere
+              - paragraph [ref=e166]: As the light softens, the experience becomes more intimate, where presence, setting, and rhythm begin to unfold differently.
+          - generic [ref=e171]:
+            - generic [ref=e172]: Final Invitation
+            - heading "Dine With The Pyramid In View, In A Moment Composed For You" [level=2] [ref=e173]:
+              - text: Dine With The Pyramid In View,
+              - text: In A Moment Composed For You
+            - paragraph [ref=e174]: Set within the Giza Plateau, Khufu’s is an experience shaped by restraint, precision, and place. From the first arrival to the final pause, every detail is deliberate, allowing heritage to feel present rather than performed. Reserve your table and step into a day where the setting leads, and everything else follows.
+            - generic [ref=e175]: Atmosphere / Presence / Reservation
+            - link "Reserve your table" [ref=e177] [cursor=pointer]:
+              - /url: /reservations
+              - text: Reserve Your Table
+    - contentinfo [ref=e179]:
+      - generic [ref=e180]:
+        - generic [ref=e183]:
+          - heading "DINE AT KHUFU'S" [level=2] [ref=e185]
+          - heading "By the Pyramids" [level=2] [ref=e187]
+          - paragraph [ref=e189]:
+            - text: Contact Information –
+            - emphasis [ref=e190]:
+              - strong [ref=e191]: info@khufus.com
+        - generic [ref=e195]:
+          - generic [ref=e196]:
+            - generic [ref=e197]:
+              - paragraph [ref=e199]: A Table Set in Time
+              - paragraph [ref=e201]:
+                - text: By the
+                - emphasis [ref=e202]:
+                  - strong [ref=e203]: Great Pyramids of Giza
+              - paragraph [ref=e205]: Framed by ancient stone and open horizon, Khufu’s offers an experience defined by clarity and restraint. Each evening unfolds with precision, where heritage is refined rather than repeated.
+              - link "Reserve Your Table" [ref=e207] [cursor=pointer]:
+                - /url: /reservations
+            - generic [ref=e208]:
+              - paragraph [ref=e210]: With Intention
+              - paragraph [ref=e212]:
+                - text: Contemporary
+                - emphasis [ref=e213]:
+                  - strong [ref=e214]: Culinary Expression
+              - paragraph [ref=e216]: Our menu draws from memory without being confined to it. Seasonal ingredients and disciplined technique shape a cuisine guided by clarity rather than excess, rooted in quiet refinement.
+              - link "Explore The Menu" [ref=e218] [cursor=pointer]:
+                - /url: /menu
+            - generic [ref=e219]:
+              - paragraph [ref=e221]: At the Plateau
+              - paragraph [ref=e223]:
+                - text: Inside the
+                - emphasis [ref=e224]:
+                  - strong [ref=e225]: Archaeological Grounds
+              - article [ref=e228]:
+                - paragraph [ref=e235]: Situated within the historic grounds, Khufu’s is reached through the visitor entrance. Guests are encouraged to allow time for entry procedures. Beyond the gate, the experience begins in view of stone and sky.
+              - link "Plan Your Visit" [ref=e237] [cursor=pointer]:
+                - /url: /experience
+            - generic [ref=e238]:
+              - paragraph [ref=e240]: In the Collection
+              - paragraph [ref=e242]:
+                - text: Part of the
+                - emphasis [ref=e243]:
+                  - strong [ref=e244]: Pier88 Group
+              - paragraph [ref=e246]: Khufu’s stands within a curated portfolio of destination-led concepts. Each venue is shaped by atmosphere, intention, and a distinct sense of place, forming a collection defined by clarity and restraint.
+              - link "Explore The Group" [ref=e248] [cursor=pointer]:
+                - /url: https://pier88group.com
+          - generic [ref=e249]:
+            - generic [ref=e251]:
+              - text: © 2026 KHUFU’S. All Rights Reserved. Powered By
+              - link "MONARQ." [ref=e252] [cursor=pointer]:
+                - /url: https://www.monarqeg.com
+            - list [ref=e255]:
+              - listitem [ref=e256]:
+                - link "Facebook-f" [ref=e257] [cursor=pointer]:
+                  - /url: https://www.facebook.com/Khufusrestaurant/
+                  - generic [ref=e258]: Facebook-f
+                  - img [ref=e259]
+              - listitem [ref=e261]:
+                - link "Instagram" [ref=e262] [cursor=pointer]:
+                  - /url: https://www.instagram.com/khufusrestaurant/
+                  - generic [ref=e263]: Instagram
+                  - img [ref=e264]
+              - listitem [ref=e266]:
+                - link "Linkedin-in" [ref=e267] [cursor=pointer]:
+                  - /url: https://eg.linkedin.com/company/pier-88-group-egypt
+                  - generic [ref=e268]: Linkedin-in
+                  - img [ref=e269]
+  - generic [ref=e365]: desktop
