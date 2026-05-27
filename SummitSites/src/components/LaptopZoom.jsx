@@ -45,7 +45,6 @@ function derive(s) {
 export default function LaptopZoom() {
   const [progress, setProgress] = useState(0)
   const [expanded, setExpanded] = useState(false)
-  const [touchY,   setTouchY]   = useState(null)
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
   const [viewport, setViewport] = useState(() => ({ w: window.innerWidth, h: window.innerHeight }))
 
@@ -55,6 +54,7 @@ export default function LaptopZoom() {
   const scrollTargetRef = useRef(0)
   const scrollCurrRef   = useRef(0)
   const isMobileRef     = useRef(isMobile)
+  const touchYRef       = useRef(null)
 
   useEffect(() => { isMobileRef.current = isMobile }, [isMobile])
 
@@ -84,29 +84,23 @@ export default function LaptopZoom() {
     return () => cancelAnimationFrame(rafRef.current)
   }, [expanded])
 
+  // Zoom phase — needs passive:false to call preventDefault and capture the zoom gesture
   useEffect(() => {
+    if (expanded) return
     const clamp = v => Math.min(Math.max(v, 0), 1)
     const onWheel = (e) => {
       e.preventDefault()
-      if (expanded) {
-        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + e.deltaY * 0.4)
-      } else if (!expanded) {
-        targetRef.current = clamp(targetRef.current + e.deltaY * 0.0005)
-      }
+      targetRef.current = clamp(targetRef.current + e.deltaY * 0.0005)
     }
-    const onTouchStart = (e) => setTouchY(e.touches[0].clientY)
+    const onTouchStart = (e) => { touchYRef.current = e.touches[0].clientY }
     const onTouchMove  = (e) => {
-      if (touchY === null) return
+      if (touchYRef.current === null) return
       e.preventDefault()
-      const dy = touchY - e.touches[0].clientY
-      if (expanded) {
-        scrollTargetRef.current = Math.max(0, scrollTargetRef.current + dy)
-      } else if (!expanded) {
-        targetRef.current = clamp(targetRef.current + dy * (dy < 0 ? 0.006 : 0.004))
-      }
-      setTouchY(e.touches[0].clientY)
+      const dy = touchYRef.current - e.touches[0].clientY
+      targetRef.current = clamp(targetRef.current + dy * (dy < 0 ? 0.006 : 0.004))
+      touchYRef.current = e.touches[0].clientY
     }
-    const onTouchEnd = () => setTouchY(null)
+    const onTouchEnd = () => { touchYRef.current = null }
     window.addEventListener('wheel',      onWheel,      { passive: false })
     window.addEventListener('touchstart', onTouchStart, { passive: true  })
     window.addEventListener('touchmove',  onTouchMove,  { passive: false })
@@ -117,7 +111,34 @@ export default function LaptopZoom() {
       window.removeEventListener('touchmove',  onTouchMove)
       window.removeEventListener('touchend',   onTouchEnd)
     }
-  }, [expanded, touchY])
+  }, [expanded])
+
+  // Scroll phase — passive:true lets the browser compositor run without waiting for JS
+  useEffect(() => {
+    if (!expanded) return
+    const onWheel = (e) => {
+      e.preventDefault()
+      scrollTargetRef.current = Math.max(0, scrollTargetRef.current + e.deltaY * 0.4)
+    }
+    const onTouchStart = (e) => { touchYRef.current = e.touches[0].clientY }
+    const onTouchMove  = (e) => {
+      if (touchYRef.current === null) return
+      const dy = touchYRef.current - e.touches[0].clientY
+      scrollTargetRef.current = Math.max(0, scrollTargetRef.current + dy)
+      touchYRef.current = e.touches[0].clientY
+    }
+    const onTouchEnd = () => { touchYRef.current = null }
+    window.addEventListener('wheel',      onWheel,      { passive: false })
+    window.addEventListener('touchstart', onTouchStart, { passive: true  })
+    window.addEventListener('touchmove',  onTouchMove,  { passive: true  })
+    window.addEventListener('touchend',   onTouchEnd)
+    return () => {
+      window.removeEventListener('wheel',      onWheel)
+      window.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('touchmove',  onTouchMove)
+      window.removeEventListener('touchend',   onTouchEnd)
+    }
+  }, [expanded])
 
   const screen          = isMobile ? MOBILE_SCREEN : DESKTOP_SCREEN
   const s               = computeInsets(screen, viewport.w, viewport.h)

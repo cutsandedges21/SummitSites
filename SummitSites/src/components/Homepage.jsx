@@ -122,7 +122,7 @@ export default function Homepage({ revealed = true, isMobile = false, scrollY = 
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: EASE, delay: 0.3 }}
               >
-                <FlipText style={{ ...styles.heroTitle, fontSize: `max(60px, ${12 + 5 * progress}vw)` }} className="hero-title">SUMMIT SITES</FlipText>
+                <FlipText style={styles.heroTitle} className="hero-title">SUMMIT SITES</FlipText>
               </motion.div>
               <motion.p
                 ref={heroSubRef}
@@ -512,7 +512,7 @@ const styles = {
     alignItems: 'flex-start',
   },
   heroTitle: {
-    fontSize: 'clamp(60px, 17vw, 280px)',
+    fontSize: 'clamp(60px, 14vw, 240px)',
     fontWeight: 700,
     letterSpacing: '0.1em',
     lineHeight: 1,
