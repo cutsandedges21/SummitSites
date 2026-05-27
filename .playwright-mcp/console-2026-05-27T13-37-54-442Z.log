@@ -1,2 +1,0 @@
-[    1134ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://razorpay.com/nvhc9u4gxsagNjk2NWU2NTE1ZmI2YjE4ZTkyOGU2ZDBm/D8uGs5dqEOCDgS9bgdm_bOkNK9A:0
-[    1170ms] [ERROR] Refused to execute script from 'https://razorpay.com/nvhc9u4gxsagNjk2NWU2NTE1ZmI2YjE4ZTkyOGU2ZDBm/D8uGs5dqEOCDgS9bgdm_bOkNK9A' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled. @ https://razorpay.com/sprint/26:0

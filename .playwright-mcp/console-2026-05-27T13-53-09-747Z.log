@@ -1,3 +1,0 @@
-[    1593ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://khufus.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
-[    2168ms] [ERROR] Access to font at 'https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2' from origin 'https://khufus.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://khufus.com/:0
-[    2170ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://khufus.monarqtesting.com/wp-content/uploads/2026/02/IvyOraDisplay-Light.woff2:0

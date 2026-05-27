@@ -3,3 +3,18 @@ dist/
 .env
 .env.local
 .env*.local
+
+# Claude / tooling folders
+.agents/
+.claude/
+.playwright-mcp/
+.superpowers/
+awesome-claude-code-subagents/
+free-claude-code/
+graphify-out/
+planning-with-files/
+skill-prompt-generator/
+skills/
+
+# Assets not part of the website
+Summit_Sites_Brand_Guide.pdf
