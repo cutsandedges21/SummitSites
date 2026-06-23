@@ -10,9 +10,11 @@ const MORPH = { type: 'spring', stiffness: 45, damping: 18 }
 const MORPH_SLOW = { type: 'spring', stiffness: 8, damping: 18 }
 const SIDEBAR_W = 260
 
+// Mobile sidebar shows every page, including Pricing.
 const ALL_NAV_LINKS = [
   { to: '/demos',      label: 'Demos'      },
   { to: '/services',   label: 'Services'   },
+  { to: '/pricing',    label: 'Pricing'    },
   { to: '/process',    label: 'Process'    },
   { to: '/faq',        label: 'FAQ'        },
   { to: '/contact',    label: 'Contact'    },
@@ -128,11 +130,10 @@ export default function Homepage({ revealed = true, isMobile = false, native = f
               : <motion.span key="tagline" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} style={{ fontSize: 'clamp(12px, 1.0vw, 18px)', letterSpacing: '0.35em' }}>PROFESSIONAL WEBSITES FOR SERIOUS BUSINESSES</motion.span>
             }
           </motion.div>
+          {/* Desktop: only Demos / Process / Contact — space-between renders them left / middle / right */}
           <motion.nav style={styles.nav} {...fadeUp}>
             <Link to="/demos"      style={styles.navLink}>DEMOS</Link>
-            <Link to="/services"   style={styles.navLink}>SERVICES</Link>
             <Link to="/process"    style={styles.navLink}>PROCESS</Link>
-            <Link to="/faq"        style={styles.navLink}>FAQ</Link>
             <Link to="/contact"    style={styles.navLink}>CONTACT</Link>
           </motion.nav>
         </div>
