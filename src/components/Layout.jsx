@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Footer from './Footer'
 
 const NAV_LINKS = [
-  { to: '/demos',      label: 'DEMOS'      },
+  { to: '/inspiration', label: 'INSPIRATION' },
   { to: '/services',   label: 'SERVICES'   },
   { to: '/pricing',    label: 'PRICING'    },
   { to: '/process',    label: 'PROCESS'    },

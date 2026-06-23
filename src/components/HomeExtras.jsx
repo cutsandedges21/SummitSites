@@ -54,9 +54,9 @@ function WorkPreview({ isMobile = false }) {
   return (
     <section style={{ padding: SECTION_PAD }}>
       <SectionHead
-        eyebrow="Selected work"
-        title="Sites we've built."
-        sub="A few of the sites we've designed and built — and the results they delivered."
+        eyebrow="Inspiration"
+        title="Quality examples."
+        sub="A few examples of the standard we hold ourselves to — not our own work, but the quality, performance, and results your site will deliver."
       />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 20 }}>
@@ -147,12 +147,12 @@ function WorkPreview({ isMobile = false }) {
         transition={{ delay: 0.3, duration: 0.5 }}
         style={{ marginTop: 36 }}
       >
-        <Link to="/demos" style={{
+        <Link to="/inspiration" style={{
           fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.7)', textDecoration: 'none',
           borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: 4,
         }}>
-          See all work →
+          See all examples →
         </Link>
       </motion.div>
     </section>

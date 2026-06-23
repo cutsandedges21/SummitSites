@@ -12,7 +12,7 @@ const SIDEBAR_W = 260
 
 // Mobile sidebar shows every page, including Pricing.
 const ALL_NAV_LINKS = [
-  { to: '/demos',      label: 'Demos'      },
+  { to: '/inspiration',      label: 'Inspiration' },
   { to: '/services',   label: 'Services'   },
   { to: '/pricing',    label: 'Pricing'    },
   { to: '/process',    label: 'Process'    },
@@ -132,7 +132,7 @@ export default function Homepage({ revealed = true, isMobile = false, native = f
           </motion.div>
           {/* Desktop: only Demos / Process / Contact — space-between renders them left / middle / right */}
           <motion.nav style={styles.nav} {...fadeUp}>
-            <Link to="/demos"      style={styles.navLink}>DEMOS</Link>
+            <Link to="/inspiration"      style={styles.navLink}>INSPIRATION</Link>
             <Link to="/process"    style={styles.navLink}>PROCESS</Link>
             <Link to="/contact"    style={styles.navLink}>CONTACT</Link>
           </motion.nav>
@@ -144,8 +144,8 @@ export default function Homepage({ revealed = true, isMobile = false, native = f
           WE DON’T BUILD WEBSITES <br />JUST TO “HAVE A WEBSITE” <br />WE BUILD DIGITAL EXPERIENCES THAT <br />POSITION YOUR COMPANY AS<br /> THE OBVIOUS CHOICE.
           </motion.div>
           <motion.div {...fadeSide(20)} className="mid-right-wrapper" style={{ position: 'absolute', zIndex: 10, right: 'clamp(16px, 2vw, 40px)', bottom: `calc(34% + ${5 * progress}vw)` }}>
-            <Link to="/demos" style={styles.midRight} className="mid-right explore-link">
-              <span>see our<br />work</span>
+            <Link to="/inspiration" style={styles.midRight} className="mid-right explore-link">
+              <span>see<br />examples</span>
               <ChevronIcon size={14} />
             </Link>
           </motion.div>

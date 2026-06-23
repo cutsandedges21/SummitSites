@@ -19,7 +19,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LaptopZoom />} />
-        <Route path="/demos"      element={<WithLayout><Demos /></WithLayout>} />
+        <Route path="/inspiration" element={<WithLayout><Demos /></WithLayout>} />
         <Route path="/services"   element={<WithLayout><Services /></WithLayout>} />
         <Route path="/pricing"    element={<WithLayout><Pricing /></WithLayout>} />
         <Route path="/process"    element={<WithLayout><Process /></WithLayout>} />
