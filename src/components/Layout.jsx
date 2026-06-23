@@ -6,6 +6,7 @@ import Footer from './Footer'
 const NAV_LINKS = [
   { to: '/demos',      label: 'DEMOS'      },
   { to: '/services',   label: 'SERVICES'   },
+  { to: '/pricing',    label: 'PRICING'    },
   { to: '/process',    label: 'PROCESS'    },
   { to: '/faq',        label: 'FAQ'        },
   { to: '/contact',    label: 'CONTACT'    },

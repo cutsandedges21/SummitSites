@@ -79,6 +79,20 @@ export default function Footer() {
         }}>
           © {new Date().getFullYear()} Summit Sites. All rights reserved.
         </span>
+        <a
+          href="mailto:summitsites.agency@gmail.com"
+          style={{
+            fontSize: 'clamp(10px, 0.8vw, 13px)',
+            color: 'rgba(255,255,255,0.5)',
+            letterSpacing: '0.06em',
+            textDecoration: 'none',
+            transition: 'color 0.2s ease',
+          }}
+          onMouseEnter={e => e.target.style.color = '#fff'}
+          onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.5)'}
+        >
+          summitsites.agency@gmail.com
+        </a>
         <span style={{
           fontSize: 'clamp(10px, 0.8vw, 13px)',
           color: 'rgba(255,255,255,0.2)',

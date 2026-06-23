@@ -1,8 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const BUDGETS  = ['Under $500', '$500–$1k', '$1k–$2k', '$2k+']
-const MONTHLY  = ['$27.99/mo',  '$47.99/mo', '$87.99/mo', '$167.99/mo']
+// Mirrors the three plans on the Pricing page (Starter / Core / Premium).
+const BUDGETS  = ['Starter — $499', 'Core — $1,199', 'Premium — $2,499']
+const MONTHLY  = ['$49/mo',         '$99/mo',         '$199/mo']
+
+// Submissions are emailed to summitsites.agency@gmail.com via Web3Forms.
+// This access key is tied to that Gmail inbox. It's safe to expose in client-side
+// code — it only permits submitting this form, not reading any data.
+const WEB3FORMS_ACCESS_KEY = 'bf4b5306-1975-4ffa-be9d-bc2e7d2f7d41'
 
 const inputStyle = {
   width: '100%', background: 'transparent',
@@ -32,8 +38,49 @@ function ChipBtn({ active, onClick, children }) {
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [sending,   setSending]   = useState(false)
+  const [error,     setError]     = useState(null)
   const [form, setForm] = useState({ name: '', email: '', business: '', description: '', budget: '', timeline: '' })
   const set = k => e => setForm(f => ({ ...f, [k]: e.target.value }))
+  const botRef = useRef(null)
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    setError(null)
+    setSending(true)
+
+    const tier = MONTHLY[BUDGETS.indexOf(form.budget)] || ''
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New project inquiry${form.name ? ` from ${form.name}` : ''}`,
+          from_name: 'Summit Sites Website',
+          name: form.name,
+          email: form.email,
+          business: form.business,
+          message: form.description,
+          budget: form.budget,
+          hosting_maintenance: tier,
+          // honeypot — bots tick this hidden box; humans never see it
+          botcheck: botRef.current?.checked || false,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSubmitted(true)
+      } else {
+        setError(data.message || 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setError('Network error — please try again, or email summitsites.agency@gmail.com directly.')
+    } finally {
+      setSending(false)
+    }
+  }
 
   const [displayIdx, setDisplayIdx]   = useState(null)
   const [priceKey,   setPriceKey]     = useState(0)
@@ -124,9 +171,11 @@ export default function Contact() {
       <motion.form
         initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        onSubmit={e => { e.preventDefault(); setSubmitted(true) }}
+        onSubmit={handleSubmit}
         style={{ maxWidth: 560, display: 'flex', flexDirection: 'column', gap: 32 }}
       >
+        {/* honeypot — hidden from humans, catches bots */}
+        <input ref={botRef} type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ display: 'none' }} />
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }}>
           <div>
             <label style={labelStyle}>NAME</label>
@@ -153,7 +202,7 @@ export default function Contact() {
         </div>
 
         <div>
-          <label style={{ ...labelStyle, display: 'block', marginBottom: 12 }}>BUDGET RANGE</label>
+          <label style={{ ...labelStyle, display: 'block', marginBottom: 12 }}>DESIRED PLAN</label>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {BUDGETS.map(b => (
               <ChipBtn key={b} active={form.budget === b} onClick={() => setForm(f => ({ ...f, budget: b }))}>{b}</ChipBtn>
@@ -162,7 +211,7 @@ export default function Contact() {
 
           {displayIdx !== null && (
             <div style={{ marginTop: 14, fontSize: 12, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.08em', display: 'flex', alignItems: 'center' }}>
-              HOSTING + MAINTENANCE —&nbsp;
+              MONTHLY PLAN —&nbsp;
               <span style={{ position: 'relative', overflow: 'hidden', display: 'inline-block', height: '1.4em', minWidth: '6.2em', verticalAlign: 'bottom' }}>
                 <AnimatePresence initial={false} mode="sync" custom={direction}>
                   <motion.span
@@ -184,18 +233,26 @@ export default function Contact() {
         </div>
 
         <motion.button type="submit"
-          whileHover={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.5)' }}
-          whileTap={{ scale: 0.97 }}
+          disabled={sending}
+          whileHover={sending ? undefined : { background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.5)' }}
+          whileTap={sending ? undefined : { scale: 0.97 }}
           style={{
             alignSelf: 'flex-start', padding: '14px 36px',
             border: '1px solid rgba(255,255,255,0.35)', borderRadius: 2,
-            background: 'transparent', color: '#fff', cursor: 'pointer',
+            background: 'transparent', color: '#fff',
+            cursor: sending ? 'default' : 'pointer', opacity: sending ? 0.5 : 1,
             fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase',
             paddingTop: 14, marginTop: 5,
           }}
         >
-          SEND MESSAGE →
+          {sending ? 'SENDING…' : 'SEND MESSAGE →'}
         </motion.button>
+
+        {error && (
+          <p style={{ fontSize: 12, color: '#ff8a8a', letterSpacing: '0.04em', margin: 0 }}>
+            {error}
+          </p>
+        )}
       </motion.form>
     </div>
   )
