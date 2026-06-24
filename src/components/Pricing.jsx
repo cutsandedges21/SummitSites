@@ -32,7 +32,7 @@ const PLANS = [
     features: [
       'Everything in Starter',
       'Built to convert visitors into customers',
-      'Optimized to get found on Google (local SEO setup)',
+      'Optimized to get found on Google',
       '5–7 pages',
       'High-quality landing page',
       'Google Maps + reviews',
