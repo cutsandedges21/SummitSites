@@ -6,48 +6,52 @@ const PLANS = [
     icon: '△',
     name: 'STARTER',
     tagline: 'Just get online',
-    price: '$49',
-    perDay: '≈ $1.60/day',
+    price: '$59',
+    perDay: '≈ $1.94/day',
     setup: '$499 one-time setup',
     features: [
-      '1–3 page website',
+      '1–4 page website',
       'Mobile-friendly',
       'Contact form',
       'Simple design (built for small businesses)',
       'Hosting, security & updates',
+      'Ongoing support',
+      'Monthly edits (limited)',
+      'Site monitoring',
     ],
   },
   {
     icon: '✦',
     name: 'CORE',
     tagline: 'Get found & grow',
-    price: '$99',
-    perDay: '≈ $3.25/day',
+    price: '$109',
+    perDay: '≈ $3.58/day',
     setup: '$1,199 one-time setup',
     featured: true,
-    badge: 'Most Popular',
+    badge: 'Summer Sale',
     features: [
       'Everything in Starter',
+      'Built to convert visitors into customers',
+      'Optimized to get found on Google (local SEO setup)',
       '5–7 pages',
       'High-quality landing page',
-      'SEO basics (show up on Google)',
       'Google Maps + reviews',
       'Booking link',
-      'A few content edits each month',
-      'Email support',
     ],
   },
   {
     icon: '⬡',
     name: 'PREMIUM',
     tagline: 'Done for you',
-    price: '$199',
-    perDay: '≈ $6.50/day',
+    price: '$209',
+    perDay: '≈ $6.87/day',
     setup: '$2,499 one-time setup',
     features: [
       'Everything in Core',
       'Unlimited pages',
       'Advanced SEO + monthly performance report',
+      'Conversion optimization',
+      'A/B testing',
       'Full online booking system',
       'Fast, unlimited edits',
       'Animated and/or 3D elements',
@@ -116,7 +120,7 @@ export default function Pricing() {
             <div style={{ marginBottom: 24 }}>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
                 <span style={{ fontSize: 44, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em', fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif" }}>{plan.price}</span>
-                <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)' }}>/mo</span>
+                <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)' }}>/moa</span>
               </div>
               <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.04em', marginTop: 6 }}>{plan.perDay}</div>
               <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.04em', marginTop: 4 }}>{plan.setup}</div>
@@ -154,7 +158,7 @@ export default function Pricing() {
         }}
       >
         Every monthly plan includes {' '}
-        <strong style={{ color: '#fff', fontWeight: 600 }}>2 hours of work per month</strong> (excluding the Premium plan which has incudes unlimited edits).
+        <strong style={{ color: '#fff', fontWeight: 600 }}>2 hours of work per month</strong> (excluding the Premium plan which allows unlimited edits).
         {' '}Any work beyond those 2 hours — larger changes or extra requests — may be billed separately.
       </motion.p>
     </div>
