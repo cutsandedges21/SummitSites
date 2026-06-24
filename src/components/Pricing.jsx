@@ -24,7 +24,7 @@ const PLANS = [
     icon: '✦',
     name: 'CORE',
     tagline: 'Get found & grow',
-    price: '$109',
+    price: '$109 /mo was 159',
     perDay: '≈ $3.58/day',
     setup: '$1,199 one-time setup',
     featured: true,
@@ -120,7 +120,7 @@ export default function Pricing() {
             <div style={{ marginBottom: 24 }}>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
                 <span style={{ fontSize: 44, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em', fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif" }}>{plan.price}</span>
-                <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)' }}>/moa</span>
+                <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)' }}>/mo</span>
               </div>
               <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.04em', marginTop: 6 }}>{plan.perDay}</div>
               <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.04em', marginTop: 4 }}>{plan.setup}</div>
