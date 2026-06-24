@@ -24,7 +24,7 @@ const PLANS = [
     icon: '✦',
     name: 'CORE',
     tagline: 'Get found & grow',
-    price: '$109 /mo was 159',
+    price: '$109',
     perDay: '≈ $3.58/day',
     setup: '$1,199 one-time setup',
     featured: true,
