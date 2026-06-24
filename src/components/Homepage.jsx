@@ -144,8 +144,8 @@ export default function Homepage({ revealed = true, isMobile = false, native = f
           WE DON’T BUILD WEBSITES <br />JUST TO “HAVE A WEBSITE” <br />WE BUILD DIGITAL EXPERIENCES THAT <br />POSITION YOUR COMPANY AS<br /> THE OBVIOUS CHOICE.
           </motion.div>
           <motion.div {...fadeSide(20)} className="mid-right-wrapper" style={{ position: 'absolute', zIndex: 10, right: 'clamp(16px, 2vw, 40px)', bottom: `calc(34% + ${5 * progress}vw)` }}>
-            <Link to="/inspiration" style={styles.midRight} className="mid-right explore-link">
-              <span>see<br />examples</span>
+            <Link to="/Pricing" style={styles.midRight} className="mid-right explore-link">
+              <span>summer<br />sale</span>
               <ChevronIcon size={14} />
             </Link>
           </motion.div>
