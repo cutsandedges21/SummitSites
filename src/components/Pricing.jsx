@@ -154,7 +154,7 @@ export default function Pricing() {
         }}
       >
         Every monthly plan includes {' '}
-        <strong style={{ color: '#fff', fontWeight: 600 }}>2 hours of work per month</strong>.
+        <strong style={{ color: '#fff', fontWeight: 600 }}>2 hours of work per month</strong> (excluding the Premium plan which has incudes unlimited edits).
         {' '}Any work beyond those 2 hours — larger changes or extra requests — may be billed separately.
       </motion.p>
     </div>
