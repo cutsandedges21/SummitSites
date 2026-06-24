@@ -147,12 +147,12 @@ function WorkPreview({ isMobile = false }) {
         transition={{ delay: 0.3, duration: 0.5 }}
         style={{ marginTop: 36 }}
       >
-        <Link to="/inspiration" style={{
+        <Link to="/Pricing" style={{
           fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.7)', textDecoration: 'none',
           borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: 4,
         }}>
-          See all examples →
+          SUMMER SALE →
         </Link>
       </motion.div>
     </section>
