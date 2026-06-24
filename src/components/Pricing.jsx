@@ -153,7 +153,7 @@ export default function Pricing() {
           color: 'rgba(255,255,255,0.5)', letterSpacing: '0.03em',
         }}
       >
-        Every monthly plan includes up to{' '}
+        Every monthly plan includes {' '}
         <strong style={{ color: '#fff', fontWeight: 600 }}>2 hours of work per month</strong>.
         {' '}Any work beyond those 2 hours — larger changes or extra requests — may be billed separately.
       </motion.p>
