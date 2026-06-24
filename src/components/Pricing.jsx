@@ -28,7 +28,7 @@ const PLANS = [
     perDay: '≈ $3.58/day',
     setup: '$1,199 one-time setup',
     featured: true,
-    badge: 'Summer Sale',
+    badge: 'Summer Sale: Was Previously $159 /mo',
     features: [
       'Everything in Starter',
       'Built to convert visitors into customers',
