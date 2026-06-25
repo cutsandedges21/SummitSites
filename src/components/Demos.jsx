@@ -8,14 +8,14 @@ export const DEMOS = [
   { name: 'AIR Business Center', type: ['Landing Page', 'Animated'],                     stat: '+38% new patients', color: '#0d1f1a', image: '/aircenter-hero.jpg', imgPosition: '50% 45%', url: 'https://aircenter.space/' },
   { name: 'Vorszk',              type: ['Animated', 'Landing Page'],                         stat: '+40% leads',        color: '#0a0a0a', image: '/vorszk-hero.jpeg', url: 'https://www.vorszk.com/' },
   { name: "Khufu's",             type: ['Landing Page'],       stat: '3× reservations',   color: '#1a1208', image: '/khufus-hero.jpeg', url: 'https://khufus.com/' },
-  { name: 'Handhold',            type: ['Mobile-First', 'Landing Page', 'Simple'],                     stat: '+61% inquiries',    color: '#0a0f1a', image: '/handhold-hero.jpeg', url: 'https://handhold.io/', cropScrollbar: true },
   { name: 'Monads',              type: ['Landing Page'],                     stat: '+44% signups',      color: '#0a0a0f', image: '/monads-hero.jpeg', url: 'https://www.monads.ch/' },
-  { name: 'Laser & Me',          type: ['Simple', 'Small Business'],         stat: '+29% form fills',   color: '#1a0d12', image: '/laserandme-hero.jpeg', url: 'https://laserandme.com/', cropScrollbar: true },
   { name: 'Cuts & Edges',        type: ['Landing Page', 'Small Business'],             stat: '+55% bookings',     color: '#0a0a0a', image: '/cutsandedges-vercel.jpeg', url: 'https://cutsandedges.vercel.app/' },
+  { name: 'Sterling Motors',     type: ['Simple'],                           stat: '+43% test drives',  color: '#0c0e12', image: '/sterling-hero.jpeg', url: 'https://sterling-motors-demo.vercel.app/', cropScrollbar: true },
+  { name: 'Halcyon Spa',         type: ['Simple'],                           stat: '+46% bookings',     color: '#15100c', image: '/halcyon-hero.jpeg', url: 'https://halcyon-spa-demo.vercel.app/' },
 ]
 
 // Curated favourites — shown in their own section above the full grid.
-const FAVOURITES = ['Cuts & Edges', 'Laser & Me', 'Handhold']
+const FAVOURITES = ['Cuts & Edges', 'Sterling Motors', 'Halcyon Spa']
   .map(name => DEMOS.find(d => d.name === name))
   .filter(Boolean)
 
