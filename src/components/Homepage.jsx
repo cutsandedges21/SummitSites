@@ -85,30 +85,6 @@ export default function Homepage({ revealed = true, isMobile = false, native = f
     transition: { duration: 0.6, ease: 'easeOut', delay: 0.25 },
   })
 
-  // ── Mobile: only bg + centered title + chevron until fullscreen ──────────
-  if (isMobile && !revealed) {
-    const exitOpacity = progress < 0.6 ? 1 : Math.max(0, 1 - (progress - 0.6) / 0.4)
-    return (
-      <div style={styles.wrapper}>
-        <video src="/wink_4k_homepageVid.mp4" style={styles.bg} autoPlay loop muted playsInline />
-        <div style={styles.overlay} />
-        <div style={{ ...styles.centeredTitle, opacity: exitOpacity }}>
-          <motion.h1
-            style={styles.heroTitle}
-            className="hero-title"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.4 }}
-          >
-            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SUMMIT</span>
-            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>SITES</span>
-          </motion.h1>
-        </div>
-        <div style={{ ...styles.scrollChevron, opacity: exitOpacity }} className="scroll-chevron"><ChevronIcon size={18} /></div>
-      </div>
-    )
-  }
-
   // ── Mobile entrance animations ───────────────────────────────────────────
   const mML   = { initial: { opacity: 0, x: -28 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.6, ease: EASE, delay: 0.22 } }
   const mSub  = { initial: { opacity: 0 },          animate: { opacity: 1 },       transition: { duration: 0.5, ease: 'easeOut', delay: 0.45 } }

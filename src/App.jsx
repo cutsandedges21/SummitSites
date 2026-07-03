@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
-import LaptopZoom from './components/LaptopZoom'
+import HomeIntro from './components/HomeIntro'
 import Demos from './components/Demos'
 import Services from './components/Services'
 import Pricing from './components/Pricing'
@@ -18,7 +18,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LaptopZoom />} />
+        <Route path="/" element={<HomeIntro />} />
         <Route path="/inspiration" element={<WithLayout><Demos /></WithLayout>} />
         <Route path="/services"   element={<WithLayout><Services /></WithLayout>} />
         <Route path="/pricing"    element={<WithLayout><Pricing /></WithLayout>} />

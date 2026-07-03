@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-const TAGS = ['All', 'Landing Page', '3D', 'Animated', 'Mobile-First', 'Simple', 'Small Business']
+const TAGS = ['All', 'Premium', 'Landing Page', '3D', 'Animated', 'Mobile-First', 'Simple', 'Small Business']
 
 export const DEMOS = [
-  { name: 'SOM Elixir',          type: ['3D', 'Animated', 'Landing Page'],                  stat: '+52% conversions',  color: '#0d0a06', image: '/drinksom-hero.jpeg', url: 'https://www.drinksom.eu/#hero' },
-  { name: 'AIR Business Center', type: ['Landing Page', 'Animated'],                     stat: '+38% new patients', color: '#0d1f1a', image: '/aircenter-hero.jpg', imgPosition: '50% 45%', url: 'https://aircenter.space/' },
+  { name: 'SOM Elixir',          type: ['3D', 'Animated', 'Premium'],                       stat: '+52% conversions',  color: '#0d0a06', image: '/drinksom-hero.jpeg', url: 'https://www.drinksom.eu/#hero' },
+  { name: 'AIR Business Center', type: ['Landing Page', 'Animated', 'Premium'],          stat: '+38% new patients', color: '#0d1f1a', image: '/aircenter-hero.jpg', imgPosition: '50% 45%', url: 'https://aircenter.space/' },
   { name: 'Vorszk',              type: ['Animated', 'Landing Page'],                         stat: '+40% leads',        color: '#0a0a0a', image: '/vorszk-hero.jpeg', url: 'https://www.vorszk.com/' },
+  { name: 'Meridian Studio',     type: ['3D', 'Animated', 'Premium'],                       stat: '+49% engagement',   color: '#0b0a12', image: '/meridian-hero.png', url: 'https://summitsites-agency.github.io/meridian-studio/' },
   { name: "Khufu's",             type: ['Landing Page'],       stat: '3× reservations',   color: '#1a1208', image: '/khufus-hero.jpeg', url: 'https://khufus.com/' },
   { name: 'Monads',              type: ['Landing Page'],                     stat: '+44% signups',      color: '#0a0a0f', image: '/monads-hero.jpeg', url: 'https://www.monads.ch/' },
   { name: 'Cuts & Edges',        type: ['Landing Page', 'Small Business'],             stat: '+55% bookings',     color: '#0a0a0a', image: '/cutsandedges-vercel.jpeg', url: 'https://cutsandedges.vercel.app/' },
@@ -16,7 +17,7 @@ export const DEMOS = [
 ]
 
 // Curated favourites — shown in their own section above the full grid.
-const FAVOURITES = ['Cuts & Edges', 'Sterling Motors', 'Halcyon Spa', 'Elixir Hotel']
+const FAVOURITES = ['Meridian Studio', 'Cuts & Edges', 'Sterling Motors', 'Halcyon Spa', 'Elixir Hotel']
   .map(name => DEMOS.find(d => d.name === name))
   .filter(Boolean)
 
