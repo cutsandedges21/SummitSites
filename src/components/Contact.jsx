@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-// Mirrors the three plans on the Pricing page (Starter / Core / Premium).
-const BUDGETS  = ['Starter — $499', 'Core — $1,199', 'Premium — $2,499']
-const MONTHLY  = ['$49/mo',         '$99/mo',         '$199/mo']
+// Mirrors the three plans on the Pricing page (Launch / Growth / Summit).
+const BUDGETS  = ['Launch — $750', 'Growth — $1,399', 'Summit — $2,599']
+const MONTHLY  = ['$68/mo',        '$108/mo',         '$218/mo']
 
 // Submissions are emailed to summitsites.agency@gmail.com via Web3Forms.
 // This access key is tied to that Gmail inbox. It's safe to expose in client-side

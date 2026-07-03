@@ -4,8 +4,8 @@ import { motion } from 'framer-motion'
 const PLANS = [
   {
     icon: '△',
-    name: 'STARTER',
-    tagline: 'Just get online',
+    name: 'LAUNCH',
+    tagline: 'Establish your presence',
     price: '$68',
     perDay: '≈ $2.23/day',
     setup: '$750 one-time setup',
@@ -13,47 +13,48 @@ const PLANS = [
       '1–4 page website',
       'Mobile-friendly',
       'Contact form',
-      'Simple design (built for small businesses)',
+      'Professional custom design',
       'Hosting, security & updates',
       'Ongoing support',
-      'Monthly edits (limited)',
+      'Up to 2 hrs of edits / month',
       'Site monitoring',
     ],
   },
   {
     icon: '✦',
-    name: 'CORE',
-    tagline: 'Get found & grow',
+    name: 'GROWTH',
+    tagline: 'Turn visitors into customers',
     price: '$108',
     perDay: '≈ $3.55/day',
     setup: '$1,399 one-time setup',
     featured: true,
     badge: 'Summer Sale: Was Previously $168 /mo',
     features: [
-      'Everything in Starter',
-      'Built to convert visitors into customers',
-      'Optimized to get found on Google',
-      '5–7 pages',
+      'Everything in Launch',
+      'Strategy built to turn visitors into leads',
+      'Local SEO — get found on Google',
+      'Conversion-focused copy & layout',
       'High-quality landing page',
-      'Google Maps + reviews',
-      'Booking link',
+      '5–7 optimized pages',
+      'Trust-building reviews & testimonials',
+      'Google Business Profile integration',
     ],
   },
   {
     icon: '⬡',
-    name: 'PREMIUM',
-    tagline: 'Done for you',
+    name: 'SUMMIT',
+    tagline: 'Scale with optimization',
     price: '$218',
     perDay: '≈ $7.16/day',
     setup: '$2,599 one-time setup',
     features: [
-      'Everything in Core',
-      'Unlimited pages',
-      'Advanced SEO + monthly performance report',
+      'Everything in Growth',
+      'Ongoing optimization & monthly SEO',
+      'Monthly performance report',
+      'A/B split testing',
       'Conversion optimization',
-      'A/B testing',
-      'Full online booking system',
-      'Fast, unlimited edits',
+      'Fast, unlimited edits — priority turnaround',
+      'Unlimited pages',
       'Animated and/or 3D elements',
     ],
   },
@@ -158,7 +159,7 @@ export default function Pricing() {
         }}
       >
         Every monthly plan includes {' '}
-        <strong style={{ color: '#fff', fontWeight: 600 }}>2 hours of work per month</strong> (excluding the Premium plan which allows unlimited edits).
+        <strong style={{ color: '#fff', fontWeight: 600 }}>2 hours of work per month</strong> (excluding the Summit plan which allows unlimited edits).
         {' '}Any work beyond those 2 hours — larger changes or extra requests — may be billed separately.
       </motion.p>
     </div>
