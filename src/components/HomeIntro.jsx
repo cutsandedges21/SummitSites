@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { motion } from 'framer-motion'
 import Homepage from './Homepage'
 
-// Intro videos shown once per browser session, then faded to black and up into
-// the homepage.
+// Intro flow: the intro video plays on load with a 0→100 counter overlaid on top,
+// driven by the video's own playback so it lasts the full clip. When the video
+// ends it fades to black and up into the homepage. Shown once per browser session.
 const DESKTOP_INTRO = '/new_homepage.mp4'
 const MOBILE_INTRO  = '/new_iphone_homepage.mp4'
+const EASE        = [0.22, 1, 0.36, 1]
 const FADE_OUT_MS = 1400   // intro video fades out to a black screen
 const FADE_IN_MS  = 2000   // black fades away into the homepage (text comes in)
 const SAFETY_MS   = 15000  // fail-safe: advance even if the video never fires `ended`
@@ -18,11 +21,17 @@ function markIntroPlayed() {
 
 export default function HomeIntro() {
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+  const played = useRef(introAlreadyPlayed())
+
+  // Video sequence:
   // 'intro'     → intro video opaque, homepage mounted underneath (not revealed)
   // 'toBlack'   → intro video fades out to a black screen
   // 'fromBlack' → black fades away, homepage revealed + text animating in
   // 'home'      → intro overlay unmounted
-  const [phase, setPhase] = useState(() => (introAlreadyPlayed() ? 'home' : 'intro'))
+  const [phase, setPhase] = useState(() => (played.current ? 'home' : 'intro'))
+  const [showLoader, setShowLoader] = useState(() => !played.current)
+  const [count, setCount] = useState(0)
+  const videoRef = useRef(null)
 
   // Desktop fake-scroll driver (ported from the old LaptopZoom scroll phase).
   const [scrollY, setScrollY] = useState(0)
@@ -41,8 +50,11 @@ export default function HomeIntro() {
     scrollTargetRef.current = Math.min(scrollTargetRef.current, max)
   }, [])
 
+  const handleLoaderDone = useCallback(() => setShowLoader(false), [])
+
   // Intro → toBlack. Guarded so `ended`, `error`, and the safety timer can't double-fire.
-  const advance = useCallback(() => {
+  const finishIntro = useCallback(() => {
+    setCount(100)
     setPhase(p => {
       if (p !== 'intro') return p
       markIntroPlayed()
@@ -55,6 +67,23 @@ export default function HomeIntro() {
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
+
+  // Drive the counter from the intro video's playback position, so 0→100 spans
+  // the whole clip regardless of its exact length.
+  useEffect(() => {
+    if (phase !== 'intro') return
+    let raf
+    const tick = () => {
+      const v = videoRef.current
+      if (v && v.duration > 0) {
+        const p = Math.min(1, v.currentTime / v.duration)
+        setCount(Math.min(100, Math.round(p * 100)))
+      }
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [phase])
 
   // Once the video has faded to black, start lifting the black into the homepage.
   useEffect(() => {
@@ -73,9 +102,9 @@ export default function HomeIntro() {
   // Fail-safe in case autoplay stalls or `ended` never fires.
   useEffect(() => {
     if (phase !== 'intro') return
-    const t = setTimeout(advance, SAFETY_MS)
+    const t = setTimeout(finishIntro, SAFETY_MS)
     return () => clearTimeout(t)
-  }, [phase, advance])
+  }, [phase, finishIntro])
 
   // Lock body scroll while the intro overlay covers the page.
   useEffect(() => {
@@ -128,7 +157,10 @@ export default function HomeIntro() {
   }, [isMobile, phase])
 
   const overlay = showOverlay && (
-    <IntroOverlay src={introSrc} phase={phase} onDone={advance} />
+    <IntroOverlay src={introSrc} phase={phase} videoRef={videoRef} onDone={finishIntro} />
+  )
+  const loader = showLoader && (
+    <Preloader count={count} exiting={phase !== 'intro'} onExitComplete={handleLoaderDone} />
   )
 
   // Mobile: native document flow (matches the old post-zoom mobile path).
@@ -137,6 +169,7 @@ export default function HomeIntro() {
       <div style={{ background: '#000' }}>
         <Homepage revealed={revealed} isMobile native />
         {overlay}
+        {loader}
       </div>
     )
   }
@@ -152,11 +185,29 @@ export default function HomeIntro() {
         onMaxScroll={handleMaxScroll}
       />
       {overlay}
+      {loader}
     </div>
   )
 }
 
-function IntroOverlay({ src, phase, onDone }) {
+// 0→100 counter overlaid on the intro video. Presentational — the count is driven
+// by the parent from the video's playback, and it fades away as the video ends.
+function Preloader({ count, exiting, onExitComplete }) {
+  return (
+    <motion.div
+      style={styles.preloader}
+      initial={{ opacity: 1, y: 0 }}
+      animate={{ opacity: exiting ? 0 : 1, y: exiting ? -30 : 0 }}
+      transition={{ duration: 0.7, ease: EASE }}
+      onAnimationComplete={() => { if (exiting) onExitComplete && onExitComplete() }}
+    >
+      <span style={styles.preloaderLabel}>SUMMIT SITES® — PROFESSIONAL WEB DESIGN</span>
+      <span style={styles.preloaderCount}>{String(count).padStart(3, '0')}</span>
+    </motion.div>
+  )
+}
+
+function IntroOverlay({ src, phase, videoRef, onDone }) {
   // Black backdrop covers the page until `fromBlack`, when it fades to reveal the
   // homepage. The video sits on top and fades out first — to black.
   return (
@@ -172,6 +223,7 @@ function IntroOverlay({ src, phase, onDone }) {
       }}
     >
       <video
+        ref={videoRef}
         src={src}
         autoPlay
         muted
@@ -191,4 +243,38 @@ function IntroOverlay({ src, phase, onDone }) {
       />
     </div>
   )
+}
+
+const styles = {
+  preloader: {
+    position: 'fixed',
+    inset: 0,
+    zIndex: 200,
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    gap: '16px',
+    padding: 'clamp(24px, 4vw, 40px)',
+    color: '#efede7',
+    pointerEvents: 'none',
+  },
+  preloaderLabel: {
+    maxWidth: '60%',
+    fontFamily: 'ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace',
+    fontSize: 'clamp(9px, 0.85vw, 12px)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.3em',
+    lineHeight: 1.4,
+    opacity: 0.85,
+    textShadow: '0 2px 12px rgba(0,0,0,0.55)',
+  },
+  preloaderCount: {
+    fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif",
+    fontSize: 'clamp(72px, 14vw, 170px)',
+    fontWeight: 700,
+    lineHeight: 1,
+    fontVariantNumeric: 'tabular-nums',
+    fontFeatureSettings: '"tnum"',
+    textShadow: '0 2px 18px rgba(0,0,0,0.55)',
+  },
 }
