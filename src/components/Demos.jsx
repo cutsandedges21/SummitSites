@@ -15,10 +15,11 @@ export const DEMOS = [
   { name: 'Halcyon Spa',         type: ['Simple'],                           stat: '+46% bookings',     color: '#15100c', image: '/halcyon-hero.jpeg', url: 'https://halcyon-spa-demo.vercel.app/' },
   { name: 'Elixir Hotel',        type: ['Simple'],                           stat: '+47% direct bookings', color: '#0c0a08', image: '/elixir-hotel-hero.jpeg', url: 'https://elixir-hotel-demo.vercel.app' },
   { name: 'Piment',              type: ['Animated'], stat: '+50% reservations', color: '#100b0a', image: '/piment-hero.jpeg', url: 'https://piment-demo.vercel.app/' },
+  { name: 'Centenario',          type: ['Animated', 'Premium'], stat: '+51% engagement', color: '#d5d5d8', image: '/lamborghini-hero.jpeg', url: 'https://lamborghini-centenario-showcase.vercel.app/' },
 ]
 
 // Curated favourites — shown in their own section above the full grid.
-const FAVOURITES = ['Meridian Studio', 'Cuts & Edges', 'Sterling Motors', 'Halcyon Spa', 'Elixir Hotel', 'Piment']
+const FAVOURITES = ['Meridian Studio', 'Cuts & Edges', 'Halcyon Spa', 'Elixir Hotel', 'Piment', 'Centenario']
   .map(name => DEMOS.find(d => d.name === name))
   .filter(Boolean)
 
