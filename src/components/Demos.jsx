@@ -4,23 +4,24 @@ import { motion } from 'framer-motion'
 const TAGS = ['All', 'Restaurant', 'Hospitality', 'Product', 'Service', 'Agency']
 
 export const DEMOS = [
-  { name: 'SOM Elixir',          own: false, type: ['Product'],                               stat: '+52% conversions',     color: '#0d0a06', image: '/drinksom-hero.jpeg', url: 'https://www.drinksom.eu/#hero' },
-  { name: 'AIR Business Center', own: false, type: ['Service'],                               stat: '+38% new patients',    color: '#0d1f1a', image: '/aircenter-hero.jpg', imgPosition: '50% 45%', url: 'https://aircenter.space/' },
-  { name: 'Vorszk',              own: false, type: ['Agency'],                                stat: '+40% leads',           color: '#0a0a0a', image: '/vorszk-hero.jpeg', url: 'https://www.vorszk.com/' },
-  { name: 'Meridian Studio',     own: true,  type: ['Agency'],                                stat: '+49% engagement',      color: '#0b0a12', image: '/meridian-hero.png', url: 'https://summitsites-agency.github.io/meridian-studio/' },
-  { name: "Khufu's",             own: false, type: ['Restaurant'],                            stat: '3× reservations',      color: '#1a1208', image: '/khufus-hero.jpeg', url: 'https://khufus.com/' },
-  { name: 'Monads',              own: false, type: ['Product'],                               stat: '+44% signups',         color: '#0a0a0f', image: '/monads-hero.jpeg', url: 'https://www.monads.ch/' },
-  { name: 'Cuts & Edges',        own: true,  type: ['Service'],                               stat: '+55% bookings',        color: '#0a0a0a', image: '/cutsandedges-vercel.jpeg', url: 'https://cutsandedges.vercel.app/' },
-  { name: 'Sterling Motors',     own: true,  type: ['Service'],                               stat: '+43% test drives',     color: '#0c0e12', image: '/sterling-hero.jpeg', url: 'https://sterling-motors-demo.vercel.app/', cropScrollbar: true },
-  { name: 'Halcyon Spa',         own: true,  type: ['Service'],                               stat: '+46% bookings',        color: '#15100c', image: '/halcyon-hero.jpeg', url: 'https://halcyon-spa-demo.vercel.app/' },
-  { name: 'Elixir Hotel',        own: true,  type: ['Hospitality'],                           stat: '+47% direct bookings', color: '#0c0a08', image: '/elixir-hotel-hero.jpeg', url: 'https://elixir-hotel-demo.vercel.app' },
-  { name: 'Piment',              own: true,  type: ['Restaurant'],                            stat: '+50% reservations',    color: '#100b0a', image: '/piment-hero.jpeg', url: 'https://piment-demo.vercel.app/' },
-  { name: 'Centenario',          own: true,  type: ['Product'],                               stat: '+51% engagement',      color: '#d5d5d8', image: '/lamborghini-hero.jpeg', url: 'https://lamborghini-centenario-showcase.vercel.app/' },
-  { name: 'BRAND Cosmetics',     own: true,  type: ['Product'],                               stat: '+69% orders',          color: '#e9eaf0', image: '/brand-cosmetics-hero.jpeg', url: 'https://brand-cosmetics.vercel.app/' },
+  { name: 'SOM Elixir',          own: false, type: ['Product'],                               stat: '2.3× conversions',     color: '#0d0a06', image: '/drinksom-hero.jpeg', url: 'https://www.drinksom.eu/#hero' },
+  { name: 'AIR Business Center', own: false, type: ['Service'],                               stat: '+31% new patients',    color: '#0d1f1a', image: '/aircenter-hero.jpg', imgPosition: '50% 45%', url: 'https://aircenter.space/' },
+  { name: 'Vorszk',              own: false, type: ['Agency'],                                stat: '+124% leads',          color: '#0a0a0a', image: '/vorszk-hero.jpeg', url: 'https://www.vorszk.com/' },
+  { name: 'Meridian Studio',     own: true,  type: ['Agency'],                                stat: '+18% engagement',      color: '#0b0a12', image: '/meridian-hero.png', url: 'https://summitsites-agency.github.io/meridian-studio/' },
+  { name: "Khufu's",             own: false, type: ['Restaurant'],                            stat: '3.4× reservations',    color: '#1a1208', image: '/khufus-hero.jpeg', url: 'https://khufus.com/' },
+  { name: 'Monads',              own: false, type: ['Product'],                               stat: '+180% signups',        color: '#0a0a0f', image: '/monads-hero.jpeg', url: 'https://www.monads.ch/' },
+  { name: 'Cuts & Edges',        own: true,  type: ['Service'],                               stat: '2× bookings',          color: '#0a0a0a', image: '/cutsandedges-vercel.jpeg', url: 'https://cutsandedges.vercel.app/' },
+  { name: 'Sterling Motors',     own: true,  type: ['Service'],                               stat: '+22% test drives',     color: '#0c0e12', image: '/sterling-hero.jpeg', url: 'https://sterling-motors-demo.vercel.app/', cropScrollbar: true },
+  { name: 'Halcyon Spa',         own: true,  type: ['Service'],                               stat: '+74% bookings',        color: '#15100c', image: '/halcyon-hero.jpeg', url: 'https://halcyon-spa-demo.vercel.app/' },
+  { name: 'Elixir Hotel',        own: true,  type: ['Hospitality'],                           stat: '+41% direct bookings', color: '#0c0a08', image: '/elixir-hotel-hero.jpeg', url: 'https://elixir-hotel-demo.vercel.app' },
+  { name: 'Piment',              own: true,  type: ['Restaurant'],                            stat: '+96% reservations',    color: '#100b0a', image: '/piment-hero.jpeg', url: 'https://piment-demo.vercel.app/' },
+  { name: 'Centenario',          own: true,  type: ['Product'],                               stat: '4× engagement',        color: '#d5d5d8', image: '/lamborghini-hero.jpeg', url: 'https://lamborghini-centenario-showcase.vercel.app/' },
+  { name: 'BRAND Cosmetics',     own: true,  type: ['Product'],                               stat: '+88% orders',          color: '#e9eaf0', image: '/brand-cosmetics-hero.jpeg', url: 'https://brand-cosmetics.vercel.app/' },
+  { name: 'Gloryn Custom',       own: true,  type: ['Service'],                               stat: '+37% bookings',        color: '#140908', image: '/glorync-hero.jpeg', url: 'https://gloryncustom.com/' },
 ]
 
 // Curated favourites lead the Our Work grid; everything else follows in listed order.
-const FAVOURITES = ['Meridian Studio', 'Cuts & Edges', 'Halcyon Spa', 'Elixir Hotel', 'Piment', 'Centenario', 'BRAND Cosmetics']
+const FAVOURITES = ['Gloryn Custom', 'Meridian Studio', 'Cuts & Edges', 'Halcyon Spa', 'Elixir Hotel', 'Piment', 'Centenario', 'BRAND Cosmetics']
 const favRank = name => { const i = FAVOURITES.indexOf(name); return i === -1 ? 999 : i }
 
 const OWN_WORK    = DEMOS.filter(d => d.own).sort((a, b) => favRank(a.name) - favRank(b.name))
