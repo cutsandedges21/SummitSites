@@ -49,14 +49,14 @@ function SectionHead({ eyebrow, title, sub }) {
 
 function WorkPreview({ isMobile = false }) {
   const [hovered, setHovered] = useState(null)
-  const featured = DEMOS.slice(0, 3)
+  const featured = DEMOS.filter(d => d.own).slice(0, 3)
 
   return (
     <section style={{ padding: SECTION_PAD }}>
       <SectionHead
-        eyebrow="Inspiration"
-        title="Quality examples."
-        sub="A few examples of the standard we hold ourselves to — not our own work, but the quality, performance, and results your site will deliver."
+        eyebrow="Our Work"
+        title="Sites we've built."
+        sub="A few of the sites we've designed and built — the same quality, performance, and results your own site will deliver."
       />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 20 }}>
@@ -147,12 +147,12 @@ function WorkPreview({ isMobile = false }) {
         transition={{ delay: 0.3, duration: 0.5 }}
         style={{ marginTop: 36 }}
       >
-        <Link to="/inspiration" style={{
+        <Link to="/portfolio" style={{
           fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.7)', textDecoration: 'none',
           borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: 4,
         }}>
-          See All Examples →
+          See The Full Portfolio →
         </Link>
       </motion.div>
     </section>

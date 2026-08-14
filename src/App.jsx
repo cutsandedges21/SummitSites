@@ -1,10 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
 import HomeIntro from './components/HomeIntro'
 import Demos from './components/Demos'
 import Services from './components/Services'
 import Pricing from './components/Pricing'
-import Process from './components/Process'
 import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import PrivacyPolicy from './components/PrivacyPolicy'
@@ -19,10 +18,10 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeIntro />} />
-        <Route path="/inspiration" element={<WithLayout><Demos /></WithLayout>} />
+        <Route path="/portfolio" element={<WithLayout><Demos /></WithLayout>} />
+        <Route path="/inspiration" element={<Navigate to="/portfolio" replace />} />
         <Route path="/services"   element={<WithLayout><Services /></WithLayout>} />
         <Route path="/pricing"    element={<WithLayout><Pricing /></WithLayout>} />
-        <Route path="/process"    element={<WithLayout><Process /></WithLayout>} />
         <Route path="/faq"        element={<WithLayout><FAQ /></WithLayout>} />
         <Route path="/contact"         element={<WithLayout><Contact /></WithLayout>} />
         <Route path="/privacy-policy"  element={<WithLayout><PrivacyPolicy /></WithLayout>} />

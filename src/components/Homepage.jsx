@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import About from './About'
 import HomeSections from './HomeExtras'
 import Footer from './Footer'
 
@@ -12,10 +11,9 @@ const SIDEBAR_W = 260
 
 // Mobile sidebar shows every page, including Pricing.
 const ALL_NAV_LINKS = [
-  { to: '/inspiration',      label: 'Inspiration' },
+  { to: '/portfolio',        label: 'Portfolio' },
   { to: '/services',   label: 'Services'   },
   { to: '/pricing',    label: 'Pricing'    },
-  { to: '/process',    label: 'Process'    },
   { to: '/faq',        label: 'FAQ'        },
   { to: '/contact',    label: 'Contact'    },
 ]
@@ -106,10 +104,10 @@ export default function Homepage({ revealed = true, isMobile = false, native = f
               : <motion.span key="tagline" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} style={{ fontSize: 'clamp(12px, 1.0vw, 18px)', letterSpacing: '0.35em' }}>PROFESSIONAL WEBSITES FOR SERIOUS BUSINESSES</motion.span>
             }
           </motion.div>
-          {/* Desktop: only Demos / Process / Contact — space-between renders them left / middle / right */}
+          {/* Desktop: Portfolio / Pricing / Contact — space-between renders them left / middle / right */}
           <motion.nav style={styles.nav} {...fadeUp}>
-            <Link to="/inspiration"      style={styles.navLink}>INSPIRATION</Link>
-            <Link to="/process"    style={styles.navLink}>PROCESS</Link>
+            <Link to="/portfolio"        style={styles.navLink}>PORTFOLIO</Link>
+            <Link to="/pricing"    style={styles.navLink}>PRICING</Link>
             <Link to="/contact"    style={styles.navLink}>CONTACT</Link>
           </motion.nav>
         </div>
@@ -145,11 +143,10 @@ export default function Homepage({ revealed = true, isMobile = false, native = f
           </div>
           <div style={styles.scrollChevron} className="scroll-chevron"><ChevronIcon size={18} /></div>
 
-          {/* About + footer — sits at 115vh, scrolls up with the content layer */}
+          {/* Tail + footer — sits at 115vh, scrolls up with the content layer */}
           <div ref={tailRef} style={{ position: 'absolute', top: '115vh', left: 0, width: '100vw' }}>
             <TailBlur />
             <div style={{ position: 'relative', zIndex: 1 }}>
-              <About scrollY={scrollY} />
               <HomeSections />
               <Footer />
             </div>
@@ -244,11 +241,10 @@ export default function Homepage({ revealed = true, isMobile = false, native = f
         <div style={styles.scrollChevron} className="scroll-chevron"><ChevronIcon size={18} /></div>
       </section>
 
-      {/* Tail — About → process → work → CTA → footer, over one continuous blur */}
+      {/* Tail — process → work → CTA → footer, over one continuous blur */}
       <div ref={mTailRef} style={{ position: 'relative' }}>
         <TailBlur />
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <About isMobile native />
           <HomeSections isMobile />
           <Footer />
         </div>

@@ -3,13 +3,21 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const FAQS = [
-  { q: 'How much does a site cost?',           a: "Every project is different — we'll talk through your needs and figure it out together." },
-  { q: 'How long does a build take?',          a: '1–2 weeks depending on the details and how many changes are needed along the way.' },
-  { q: 'How many revisions do I get?',         a: 'Unlimited revisions during the design phase. Once development starts, reasonable adjustments are always included.' },
-  { q: "Do I own the site when it's done?",    a: 'Yes — fully. Code, content, domain, accounts. Everything transfers to you at launch.' },
-  { q: 'Who handles hosting?',                 a: "We set up and manage hosting on your behalf — it's included as part of working with us." },
-  { q: 'Will my site rank on Google?',         a: "SEO is built into every project — structure, meta tags, schema, Core Web Vitals. We build the right foundation." },
-  { q: 'What if I need changes after launch?', a: 'Maintenance plans cover ongoing edits. One-off changes are billed at a flat hourly rate.' },
+  { q: 'How much does a website cost?',                 a: 'Three monthly plans: Launch at $68/mo, Growth at $108/mo, and Summit at $218/mo — each with a one-time setup fee ($750, $1,399, and $2,599). One flat rate, no hidden fees. See the full breakdown on the pricing page.' },
+  { q: 'Why a monthly plan instead of one big payment?', a: "The monthly rate keeps your site live and looked-after — hosting, security, updates, monitoring and support are all baked in. You're never left with a site that quietly goes stale a year after launch." },
+  { q: 'What does the one-time setup fee cover?',        a: 'The upfront design and build of your site — strategy, custom design, copy and development. Your monthly plan then covers everything that keeps it running after launch.' },
+  { q: "What's included every month?",                  a: 'Hosting, security, updates, site monitoring and ongoing support on every plan — plus up to 2 hours of edits per month. The Summit plan includes fast, unlimited edits with priority turnaround.' },
+  { q: 'How long does a build take?',                    a: '1–2 weeks depending on the details and how many changes are needed along the way.' },
+  { q: 'How many revisions do I get?',                  a: 'Unlimited revisions during the design phase. Once development starts, reasonable adjustments are always included.' },
+  { q: 'What if I need changes after launch?',          a: 'Every plan includes up to 2 hours of edits each month. Larger changes or extra requests can be billed separately, or you can add Unlimited edits for $99/mo (one request at a time, 48-hour turnaround). Summit already includes unlimited edits.' },
+  { q: 'Do I own my site and domain?',                  a: 'Yes. Your domain is registered in your name and your content is yours. You get full access, and if you ever decide to move on, we hand everything over — no hostage situations.' },
+  { q: 'Who handles hosting?',                          a: "We set up and manage hosting on your behalf — it's included in every plan." },
+  { q: 'Will my site rank on Google?',                  a: 'SEO is built into every project — structure, meta tags, schema, Core Web Vitals. Growth adds local SEO to help you get found, and Summit adds ongoing monthly SEO and optimization.' },
+  { q: 'Do you write the copy and provide the images?', a: 'Every plan includes conversion-focused copy and layout. Need a professional writer to take the whole thing off your plate? Professional copywriting is an add-on ($299–599/mo). We can use images you provide or source high-quality ones for you.' },
+  { q: 'Can you redesign my existing website?',         a: "Absolutely. Whether you're starting from scratch or reworking a site that isn't pulling its weight, the process is the same — we'll talk through what's working, what isn't, and build from there." },
+  { q: 'Can you add a booking or scheduling system?',   a: "Yes — an advanced booking / scheduling system is available as an add-on ($249/mo). If you need something more custom like a store or a specific integration, just ask and we'll scope it." },
+  { q: 'Is there a long-term contract?',                a: 'No long lock-in — plans run month-to-month. The site is meant to earn its keep; if it ever stops making sense for you, you can move on.' },
+  { q: 'Can I bundle the add-ons and save?',            a: 'Yes — the Care+ bundle combines unlimited edits, Google Business Profile management and a monthly analytics report for $389/mo, saving you $676/mo versus buying them separately.' },
 ]
 
 export default function FAQ() {

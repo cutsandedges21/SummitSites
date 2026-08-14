@@ -4,10 +4,9 @@ import { motion } from 'framer-motion'
 import Footer from './Footer'
 
 const NAV_LINKS = [
-  { to: '/inspiration', label: 'INSPIRATION' },
+  { to: '/portfolio',  label: 'PORTFOLIO'   },
   { to: '/services',   label: 'SERVICES'   },
   { to: '/pricing',    label: 'PRICING'    },
-  { to: '/process',    label: 'PROCESS'    },
   { to: '/faq',        label: 'FAQ'        },
   { to: '/contact',    label: 'CONTACT'    },
 ]
@@ -80,15 +79,25 @@ export default function Layout({ children }) {
     }
     const onTouchEnd = () => { touchYRef.current = null }
 
+    // Programmatic scroll to an in-page element (drives the custom scroll)
+    const onScrollToEl = e => {
+      const el = document.getElementById(e.detail)
+      if (!el || !contentRef.current) return
+      const offset = el.getBoundingClientRect().top - contentRef.current.getBoundingClientRect().top
+      scrollTargetRef.current = clamp(offset - 24)
+    }
+
     window.addEventListener('wheel',      onWheel,      { passive: false })
     window.addEventListener('touchstart', onTouchStart, { passive: true  })
     window.addEventListener('touchmove',  onTouchMove,  { passive: false })
     window.addEventListener('touchend',   onTouchEnd)
+    window.addEventListener('summit:scrollto', onScrollToEl)
     return () => {
       window.removeEventListener('wheel',      onWheel)
       window.removeEventListener('touchstart', onTouchStart)
       window.removeEventListener('touchmove',  onTouchMove)
       window.removeEventListener('touchend',   onTouchEnd)
+      window.removeEventListener('summit:scrollto', onScrollToEl)
     }
   }, [])
 

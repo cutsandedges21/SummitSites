@@ -3,13 +3,13 @@ import { motion } from 'framer-motion'
 
 const EASE = [0.22, 1, 0.36, 1]
 const AMBER = '#D4623A'
-const LAST_UPDATED = 'July 3, 2026'
+const LAST_UPDATED = 'August 14, 2026'
 
 const SECTIONS = [
   {
     h: 'Information We Collect',
     body: [
-      'When you reach out through our contact form, email, or phone, we collect the details you choose to share — typically your name, email address, phone number, business name, and anything you tell us about your project.',
+      'When you reach out to us by email, we collect the details you choose to share — typically your name, email address, business name, and anything you tell us about your project.',
       'When you visit our website, we automatically collect limited technical information such as your IP address, browser type, device information, pages viewed, and how you arrived at our site. This is standard analytics data used to understand how the site is performing.',
     ],
   },

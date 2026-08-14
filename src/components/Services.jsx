@@ -6,25 +6,25 @@ const SERVICES = [
     icon: '✦',
     title: 'DESIGN',
     blurb: 'Custom visuals built around your brand — no templates, no shortcuts.',
-    includes: ['Brand identity integration', 'Mobile-first layouts', 'Custom animations', 'UI/UX wireframing'],
+    includes: ['Professional custom design', 'Mobile-first layouts', 'Conversion-focused copy & layout', 'Animated & 3D elements'],
   },
   {
     icon: '⬡',
     title: 'DEVELOPMENT',
     blurb: 'Fast, modern sites engineered for performance and long-term reliability.',
-    includes: ['React / Next.js build', 'CMS integration', 'Speed optimization', 'Cross-browser QA'],
+    includes: ['React build', 'Booking & scheduling systems', 'Speed optimization', 'Cross-browser QA'],
   },
   {
     icon: '◎',
     title: 'SEO',
-    blurb: 'Built to rank from day one — technical SEO baked into every page.',
-    includes: ['On-page optimization', 'Schema markup', 'Core Web Vitals', 'Google Business setup'],
+    blurb: 'Built to rank from day one — get found on Google and turn searches into leads.',
+    includes: ['Local SEO — get found on Google', 'On-page optimization & schema', 'Core Web Vitals', 'Google Business Profile'],
   },
   {
     icon: '△',
-    title: 'MAINTENANCE',
-    blurb: 'We keep your site fast, secure, and up to date — hands off for you.',
-    includes: ['Monthly updates', 'Uptime monitoring', 'Security patches', 'Content edits included'],
+    title: 'CARE & GROWTH',
+    blurb: 'We keep your site fast, secure, and improving — hands off for you.',
+    includes: ['Hosting, security & updates', 'Uptime monitoring', 'Monthly analytics report', 'Ongoing edits & optimization'],
   },
 ]
 
@@ -51,7 +51,7 @@ export default function Services() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           style={{ fontSize: 'clamp(13px,1.05vw,18px)', color: 'rgba(255,255,255,0.45)', fontWeight: 400, letterSpacing: '0.04em', margin: 0 }}
         >
-          Design, development, SEO, and support — all under one roof, one flat rate.
+          Design, development, SEO, and ongoing care — bundled into every plan for one flat monthly rate.
         </motion.p>
       </div>
 
@@ -84,8 +84,17 @@ export default function Services() {
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        style={{ textAlign: 'center' }}
+        style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 14 }}
       >
+        <Link to="/pricing" style={{
+          display: 'inline-block', padding: '14px 36px',
+          border: '1px solid rgba(255,255,255,0.6)', borderRadius: 2,
+          background: 'rgba(255,255,255,0.1)',
+          color: '#fff', textDecoration: 'none', fontSize: 12,
+          letterSpacing: '0.14em', textTransform: 'uppercase',
+        }}>
+          SEE PRICING →
+        </Link>
         <Link to="/contact" style={{
           display: 'inline-block', padding: '14px 36px',
           border: '1px solid rgba(255,255,255,0.35)', borderRadius: 2,

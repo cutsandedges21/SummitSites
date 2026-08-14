@@ -65,21 +65,21 @@ const ADDON_GROUPS = [
     label: 'Ongoing',
     note: 'Added to your monthly plan',
     items: [
-      { name: 'Unlimited edits', note: 'One request at a time · 48hr turnaround', price: '+$99/mo' },
-      { name: 'Google Business Profile management', price: '+$80/mo' },
-      { name: 'Monthly analytics report',           price: '+$40/mo' },
+      { name: 'Unlimited edits', note: 'One request at a time · 48hr turnaround', price: '$99/mo' },
+      { name: 'Google Business Profile management', price: '$79/mo' },
+      { name: 'Monthly analytics report',           price: '$39/mo' },
+      { name: 'Professional copywriting',           price: '$299–599/mo' },
+      { name: 'Advanced booking / scheduling system', price: '$249/mo' },
     ],
   },
   {
     label: 'One-off',
     note: 'Billed once, as needed',
     items: [
-      { name: 'Professional copywriting',             price: '+$300–600' },
-      { name: 'Brand / logo refresh',                 price: '+$250–500' },
+      { name: 'Brand / logo refresh',                 price: '$249–499' },
       { name: 'Extra pages',                          price: '$75–125/page' },
-      { name: 'Business email setup',                 price: '+$75' },
-      { name: 'Advanced booking / scheduling system', price: '+$250' },
-      { name: 'Extra project work', note: 'New features & builds — not routine edits', price: '$50/hr' },
+      { name: 'Business email setup',                 price: '$75' },
+      { name: 'Extra project work', note: 'New features & builds — not routine edits', price: '$49/hr' },
     ],
   },
 ]
@@ -167,28 +167,36 @@ export default function Pricing() {
               color: '#fff', textDecoration: 'none', fontSize: 11.5,
               letterSpacing: '0.1em', textTransform: 'uppercase',
             }}>
-              Book a Free Demo →
+              Get in touch →
             </Link>
           </motion.div>
         ))}
       </div>
 
-      <motion.p
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.6, ease: EASE }}
+      {/* Add-ons teaser — pulls the eye below the three plans */}
+      <motion.button
+        type="button"
+        onClick={() => window.dispatchEvent(new CustomEvent('summit:scrollto', { detail: 'addons' }))}
+        initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.35, duration: 0.5, ease: EASE }}
         style={{
-          maxWidth: 700, margin: '0 auto', textAlign: 'center',
-          fontSize: 'clamp(12px,1vw,14px)', lineHeight: 1.65,
-          color: 'rgba(255,255,255,0.5)', letterSpacing: '0.03em',
+          display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '8px 18px',
+          width: '100%', maxWidth: 720, margin: '0 auto 60px', padding: '18px 26px',
+          border: '1px solid rgba(255,255,255,0.3)', borderRadius: 4,
+          background: 'rgba(255,255,255,0.05)', textAlign: 'center', cursor: 'pointer',
+          fontFamily: 'inherit',
         }}
       >
-        Every monthly plan includes {' '}
-        <strong style={{ color: '#fff', fontWeight: 600 }}>2 hours of work per month</strong> (excluding the Summit plan which allows unlimited edits).
-        {' '}Any work beyond those 2 hours — larger changes or extra requests — may be billed separately.
-      </motion.p>
+        <span style={{ fontSize: 'clamp(13px,1.1vw,15px)', color: '#fff', fontWeight: 600, letterSpacing: '0.02em' }}>
+          Keep scrolling for add-ons
+        </span>
+        <span style={{ fontSize: 'clamp(12px,1vw,13.5px)', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.02em' }}>
+          Unlimited edits, SEO, copywriting & the Care+ bundle — save $676/mo
+        </span>
+      </motion.button>
 
       {/* ── Add-ons ───────────────────────────────────────────── */}
-      <div style={{ maxWidth: 1100, margin: '110px auto 0', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 72 }}>
+      <div id="addons" style={{ scrollMarginTop: 40, maxWidth: 1100, margin: '72px auto 0', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 64 }}>
         <motion.p
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5, ease: EASE }}
@@ -250,13 +258,27 @@ export default function Pricing() {
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, justifyContent: 'flex-end' }}>
-              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', textDecoration: 'line-through' }}>$219</span>
-              <span style={{ fontSize: 34, fontWeight: 700, color: '#fff', fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif" }}>$189</span>
+              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', textDecoration: 'line-through' }}>$1065</span>
+              <span style={{ fontSize: 34, fontWeight: 700, color: '#fff', fontFamily: "'Avaleigh', 'MohoCondensed', sans-serif" }}>$389</span>
               <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>/mo</span>
             </div>
-            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.04em', marginTop: 2 }}>Save $30/mo</div>
+            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.04em', marginTop: 2 }}>Save $676/mo</div>
           </div>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: EASE }}
+          style={{
+            maxWidth: 700, margin: '72px auto 0', textAlign: 'center',
+            fontSize: 'clamp(12px,1vw,14px)', lineHeight: 1.65,
+            color: 'rgba(255,255,255,0.5)', letterSpacing: '0.03em',
+          }}
+        >
+          Every monthly plan includes {' '}
+          <strong style={{ color: '#fff', fontWeight: 600 }}>2 hours of work per month</strong> (excluding the Summit plan which allows unlimited edits).
+          {' '}Any work beyond those 2 hours — larger changes or extra requests — may be billed separately.
+        </motion.p>
       </div>
     </div>
   )
